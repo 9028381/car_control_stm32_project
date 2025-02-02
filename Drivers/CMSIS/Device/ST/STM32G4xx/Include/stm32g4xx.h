@@ -103,7 +103,7 @@
   * @{
   */
 
-#define STM32G474xx
+ #define STM32G474xx
 
 #if defined(STM32G431xx)
   #include "stm32g431xx.h"

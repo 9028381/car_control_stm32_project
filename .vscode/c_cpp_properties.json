@@ -8,7 +8,8 @@
             "defines": [
                 "_DEBUG",
                 "UNICODE",
-                "_UNICODE"
+                "_UNICODE",
+                "#STM32G474xx"
             ],
             "compilerPath": "D:\\program\\arm_gcc\\mingw32\\bin\\gcc.exe",
             "cStandard": "c17",
