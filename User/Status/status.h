@@ -1,8 +1,11 @@
 #ifndef __STATUS_H
 #define __STATUS_H
 
+#include "gy901.h"
 #include "main.h"
+#include "motor.h"
 #include "pid.h"
+#include "servo.h"
 
 extern STATUS status;
 

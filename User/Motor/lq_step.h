@@ -2,7 +2,7 @@
 #define __LQ_STEP_H
 
 #include "main.h"
-#include "usart.h"
 #include "math.h"
+#include "usart.h"
 
 #endif

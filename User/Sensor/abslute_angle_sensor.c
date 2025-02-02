@@ -79,5 +79,14 @@ float driver_abslute_angle(UART_HandleTypeDef huart) {
     set_angle = (float)((buff[4] << 8) + buff[5]) / (float)MAX_CNT * 360.0;
   }
   HAL_UART_Receive_IT(&huart, buff, 7);
+
   return;
+}
+
+float get_abslute_angle() {
+  return cur_angle;
+}
+
+float get_set_angle() {
+  return set_angle;
 }
