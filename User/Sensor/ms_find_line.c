@@ -16,4 +16,4 @@ void update_ms_diff(uint8_t buf) {
   }
 }
 
-int16_t get_ms_diff(void) { return -ms_diff / 10; }
+int16_t get_ms_value(void) { return -ms_diff / 10; }
