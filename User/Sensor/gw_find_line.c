@@ -18,16 +18,18 @@
 
 #define Ping_SUCCESS 0x66
 
+uint8_t data_buf = 0;
+
 const int16_t gw_bit_weight[8] = {0, -1500, -300, -100, 100, 300, 1500, 0};
 uint32_t line_record = 0x6666;  // 0b0110_0110_0110_0110初始化路为直线
 
 void update_line_record() {
-  line_record = (line_record << 8) | gw_gray_get_line_digital_is_black();
+  line_record = (line_record << 8) | data_buf;
 
   return;
 }
 
-LINE_TYPE get_line_data() {
+LINE_TYPE get_line_value() {
   update_line_record();  // 更新路线信息
 
   uint8_t tar = (line_record >> 16) & 0xFF;  // 将第三行的信息提取出来
@@ -106,13 +108,12 @@ int16_t compute_gw_gray_diff(uint8_t gray[8]) {
 
 #ifdef STM32
 
-uint8_t gw_gray_get_line_digital_is_black() {
+void gw_gray_get_line_digital_is_black() {
   uint8_t cmd = Digital_Output_CMD;
-  uint8_t buf = 0;
 
-  HAL_I2C_Master_Receive_DMA(&hi2c1, GW_GRAY_ADDR, &buf, 1);
+  HAL_I2C_Master_Receive_DMA(&hi2c1, GW_GRAY_ADDR, &data_buf, 1);
 
-  return buf;
+  return;
 }
 
 void gw_gray_get_line_analog(uint8_t gray[8]) {
