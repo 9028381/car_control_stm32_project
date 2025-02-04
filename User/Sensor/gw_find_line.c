@@ -1,5 +1,4 @@
 // @551
-
 #include "gw_find_line.h"
 
 #include "i2c.h"
@@ -13,10 +12,11 @@
 #define GW_GRAY_ADDR 0x4C
 
 #define Ping_CMD 0xAA
-#define Ping_SUCCESS 0x66
 #define Digital_Output_CMD 0xDD
 #define Analogue_Output_CMD 0xB0
 #define Get_error_CMD 0xDE
+
+#define Ping_SUCCESS 0x66
 
 const int16_t gw_bit_weight[8] = {0, -1500, -300, -100, 100, 300, 1500, 0};
 uint32_t line_record = 0x6666;  // 0b0110_0110_0110_0110初始化路为直线
@@ -110,8 +110,7 @@ uint8_t gw_gray_get_line_digital_is_black() {
   uint8_t cmd = Digital_Output_CMD;
   uint8_t buf = 0;
 
-  HAL_I2C_Master_Transmit(&hi2c1, GW_GRAY_ADDR, &cmd, 1, 10);
-  HAL_I2C_Master_Receive(&hi2c1, GW_GRAY_ADDR, &buf, 1, 10);
+  HAL_I2C_Master_Receive_DMA(&hi2c1, GW_GRAY_ADDR, &buf, 1);
 
   return buf;
 }
@@ -120,8 +119,7 @@ void gw_gray_get_line_analog(uint8_t gray[8]) {
   uint8_t cmd = Analogue_Output_CMD;
   uint8_t buf[8] = {0};
 
-  HAL_I2C_Master_Transmit(&hi2c1, GW_GRAY_ADDR, &cmd, 1, 10);
-  HAL_I2C_Master_Receive(&hi2c1, GW_GRAY_ADDR, buf, 8, 10);
+  HAL_I2C_Master_Receive_DMA(&hi2c1, GW_GRAY_ADDR, buf, 8);
 
   // printf("1:%X 2:%X 3:%X 4:%X 5:%X 6:%X 7:%X 8:%X", buf[0], buf[1], buf[2],
   // buf[3], buf[4], buf[5], buf[6], buf[7]);
@@ -144,10 +142,13 @@ uint8_t gw_gray_get_error() {
   uint8_t cmd = Get_error_CMD;
   uint8_t buf = 0;
 
-  HAL_I2C_Master_Transmit(&hi2c1, GW_GRAY_ADDR, &cmd, 1, 10);
-  HAL_I2C_Master_Receive(&hi2c1, GW_GRAY_ADDR, &buf, 1, 10);
+  HAL_I2C_Master_Receive_DMA(&hi2c1, GW_GRAY_ADDR, &buf, 1);
 
   return buf;
+}
+
+void set_gw_gray_mode(uint8_t cmd) {
+  HAL_I2C_Master_Transmit_DMA(&hi2c1, GW_GRAY_ADDR, &cmd, 1);
 }
 
 #endif

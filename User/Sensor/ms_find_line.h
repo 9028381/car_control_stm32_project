@@ -1,7 +1,4 @@
-/*
- * Eight-way grayscale sensor
- * use IIC
- */
+// @551
 
 #ifndef __GW_GRAY_H__
 #define __GW_GRAY_H__

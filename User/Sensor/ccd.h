@@ -1,3 +1,5 @@
+// @63 @551
+
 #ifndef __CCD_H_
 #define __CCD_H_
 
@@ -5,9 +7,9 @@
 
 #ifdef MSPM0
 
-#define CLK_UP   DL_GPIO_writePins(CCD_CLK_PORT, CCD_CLK_PIN)
+#define CLK_UP DL_GPIO_writePins(CCD_CLK_PORT, CCD_CLK_PIN)
 #define CLK_DOWN DL_GPIO_clearPins(CCD_CLK_PORT, CCD_CLK_PIN)
-#define SI_UP   DL_GPIO_writePins(CCD_SI_PORT, CCD_SI_PIN)
+#define SI_UP DL_GPIO_writePins(CCD_SI_PORT, CCD_SI_PIN)
 #define SI_DOWN DL_GPIO_clearPins(CCD_SI_PORT, CCD_SI_PIN)
 
 #endif
@@ -24,9 +26,8 @@
 
 #endif
 
-
 short get_adc_val(void);
 void get_ccd_val(void);
-int ccd_compute();
+void ccd_compute();
 
 #endif

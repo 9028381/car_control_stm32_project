@@ -7,6 +7,7 @@
 
 uint16_t BUFF_DATA_1[128] = {0};
 uint16_t BUFF_DATA_2[128] = {0};
+int16_t ccd_diff = 0;
 
 #define GAIN 4
 #define MASK 0  // 遮住一部分的数据，防止前15个数字读不出来的问题
@@ -61,7 +62,7 @@ void get_ccd_val(void) {
   return;
 }
 
-int ccd_compute() {
+void ccd_compute() {
   static int last = 0;
   get_ccd_val();
   short dest[128];
@@ -83,5 +84,10 @@ int ccd_compute() {
   /* INFO("CCD fond black: %d", diff); */
 
   last = diff;
-  return diff;
+
+  ccd_diff = diff;
+}
+
+int16_t get_ccd_diff() {
+  return ccd_diff;
 }
