@@ -85,10 +85,10 @@ float driver_abslute_angle(UART_HandleTypeDef huart) {
   return;
 }
 
-float get_abslute_angle() {
+float get_abslute_angle_value() {
   return cur_angle;
 }
 
-float get_set_angle() {
+float get_set_angle_value() {
   return set_angle;
 }

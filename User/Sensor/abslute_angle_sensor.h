@@ -11,4 +11,8 @@
 #define ACCURACY 12
 #define MAX_CNT POW(2, ACCURACY)
 
+float get_abslute_angle_value();
+float get_set_angle_value();
+float driver_abslute_angle(UART_HandleTypeDef huart);
+
 #endif
