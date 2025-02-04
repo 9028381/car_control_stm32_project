@@ -5,7 +5,7 @@
 int16_t ms_diff = 0;
 char ms_rx_buf[8] = {0};
 
-void update_ms_diff(uint8_t buf) {
+void driver_ms_diff(uint8_t buf) {
   static unsigned char index = 0;
   if (buf == '\n') {
     ms_rx_buf[index] = '\0';

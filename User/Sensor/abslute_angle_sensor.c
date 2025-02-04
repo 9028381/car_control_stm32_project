@@ -23,7 +23,7 @@ uint16_t Crc_Count(unsigned char pbuf[], unsigned char num) {
 }
 
 // 写单个寄存器
-void write_abslute_angle_reg(UART_HandleTypeDef huart, uint16_t addr, uint16_t value) {
+void write_abslute_angle_reg(uint16_t addr, uint16_t value) {
   uint8_t data[8] = {0};
   data[0] = 0x01;
   data[1] = 0x06;
@@ -39,7 +39,7 @@ void write_abslute_angle_reg(UART_HandleTypeDef huart, uint16_t addr, uint16_t v
 }
 
 // 读单个寄存器
-void read_abslute_angle_reg(UART_HandleTypeDef huart, uint16_t addr, uint16_t *value) {
+void read_abslute_angle_reg(uint16_t addr, uint16_t *value) {
   uint8_t data[8] = {0};
   data[0] = 0x01;
   data[1] = 0x03;
@@ -51,36 +51,36 @@ void read_abslute_angle_reg(UART_HandleTypeDef huart, uint16_t addr, uint16_t *v
   data[6] = (crc >> 8) & 0x00FF;
   data[7] = crc & 0x00FF;
 
-  HAL_UART_Receive_IT(&huart, buff, 7);
+  HAL_UART_Receive_IT(&ABS_ANGLE_UART, buff, 7);
 
   return;
 }
 
-void set_abslute_angle(UART_HandleTypeDef huart, float angle) {
+void set_abslute_angle(float angle) {
   uint16_t cnt = (uint16_t)(angle / 360 * MAX_CNT);
   uint16_t addr = 0x000B;
-  write_abslute_angle_reg(huart, addr, cnt);
+  write_abslute_angle_reg(addr, cnt);
 
   return;
 }
 
 // 设置绝对值编码器的模式 0x00: 被动模式 0x01: 主动模式
-void set_abslute_angle_sensor_mode(UART_HandleTypeDef huart, uint8_t mode) {
+void set_abslute_angle_sensor_mode(uint8_t mode) {
   uint16_t addr = 0x0006;
 
-  write_abslute_angle_reg(huart, addr, mode);
+  write_abslute_angle_reg(addr, mode);
 
   return;
 }
 
 // driver函数放在对应的huart中断函数中
-float driver_abslute_angle(UART_HandleTypeDef huart) {
+float driver_abslute_angle() {
   if (buff[2] == 0x03) {
     cur_angle = (float)((buff[3] << 8) + buff[4]) / (float)MAX_CNT * 360.0;
   } else if (buff[2] == 0x06) {
     set_angle = (float)((buff[4] << 8) + buff[5]) / (float)MAX_CNT * 360.0;
   }
-  HAL_UART_Receive_IT(&huart, buff, 7);
+  HAL_UART_Receive_IT(&ABS_ANGLE_UART, buff, 7);
 
   return;
 }

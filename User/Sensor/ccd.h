@@ -18,6 +18,7 @@
 
 #include "adc.h"
 #include "main.h"
+#include "tim.h"
 
 #define CLK_UP HAL_GPIO_WritePin(CCD_CLK_GPIO_Port, CCD_CLK_Pin, 1)
 #define CLK_DOWN HAL_GPIO_WritePin(CCD_CLK_GPIO_Port, CCD_CLK_Pin, 0)
@@ -26,8 +27,8 @@
 
 #endif
 
-short get_adc_val(void);
-void get_ccd_val(void);
+void driver_ccd();
+void get_ccd_data();
 void ccd_compute();
 
 #endif

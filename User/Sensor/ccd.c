@@ -17,49 +17,55 @@ int16_t ccd_diff = 0;
 #define CCD_COUNT_THRUST 5
 #define CCD_BLACK_COUNT_LIMIT 40
 
-short get_adc_val(void) {  // 读取ADC的函数
-  HAL_ADC_Start(&hadc3);
-
-  delay_us(2);
-
-  unsigned gADCResult = HAL_ADC_GetValue(&hadc3);
-
-  return gADCResult >> GAIN;
+void get_ccd_data() {
+  HAL_TIM_Base_Start_IT(&htim6);
 }
 
-void start_ccd(void) {
-  CLK_DOWN;
-  CLK_DOWN;
-  delay_us(20);
-
-  CLK_DOWN;
-  SI_UP;
-  delay_us(20);
-
-  CLK_UP;  // 警告在使用mspm0：实测CLK和SI引脚不能用同一个PORT，否则编译器会改变执行顺序，将该段delay()放置段尾执行，原因未知
-  delay_us(20);
-  SI_DOWN;
-
-  delay_us(20);
-
-  return;
-}
-
-void get_ccd(uint16_t *BUFF) {     // 实测使用该函数读取轮趣科技CCD时前15个数据近似为0
-  for (int i = 0; i < 128; i++) {  // 轮趣文档中说因为GPIO速度过快导致
-    CLK_DOWN;                      // 当前没有找到可以更改MSPM0G3507的GPIO速度的方法
-    delay_us(1);
-    BUFF[i] = get_adc_val();
+void driver_ccd() {
+  static uint16_t cnt = 0;
+  if (cnt == 1) {
+    CLK_DOWN;
+    SI_DOWN;
+    cnt++;
+    return;
+  } else if (cnt == 5) {
     CLK_UP;
-    delay_us(1);
+    SI_UP;
+    cnt++;
+    return;
+  } else if (cnt == 7) {
+    CLK_UP;
+    SI_DOWN;
+    cnt++;
+    return;
+  } else if (cnt == 9) {
+    CLK_DOWN;
+    SI_DOWN;
+    cnt++;
+    return;
+  } else if ((cnt > 9) && ((cnt - 10) % 3 == 0) && (cnt < 521)) {
+    HAL_ADC_Start_DMA(&hadc3, &BUFF_DATA_1[(cnt - 10) / 3], 1);
+    cnt++;
+    return;
+  } else if ((cnt > 9) && ((cnt - 10) % 3 == 1) && (cnt < 521)) {
+    CLK_UP;
+    SI_DOWN;
+    cnt++;
+    return;
+  } else if ((cnt > 9) && ((cnt - 10) % 3 == 2) && (cnt < 521)) {
+    CLK_DOWN;
+    SI_UP;
+    cnt++;
+    return;
+  } else if (cnt == 521) {
+    CLK_DOWN;
+    SI_DOWN;
+    cnt = 0;
+    HAL_TIM_Base_Stop_IT(&htim6);
+  } else {
+    cnt++;
+    return;
   }
-}
-
-void get_ccd_val(void) {
-  start_ccd();
-  get_ccd(BUFF_DATA_1);
-
-  return;
 }
 
 void ccd_compute() {

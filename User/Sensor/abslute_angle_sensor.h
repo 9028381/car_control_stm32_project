@@ -4,6 +4,8 @@
 #ifndef ABSLUTE_ANGLE_SENSOR_H
 #define ABSLUTE_ANGLE_SENSOR_H
 
+#define ABS_ANGLE_UART huart2
+
 #include "main.h"
 #include "math_tool.h"
 #include "usart.h"
@@ -13,6 +15,6 @@
 
 float get_abslute_angle_value();
 float get_set_angle_value();
-float driver_abslute_angle(UART_HandleTypeDef huart);
+float driver_abslute_angle();
 
 #endif

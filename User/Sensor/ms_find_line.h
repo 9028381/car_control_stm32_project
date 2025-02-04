@@ -5,7 +5,7 @@
 
 #include "main.h"
 
-void update_ms_diff(uint8_t buf);
+void driver_ms_diff(uint8_t buf);
 int16_t get_ms_value(void);
 
 #endif
