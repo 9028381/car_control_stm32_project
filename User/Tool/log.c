@@ -1,15 +1,17 @@
+// @63
+
 #include "log.h"
+
 #include "stdarg.h"
 #include "stdio.h"
-#include "usart.h"
 #include "stm_or_msp.h"
+#include "usart.h"
 
 #define LOG_FORMAT_BUF_LENGTH 256
 
 #ifdef STM32
 
-void log_uprintf(UART_HandleTypeDef huart, const char *format, ...) 
-{
+void log_uprintf(UART_HandleTypeDef huart, const char *format, ...) {
   static unsigned char abbuf = 0;
   static char buf[2][LOG_FORMAT_BUF_LENGTH];
 
