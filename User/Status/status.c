@@ -5,6 +5,8 @@
 STATUS status;
 
 void init_motor(STATUS *status) {
+  status->motion = STOP;  // 初始化运动状态为 STOP
+
   status->motor[0].which = 1;
   status->motor[0].trust = 0;
   status->motor[0].cur_speed = 0;

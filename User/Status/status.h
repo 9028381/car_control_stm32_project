@@ -5,6 +5,7 @@
 
 #include "gy901.h"
 #include "main.h"
+#include "motion.h"
 #include "motor.h"
 #include "pid.h"
 #include "servo.h"
@@ -38,8 +39,9 @@ typedef struct SERVO {
 } SERVO;
 
 typedef struct STATUS {
-  int64_t time;    // 系统时间单位ms
-  int8_t T;        // 系统周期单位ms
+  int64_t time;  // 系统时间单位ms
+  int8_t T;      // 系统周期单位ms
+  MOTION motion;
   SENSOR sensor;   // 传感器数据
   MOTOR motor[4];  // 电机数据
   SERVO servo[2];  // 舵机数据
