@@ -6,11 +6,16 @@
 
 #define GYR_ADDR 0xa1
 
-float Get_gyr_value(enum gyroscope key) {
-  uint8_t buf[2];
+uint8_t data_buf[2] = {0};
 
-  HAL_I2C_Mem_Read_DMA(&hi2c1, GYR_ADDR, key, I2C_MEMADD_SIZE_8BIT, buf, 2);
-  float value = (short)(((short)buf[1] << 8) | buf[0]);
+void get_gyr_data(enum gyroscope key) {
+  HAL_I2C_Mem_Read_DMA(&hi2c1, GYR_ADDR, key, I2C_MEMADD_SIZE_8BIT, data_buf, 2);
+
+  return;
+}
+
+float get_gyr_value(enum gyroscope key) {
+  float value = (short)(((short)data_buf[1] << 8) | data_buf[0]);
 
   switch (key) {
     case gyr_a_x:

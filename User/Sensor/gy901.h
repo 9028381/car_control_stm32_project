@@ -15,6 +15,7 @@ enum gyroscope {
   gyr_z_yaw = 0x3F,    // The angle of the sensor around the z-axis
 };
 
-float Get_gyr_value(enum gyroscope key);
+void get_gyr_data(enum gyroscope key);
+float get_gyr_value(enum gyroscope key);
 
 #endif /* !__GYROSCOPE_H__ */
