@@ -1,6 +1,7 @@
 #include "eeprom.h"
 
 #include "i2c.h"
+#include "log.h"
 
 uint8_t buff[PAGE_SIZE] = {0};  // 缓冲区
 
@@ -34,6 +35,9 @@ void EEPROM_WriteByte(uint16_t tar_addr, uint8_t *data, uint16_t size) {
   uint16_t cur_addr = tar_addr;         // 当前地址
   uint16_t len = 0;                     // 当前页剩余空间
   while (cnt != 0) {
+    if (cur_page >= PAGE_NUMB) {
+      WARN("EEPROM_WriteByte: Out of range\n");
+    }
     if ((tar_addr + cnt) / PAGE_SIZE != cur_page) {  // 如果需要跨页
       len = PAGE_SIZE - cur_addr % PAGE_SIZE;        // 当前页剩余空间
       EEPROM_WaitUntilReady();
@@ -47,6 +51,8 @@ void EEPROM_WriteByte(uint16_t tar_addr, uint8_t *data, uint16_t size) {
       cnt = 0;  // 更新剩余字节数
     }
   }
+
+  return;
 }
 
 /**
