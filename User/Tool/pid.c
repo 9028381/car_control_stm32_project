@@ -2,6 +2,7 @@
 
 #include "pid.h"
 
+#include "log.h"
 #include "math.h"
 
 PID init_pid(float kp, float ki, float kd, float T, float integral_max) {
@@ -21,6 +22,10 @@ PID init_pid(float kp, float ki, float kd, float T, float integral_max) {
 }
 
 float compute_pid(PID *pid, float error) {
+  if (pid == NULL) {
+    WARN("pid is not initialized");
+    return 0;
+  }
   pid->error = error;
   pid->integral += pid->error * pid->T;
   pid->integral = CONFINE(pid->integral, -pid->integral_max, pid->integral_max);
