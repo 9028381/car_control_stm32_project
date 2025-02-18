@@ -1,4 +1,5 @@
 #include "lq_step.h"
+#include "math_tool.h"
 
 uint8_t BCC(uint8_t *data, uint16_t length) {
   uint8_t i;
@@ -10,7 +11,7 @@ uint8_t BCC(uint8_t *data, uint16_t length) {
 }
 
 void set_lq_step_abslute_angle(UART_HandleTypeDef huart, float angle) {
-  uint8_t cmd[11] = 0;
+  uint8_t cmd[11] = {0};
   cmd[0] = 0x7B;
   cmd[1] = 0x01;
   cmd[2] = 0x04;
@@ -30,7 +31,7 @@ void set_lq_step_abslute_angle(UART_HandleTypeDef huart, float angle) {
 }
 
 void trun_lq_step_angle(UART_HandleTypeDef huart, float angle, uint8_t dir) {
-  uint8_t cmd[11] = 0;
+  uint8_t cmd[11] = {0};
   cmd[0] = 0x7B;
   cmd[1] = 0x01;
   cmd[2] = 0x02;
@@ -50,7 +51,7 @@ void trun_lq_step_angle(UART_HandleTypeDef huart, float angle, uint8_t dir) {
 
 void trun_lq_step_speed(UART_HandleTypeDef huart, float speed, uint8_t dir)  // speed 单位rad/s
 {
-  uint8_t cmd[11] = 0;
+  uint8_t cmd[11] = {0};
   cmd[0] = 0x7B;
   cmd[1] = 0x01;
   cmd[2] = 0x01;
@@ -70,7 +71,7 @@ void trun_lq_step_speed(UART_HandleTypeDef huart, float speed, uint8_t dir)  // 
 
 void turn_lq_step_current(UART_HandleTypeDef huart, uint16_t current, uint8_t dir)  // current 电流单位mA
 {
-  uint8_t cmd[11] = 0;
+  uint8_t cmd[11] = {0};
   cmd[0] = 0x7B;
   cmd[1] = 0x01;
   cmd[2] = 0x03;

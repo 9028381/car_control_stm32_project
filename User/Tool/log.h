@@ -3,22 +3,24 @@
 #ifndef __LOG_H__
 #define __LOG_H__
 
-#define LOG_UART huart1
-void log_uprintf(UART_HandleTypeDef huart, const char *format, ...);
+#include "usart.h"
+
+#define LOG_UART &huart1
+void log_uprintf(UART_HandleTypeDef *huart, const char *format, ...);
 
 #define PRINTF(fmt, ...) log_uprintf(LOG_UART, fmt, ##__VA_ARGS__);
 #define PRINTLN(fmt, ...) PRINTF(fmt "\r\n", ##__VA_ARGS__)
 
 /// minute:second:frequency
 #define LOG_TIME_FMT_TYPE "%02u:%02u:%02u"
-#define LOG_TIME_FMT(t)                                                        \
+#define LOG_TIME_FMT(t) \
   ((t / STATUS_FREQ) / 60), ((t / STATUS_FREQ) % 60), (t % STATUS_FREQ)
 
-#define LOG_EVENT(level, fmt, ...)                                             \
-  PRINTLN(level " " LOG_TIME_FMT_TYPE " " fmt, LOG_TIME_FMT(status.times),     \
+#define LOG_EVENT(level, fmt, ...)                                         \
+  PRINTLN(level " " LOG_TIME_FMT_TYPE " " fmt, LOG_TIME_FMT(status.times), \
           ##__VA_ARGS__)
 
-#define LOG_SPAN(level, fmt, ...)                                              \
+#define LOG_SPAN(level, fmt, ...) \
   LOG_EVENT(level, "%s:%u " fmt, __func__, __LINE__, ##__VA_ARGS__)
 
 #define ERROR(fmt, ...) LOG_EVENT("E", fmt, ##__VA_ARGS__)
@@ -32,11 +34,11 @@ void log_uprintf(UART_HandleTypeDef huart, const char *format, ...);
 
 #ifdef DEV
 #define LOG_ENABLE
-#endif // DEV
+#endif  // DEV
 
 #ifndef LOG_ENABLE
 #undef LOG_EVENT
 #define LOG_EVENT(level, fmt, ...)
-#endif // !LOG_ENABLE
+#endif  // !LOG_ENABLE
 
-#endif // !__LOG_H__
+#endif  // !__LOG_H__

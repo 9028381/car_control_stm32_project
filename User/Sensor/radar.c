@@ -1,6 +1,7 @@
 // @551 @LQ
 // 轮趣科技N10P雷达的驱动
 #include "radar.h"
+#include "string.h"
 
 extern uint16_t receive_cnt;
 int data_flag = 0, data_process_flag = 0;

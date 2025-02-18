@@ -2,9 +2,9 @@
 
 #include "abslute_angle_sensor.h"
 
-uint8_t buff[20] = {0};  // 接收暂存
-float cur_angle = 0;     // 当前角度
-float set_angle = 0;     // 设定角度
+uint8_t abslute_angle_sensor_buff[20] = {0};  // 接收暂存
+float cur_angle = 0;                          // 当前角度
+float set_angle = 0;                          // 设定角度
 
 uint16_t Crc_Count(unsigned char pbuf[], unsigned char num) {
   int i, j;
@@ -51,7 +51,7 @@ void read_abslute_angle_reg(uint16_t addr, uint16_t *value) {
   data[6] = (crc >> 8) & 0x00FF;
   data[7] = crc & 0x00FF;
 
-  HAL_UART_Receive_IT(&ABS_ANGLE_UART, buff, 7);
+  HAL_UART_Receive_IT(&ABS_ANGLE_UART, abslute_angle_sensor_buff, 7);
 
   return;
 }
@@ -74,13 +74,13 @@ void set_abslute_angle_sensor_mode(uint8_t mode) {
 }
 
 // driver函数放在对应的huart中断函数中
-float driver_abslute_angle() {
-  if (buff[2] == 0x03) {
-    cur_angle = (float)((buff[3] << 8) + buff[4]) / (float)MAX_CNT * 360.0;
-  } else if (buff[2] == 0x06) {
-    set_angle = (float)((buff[4] << 8) + buff[5]) / (float)MAX_CNT * 360.0;
+void driver_abslute_angle() {
+  if (abslute_angle_sensor_buff[2] == 0x03) {
+    cur_angle = (float)((abslute_angle_sensor_buff[3] << 8) + abslute_angle_sensor_buff[4]) / (float)MAX_CNT * 360.0;
+  } else if (abslute_angle_sensor_buff[2] == 0x06) {
+    set_angle = (float)((abslute_angle_sensor_buff[4] << 8) + abslute_angle_sensor_buff[5]) / (float)MAX_CNT * 360.0;
   }
-  HAL_UART_Receive_IT(&ABS_ANGLE_UART, buff, 7);
+  HAL_UART_Receive_IT(&ABS_ANGLE_UART, abslute_angle_sensor_buff, 7);
 
   return;
 }

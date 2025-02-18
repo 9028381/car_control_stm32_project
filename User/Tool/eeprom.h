@@ -16,6 +16,8 @@
 #define EEPROM_MEMADD_SIZE I2C_MEMADD_SIZE_16BIT
 #endif
 
+#include "main.h"
+
 void EEPROM_WriteByte(uint16_t tar_addr, uint8_t *data, uint16_t size);  // 向eeprom写入数据
 void EEPROM_ReadByte(uint16_t tar_addr, uint8_t *data, uint16_t size);   // 从eeprom读取数据
 

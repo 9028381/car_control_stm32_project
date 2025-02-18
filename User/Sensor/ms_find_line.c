@@ -1,6 +1,7 @@
 // @551
 
 #include "ms_find_line.h"
+#include "stdlib.h"
 
 int16_t ms_diff = 0;
 char ms_rx_buf[8] = {0};

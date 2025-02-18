@@ -3,7 +3,7 @@
 #include "pid.h"
 
 #include "log.h"
-#include "math.h"
+#include "math_tool.h"
 
 PID init_pid(float kp, float ki, float kd, float T, float integral_max) {
   PID pid;

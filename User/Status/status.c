@@ -2,6 +2,9 @@
 
 #include "status.h"
 
+#include "motor.h"
+#include "servo.h"
+
 STATUS status;
 
 void init_motor(STATUS *status) {
@@ -34,6 +37,10 @@ void init_motor(STATUS *status) {
   status->motor[3].tar_speed = 0;
   status->motor[3].dir = 0;
   status->motor[3].motor_pid = init_pid(0.1, 0.1, 0.1, status->T, 10);
+
+  status->device.led1.which = 1;
+  status->device.led1.High_level_is_on = 1;
+  status->device.led1.on = 0;
 
   return;
 }
@@ -71,9 +78,9 @@ void init_status(STATUS *status, uint8_t T) {
 void update_status(STATUS *status) {
   status->time += status->T;  // 更新系统时间
 
-  status->sensor.angle.pitch = Get_gyr_value(gyr_y_pitch);  // 更新传感器数据
-  status->sensor.angle.roll = Get_gyr_value(gyr_x_roll);
-  status->sensor.angle.yaw = Get_gyr_value(gyr_z_yaw);
+  status->sensor.angle.pitch = get_gyr_value(gyr_y_pitch);  // 更新传感器数据
+  status->sensor.angle.roll = get_gyr_value(gyr_x_roll);
+  status->sensor.angle.yaw = get_gyr_value(gyr_z_yaw);
 
   status->motor[0].cur_speed = get_motor_speed(&status->motor[0]);
   status->motor[1].cur_speed = get_motor_speed(&status->motor[1]);

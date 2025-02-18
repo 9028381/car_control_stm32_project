@@ -6,7 +6,6 @@
 #include "main.h"
 #include "road.h"
 #include "stdbool.h"
-#include "stm_or_msp.h"
 #include "usart.h"
 
 #define GW_GRAY_ADDR 0x4C
@@ -18,13 +17,13 @@
 
 #define Ping_SUCCESS 0x66
 
-uint8_t data_buf = 0;
+uint8_t gw_find_line_data_buf = 0;
 
 const int16_t gw_bit_weight[8] = {0, -1500, -300, -100, 100, 300, 1500, 0};
 uint32_t line_record = 0x6666;  // 0b0110_0110_0110_0110初始化路为直线
 
 void update_line_record() {
-  line_record = (line_record << 8) | data_buf;
+  line_record = (line_record << 8) | gw_find_line_data_buf;
 
   return;
 }
@@ -37,7 +36,7 @@ LINE_TYPE get_line_value() {
   {
     // 开始判断是什么路口
     tar = ((line_record >> 24) & 0xFF) | ((line_record >> 16) & 0xFF) | ((line_record >> 8) & 0xFF) | (line_record >> 8);  // 将四行信息压缩为一行
-    if (tar & 0x81 == 0x81)                                                                                                // 可能是十字路口或者丁字路口
+    if ((tar & 0x81) == 0x81)                                                                                              // 可能是十字路口或者丁字路口
     {
       tar = line_record & 0xff;  // 取出最新行信息
       if (tar & 0x18)            // 最新的前面有黑线
@@ -46,7 +45,7 @@ LINE_TYPE get_line_value() {
       } else {
         return T;
       }
-    } else if (tar & 0x01 == 0x01)  // 可能是R或者RT
+    } else if ((tar & 0x01) == 0x01)  // 可能是R或者RT
     {
       tar = line_record & 0xff;  // 取出最新行信息
       if (tar & 0x01)            // 最新的前面有黑线
@@ -55,7 +54,7 @@ LINE_TYPE get_line_value() {
       } else {
         return R;
       }
-    } else if (tar & 0x80 == 0x80)  // 可能是L或者LT
+    } else if ((tar & 0x80) == 0x80)  // 可能是L或者LT
     {
       tar = line_record & 0xff;  // 取出最新行信息
       if (tar & 0x80)            // 最新的前面有黑线
@@ -80,25 +79,25 @@ int16_t gw_gray_diff(LINE_TYPE line_type) {
   {
     if (line_record & 0x01)  // 新的左边有黑线
     {
-      return compute_gw_gray_diff(line_record & 0xfc);  // 把左边的两个屏蔽掉
+      return compute_gw_gray_diff((uint8_t)((line_record >> 24) & 0xfc));  // 把左边的两个屏蔽掉
     }
     if (line_record & 0x80)  // 新的右边有黑线
     {
-      return compute_gw_gray_diff(line_record & 0x3f);  // 把右边的两个屏蔽掉
+      return compute_gw_gray_diff((uint8_t)((line_record >> 24) & 0x3f));  // 把右边的两个屏蔽掉
     } else {
-      return compute_gw_gray_diff(line_record & 0xff);  // 正常计算
+      return compute_gw_gray_diff((uint8_t)((line_record >> 24) & 0xff));  // 正常计算
     }
   }
 }
 
-int16_t compute_gw_gray_diff(uint8_t gray[8]) {
+int16_t compute_gw_gray_diff(uint8_t gray) {
   int16_t diff = 0;
   uint8_t cnt = 0;
   for (int i = 0; i < 8; i++) {
-    if (gray[i] == 1) {
+    if (((gray >> i) & 0x01) == 1) {
       cnt++;
     }
-    diff += gray[i] * gw_bit_weight[i];
+    diff += ((gray >> i) & 0x01) * gw_bit_weight[i];
   }
   if (cnt != 0)
     return diff / cnt;

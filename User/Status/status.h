@@ -4,13 +4,10 @@
 #define __STATUS_H
 
 #include "gy901.h"
+#include "led.h"
 #include "main.h"
 #include "motion.h"
-#include "motor.h"
 #include "pid.h"
-#include "servo.h"
-
-extern STATUS status;
 
 typedef struct ANGLE {
   float pitch;
@@ -38,6 +35,10 @@ typedef struct SERVO {
   float max_angle;
 } SERVO;
 
+typedef struct DEVICE {
+  LED led1;
+} DEVICE;
+
 typedef struct STATUS {
   int64_t time;  // 系统时间单位ms
   int8_t T;      // 系统周期单位ms
@@ -45,6 +46,12 @@ typedef struct STATUS {
   SENSOR sensor;   // 传感器数据
   MOTOR motor[4];  // 电机数据
   SERVO servo[2];  // 舵机数据
+  DEVICE device;
 } STATUS;
+
+extern STATUS status;
+
+void init_status(STATUS *status, uint8_t T);
+void update_status(STATUS *status);
 
 #endif

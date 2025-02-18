@@ -5,7 +5,7 @@
 #include "i2c.h"
 #include "log.h"
 
-uint8_t buff[PAGE_SIZE] = {0};  // 缓冲区
+uint8_t eeprom_buff[PAGE_SIZE] = {0};  // 缓冲区
 
 /**
  * @brief  判断AT24C02是否空闲

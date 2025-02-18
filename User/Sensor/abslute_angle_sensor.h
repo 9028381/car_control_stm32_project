@@ -15,6 +15,6 @@
 
 float get_abslute_angle_value();
 float get_set_angle_value();
-float driver_abslute_angle();
+void driver_abslute_angle();
 
 #endif

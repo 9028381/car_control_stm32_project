@@ -29,6 +29,6 @@
 
 void driver_ccd();
 void get_ccd_data();
-void ccd_compute();
+int16_t ccd_compute();
 
 #endif

@@ -4,6 +4,7 @@
 
 #include "array.h"
 #include "road.h"
+#include "math_tool.h"
 
 uint16_t BUFF_DATA_1[128] = {0};
 uint16_t BUFF_DATA_2[128] = {0};
@@ -68,9 +69,9 @@ void driver_ccd() {
   }
 }
 
-void ccd_compute() {
+int16_t ccd_compute() {
   static int last = 0;
-  get_ccd_val();
+
   short dest[128];
   /* int len = convolve_unit(CCD_ARRAY_LEN, CCD_KERNEL_LEN, CCD_ARRAY, dest); */
   /* int len = forward_difference_multiple(128 - 15, 6, &CCD_DATA[15], dest); */
