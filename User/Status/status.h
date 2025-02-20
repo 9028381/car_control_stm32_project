@@ -3,11 +3,14 @@
 #ifndef __STATUS_H
 #define __STATUS_H
 
+#include "button.h"
+#include "buzzer.h"
 #include "gy901.h"
 #include "led.h"
 #include "main.h"
 #include "motion.h"
 #include "pid.h"
+#include "servo.h"
 
 typedef struct ANGLE {
   float pitch;
@@ -29,14 +32,13 @@ typedef struct MOTOR {
   PID motor_pid;
 } MOTOR;
 
-typedef struct SERVO {
-  uint8_t which;
-  float angle;
-  float max_angle;
-} SERVO;
-
 typedef struct DEVICE {
+  LED led_on_board;
   LED led1;
+  LED led2;
+  BUTTON button_D2;
+  BUTTON button_B11;
+  BUZZER buzzer;
 } DEVICE;
 
 typedef struct STATUS {

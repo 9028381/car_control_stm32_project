@@ -10,5 +10,6 @@ typedef struct LED {
 } LED;
 
 void driver_LED(LED *led);
+void init_LED(LED *led, uint8_t which, uint8_t High_level_is_on);
 
 #endif  // __LED_H

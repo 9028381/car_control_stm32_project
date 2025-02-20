@@ -32,6 +32,7 @@ car_control_stm32_project/motor.o: ..\User\Motor\motor.c \
   ..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_tim_ex.h \
   ..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h \
   ..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h \
-  ..\User\Tool\pid.h ..\User\Status\status.h ..\User\Sensor\gy901.h \
-  ..\User\Device\led.h ..\User\Status\motion.h ..\Core\Inc\tim.h \
+  ..\User\Tool\pid.h ..\User\Status\status.h ..\User\Device\button.h \
+  ..\User\Device\buzzer.h ..\User\Sensor\gy901.h ..\User\Device\led.h \
+  ..\User\Status\motion.h ..\User\Motor\servo.h ..\Core\Inc\tim.h \
   ..\User\Tool\math_tool.h

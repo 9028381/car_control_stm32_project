@@ -1,6 +1,6 @@
 car_control_stm32_project/status.o: ..\User\Status\status.c \
-  ..\User\Status\status.h ..\User\Sensor\gy901.h ..\User\Device\led.h \
-  ..\Core\Inc\main.h ..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h \
+  ..\User\Status\status.h ..\User\Device\button.h ..\Core\Inc\main.h \
+  ..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h \
   ..\Core\Inc\stm32g4xx_hal_conf.h \
   ..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h \
   ..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_def.h \
@@ -32,5 +32,6 @@ car_control_stm32_project/status.o: ..\User\Status\status.c \
   ..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_tim_ex.h \
   ..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h \
   ..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h \
-  ..\User\Status\motion.h ..\User\Tool\pid.h ..\User\Motor\motor.h \
-  ..\Core\Inc\gpio.h ..\Core\Inc\tim.h ..\User\Motor\servo.h
+  ..\User\Device\buzzer.h ..\User\Sensor\gy901.h ..\User\Device\led.h \
+  ..\User\Status\motion.h ..\User\Tool\pid.h ..\User\Motor\servo.h \
+  ..\User\Motor\motor.h ..\Core\Inc\gpio.h ..\Core\Inc\tim.h

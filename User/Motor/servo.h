@@ -3,9 +3,15 @@
 #ifndef __SERVO_H
 #define __SERVO_H
 
-#include "status.h"
-#include "tim.h"
+#include "main.h"
 
-void set_servo_angle(SERVO *servo);
+typedef struct SERVO {
+  uint8_t which;
+  float angle;
+  float max_angle;
+} SERVO;
+
+void driver_servo(SERVO *servo);
+void init_servo(SERVO *servo, uint8_t which, float max_angle);
 
 #endif

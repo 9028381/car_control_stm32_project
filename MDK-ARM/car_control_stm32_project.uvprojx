@@ -656,6 +656,16 @@
               <FileType>5</FileType>
               <FilePath>..\User\Device\led.h</FilePath>
             </File>
+            <File>
+              <FileName>buzzer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Device\buzzer.c</FilePath>
+            </File>
+            <File>
+              <FileName>buzzer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\Device\buzzer.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

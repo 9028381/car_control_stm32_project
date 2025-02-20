@@ -33,5 +33,6 @@ car_control_stm32_project/led.o: ..\User\Device\led.c \
   ..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h \
   ..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h \
   ..\Core\Inc\gpio.h ..\User\Tool\log.h ..\Core\Inc\usart.h \
-  ..\User\Status\status.h ..\User\Sensor\gy901.h ..\User\Status\motion.h \
-  ..\User\Tool\pid.h
+  ..\User\Status\status.h ..\User\Device\button.h \
+  ..\User\Device\buzzer.h ..\User\Sensor\gy901.h ..\User\Status\motion.h \
+  ..\User\Tool\pid.h ..\User\Motor\servo.h

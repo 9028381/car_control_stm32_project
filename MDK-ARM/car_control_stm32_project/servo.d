@@ -1,6 +1,5 @@
 car_control_stm32_project/servo.o: ..\User\Motor\servo.c \
-  ..\User\Motor\servo.h ..\User\Status\status.h ..\User\Sensor\gy901.h \
-  ..\User\Device\led.h ..\Core\Inc\main.h \
+  ..\User\Motor\servo.h ..\Core\Inc\main.h \
   ..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h \
   ..\Core\Inc\stm32g4xx_hal_conf.h \
   ..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_rcc.h \
@@ -33,4 +32,7 @@ car_control_stm32_project/servo.o: ..\User\Motor\servo.c \
   ..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_tim_ex.h \
   ..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h \
   ..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h \
-  ..\User\Status\motion.h ..\User\Tool\pid.h ..\Core\Inc\tim.h
+  ..\User\Tool\log.h ..\Core\Inc\usart.h ..\User\Status\status.h \
+  ..\User\Device\button.h ..\User\Device\buzzer.h ..\User\Sensor\gy901.h \
+  ..\User\Device\led.h ..\User\Status\motion.h ..\User\Tool\pid.h \
+  ..\Core\Inc\tim.h

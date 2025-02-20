@@ -37,6 +37,7 @@
 "car_control_stm32_project\system_stm32g4xx.o"
 "car_control_stm32_project\button.o"
 "car_control_stm32_project\led.o"
+"car_control_stm32_project\buzzer.o"
 "car_control_stm32_project\timer_it.o"
 "car_control_stm32_project\uart_it.o"
 "car_control_stm32_project\status.o"

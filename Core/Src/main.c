@@ -24,13 +24,12 @@
 #include "gpio.h"
 #include "i2c.h"
 #include "spi.h"
-#include "status.h"
 #include "tim.h"
 #include "usart.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "status.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -112,6 +111,8 @@ int main(void) {
   /* USER CODE BEGIN 2 */
 
   init_status(&status, 1);
+  HAL_TIM_PWM_Start(&htim15, TIM_CHANNEL_1);
+  HAL_TIM_PWM_Start(&htim15, TIM_CHANNEL_2);
   HAL_TIM_Base_Start_IT(&htim5);
   /* USER CODE END 2 */
 
