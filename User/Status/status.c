@@ -33,10 +33,7 @@ void init_device() {
 }
 
 void init_sensor(STATUS *status) {
-  status->sensor.angle.pitch = 0;
-  status->sensor.angle.roll = 0;
-  status->sensor.angle.yaw = 0;
-  status->sensor.Line = 0;
+  init_gyr(&status->sensor.gy901);
 }
 
 void init_status(STATUS *status, uint8_t T) {
@@ -57,6 +54,8 @@ void update_status(STATUS *status) {
   status->motor.wheel[1].cur_speed = get_wheel_speed(&status->motor.wheel[1]);
   status->motor.wheel[2].cur_speed = get_wheel_speed(&status->motor.wheel[2]);
   status->motor.wheel[3].cur_speed = get_wheel_speed(&status->motor.wheel[3]);
+
+  get_gyr_data(&status->sensor.gy901);
 
   return;
 }

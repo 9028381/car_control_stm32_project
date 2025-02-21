@@ -7,6 +7,8 @@
 #include "tim.h"
 #include "usart.h"
 
+uint8_t update_or_driver = 0;  // 0 : upadte  1 : driver
+
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
   status.time += status.T;  // 更新系统时间
 
@@ -25,11 +27,15 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     else if (status.time == 300)
       status.device.led_on_board.on = 0;
 
-    if (status.time % 20 == 0) {  // 周期 20ms
-      update_status(&status);
-      driver_status(&status);
+    if (status.time % 25 == 0) {  // 周期 25ms
+      if (update_or_driver == 0) {
+        update_status(&status);
+        update_or_driver = 1;
+      } else {
+        driver_status(&status);
+        update_or_driver = 0;
+      }
     }
-
   } else if (htim == &htim6) {  // 周期 5us
     driver_ccd();
   }

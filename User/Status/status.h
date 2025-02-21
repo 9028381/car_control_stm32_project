@@ -13,14 +13,8 @@
 #include "servo.h"
 #include "wheel.h"
 
-typedef struct ANGLE {
-  float pitch;
-  float roll;
-  float yaw;
-} ANGLE;
-
 typedef struct SENSOR {
-  ANGLE angle;
+  GYR gy901;
   int16_t Line;
 } SENSOR;
 

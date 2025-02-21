@@ -38,7 +38,5 @@ float compute_pid(PID *pid, float error) {
   }
   pid->last_error = pid->error;
 
-  log_uprintf(&huart1, "tar %d %d\r\n", status.motor.wheel[0].cur_speed, status.motor.wheel[1].cur_speed);
-
   return pid->kp * pid->error + pid->ki * pid->integral + pid->kd * pid->derivative;
 }

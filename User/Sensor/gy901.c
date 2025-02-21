@@ -1,21 +1,31 @@
 // @551
 
+// 警告 使用该库时需要开启I2C中断
+
 #include "gy901.h"
 
 #include "i2c.h"
 
 #define GYR_ADDR 0xa1
 
-uint8_t gy901_buf[2] = {0};
+void init_gyr(GYR *gyr) {
+  gyr->device_addr = GYR_ADDR;
+  gyr->data_start_addr = 0x34;
+  for (int i = 0; i < 24; i++) {
+    gyr->data_buf[i] = 0;
+  }
+  return;
+}
 
-void get_gyr_data(enum gyroscope key) {
-  HAL_I2C_Mem_Read_DMA(&hi2c1, GYR_ADDR, key, I2C_MEMADD_SIZE_8BIT, gy901_buf, 2);
+void get_gyr_data(GYR *gyr) {
+  HAL_I2C_Mem_Read_DMA(&hi2c1, GYR_ADDR, gyr->data_start_addr, I2C_MEMADD_SIZE_8BIT, gyr->data_buf, 24);
 
   return;
 }
 
-float get_gyr_value(enum gyroscope key) {
-  float value = (short)(((short)gy901_buf[1] << 8) | gy901_buf[0]);
+float get_gyr_value(GYR *gyr, enum gyroscope key) {
+  uint8_t cnt = (key - gyr->data_start_addr) * 2;
+  float value = (short)(((short)gyr->data_buf[cnt + 1] << 8) | gyr->data_buf[cnt]);
 
   switch (key) {
     case gyr_a_x:
