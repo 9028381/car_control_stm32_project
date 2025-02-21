@@ -35,4 +35,5 @@ car_control_stm32_project/timer_it.o: ..\User\It\timer_it.c \
   ..\User\Sensor\ccd.h ..\Core\Inc\adc.h ..\Core\Inc\tim.h \
   ..\User\Device\led.h ..\User\Tool\log.h ..\Core\Inc\usart.h \
   ..\User\Motor\servo.h ..\User\Status\status.h ..\User\Device\button.h \
-  ..\User\Sensor\gy901.h ..\User\Status\motion.h ..\User\Tool\pid.h
+  ..\User\Sensor\gy901.h ..\User\Status\motion.h ..\User\Tool\pid.h \
+  ..\User\Motor\wheel.h

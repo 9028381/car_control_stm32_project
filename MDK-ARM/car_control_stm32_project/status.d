@@ -34,4 +34,4 @@ car_control_stm32_project/status.o: ..\User\Status\status.c \
   ..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h \
   ..\User\Device\buzzer.h ..\User\Sensor\gy901.h ..\User\Device\led.h \
   ..\User\Status\motion.h ..\User\Tool\pid.h ..\User\Motor\servo.h \
-  ..\User\Motor\motor.h ..\Core\Inc\gpio.h ..\Core\Inc\tim.h
+  ..\User\Motor\wheel.h ..\User\Tool\log.h ..\Core\Inc\usart.h

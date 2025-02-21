@@ -114,6 +114,9 @@ int main(void) {
   HAL_TIM_PWM_Start(&htim15, TIM_CHANNEL_1);
   HAL_TIM_PWM_Start(&htim15, TIM_CHANNEL_2);
   HAL_TIM_Base_Start_IT(&htim5);
+
+  status.motor.wheel[0].tar_speed = 50;
+  status.motor.wheel[1].tar_speed = -50;
   /* USER CODE END 2 */
 
   /* Infinite loop */

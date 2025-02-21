@@ -9,7 +9,6 @@
 void driver_servo(SERVO *servo) {
   if (servo->which == 1) {
     __HAL_TIM_SET_COMPARE(&htim15, TIM_CHANNEL_2, (int)((((float)servo->angle / (float)servo->max_angle) * 0.1 + 0.025) * 50000));
-    log_uprintf(&huart1, "servo1: %d %f\r\n", (int)((((float)servo->angle / (float)servo->max_angle) * 0.1 + 0.025) * 50000), servo->angle);
   } else if (servo->which == 2) {
     __HAL_TIM_SET_COMPARE(&htim15, TIM_CHANNEL_1, (int)((((float)servo->angle / (float)servo->max_angle) * 0.1 + 0.025) * 50000));
   }

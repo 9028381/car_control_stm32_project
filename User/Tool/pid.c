@@ -4,6 +4,7 @@
 
 #include "log.h"
 #include "math_tool.h"
+#include "status.h"
 
 PID init_pid(float kp, float ki, float kd, float T, float integral_max) {
   PID pid;
@@ -36,6 +37,8 @@ float compute_pid(PID *pid, float error) {
     pid->derivative = (pid->error - pid->last_error) / pid->T;
   }
   pid->last_error = pid->error;
+
+  log_uprintf(&huart1, "tar %d %d\r\n", status.motor.wheel[0].cur_speed, status.motor.wheel[1].cur_speed);
 
   return pid->kp * pid->error + pid->ki * pid->integral + pid->kd * pid->derivative;
 }

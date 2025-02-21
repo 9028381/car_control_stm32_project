@@ -7,21 +7,14 @@
 #include "status.h"
 
 void server_button(BUTTON *button, BUTTON_STATION station) {
-  log_uprintf(&huart1, "button%d_%d\r\n", button->which, station);
   if (button->which == 1) {
     if (station == BUTTON_DOWN) {
-      status.servo[0].angle -= 45;
-      status.servo[0].angle = CONFINE(status.servo[0].angle, 0, status.servo[0].max_angle);
-      status.servo[1].angle += 90;
-      status.servo[1].angle = CONFINE(status.servo[1].angle, 0, status.servo[1].max_angle);
+      status.motor.wheel[0].tar_speed = -status.motor.wheel[0].tar_speed;
     }
   }
   if (button->which == 2) {
     if (station == BUTTON_DOWN) {
-      status.servo[0].angle += 45;
-      status.servo[0].angle = CONFINE(status.servo[0].angle, 0, status.servo[0].max_angle);
-      status.servo[1].angle -= 90;
-      status.servo[1].angle = CONFINE(status.servo[1].angle, 0, status.servo[1].max_angle);
+      status.motor.wheel[1].tar_speed = -status.motor.wheel[1].tar_speed;
     }
   }
   return;

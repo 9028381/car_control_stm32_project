@@ -35,4 +35,4 @@ car_control_stm32_project/servo.o: ..\User\Motor\servo.c \
   ..\User\Tool\log.h ..\Core\Inc\usart.h ..\User\Status\status.h \
   ..\User\Device\button.h ..\User\Device\buzzer.h ..\User\Sensor\gy901.h \
   ..\User\Device\led.h ..\User\Status\motion.h ..\User\Tool\pid.h \
-  ..\Core\Inc\tim.h
+  ..\User\Motor\wheel.h ..\Core\Inc\tim.h

@@ -8,21 +8,28 @@
 #include "usart.h"
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+  status.time += status.T;  // 更新系统时间
+
   if (htim == &htim5)  // 周期 1ms
   {
-    status.time += status.T;
-    if (status.time == 200)
-      status.device.buzzer.on = 1;
-    if (status.time == 500)
-      status.device.buzzer.on = 0;
-    driver_button(&status.device.button_D2);
-    driver_button(&status.device.button_B11);
-    driver_LED(&status.device.led_on_board);
-    driver_LED(&status.device.led1);
-    driver_LED(&status.device.led2);
-    driver_servo(&status.servo[0]);
-    driver_servo(&status.servo[1]);
-    driver_BUZZER(&status.device.buzzer);
+    if (status.time == 50)
+      status.device.led_on_board.on = 1;
+    else if (status.time == 100)
+      status.device.led_on_board.on = 0;
+    else if (status.time == 150)
+      status.device.led_on_board.on = 1;
+    else if (status.time == 200)
+      status.device.led_on_board.on = 0;
+    else if (status.time == 250)
+      status.device.led_on_board.on = 1;
+    else if (status.time == 300)
+      status.device.led_on_board.on = 0;
+
+    if (status.time % 20 == 0) {  // 周期 20ms
+      update_status(&status);
+      driver_status(&status);
+    }
+
   } else if (htim == &htim6) {  // 周期 5us
     driver_ccd();
   }

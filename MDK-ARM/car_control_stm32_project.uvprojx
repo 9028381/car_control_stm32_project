@@ -787,16 +787,6 @@
               <FilePath>..\User\Motor\lq_step.h</FilePath>
             </File>
             <File>
-              <FileName>motor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Motor\motor.c</FilePath>
-            </File>
-            <File>
-              <FileName>motor.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\User\Motor\motor.h</FilePath>
-            </File>
-            <File>
               <FileName>servo.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\Motor\servo.c</FilePath>
@@ -805,6 +795,16 @@
               <FileName>servo.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\User\Motor\servo.h</FilePath>
+            </File>
+            <File>
+              <FileName>wheel.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\Motor\wheel.h</FilePath>
+            </File>
+            <File>
+              <FileName>wheel.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Motor\wheel.c</FilePath>
             </File>
           </Files>
         </Group>
