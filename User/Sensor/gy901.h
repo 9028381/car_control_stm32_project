@@ -7,10 +7,13 @@
 
 #include "main.h"
 
+// GYR结构体
+// 挂载于status sensor
+// 用于驱动gy901
 typedef struct GYR {
-  uint8_t data_buf[24];
-  uint8_t device_addr;
-  uint8_t data_start_addr;
+  uint8_t data_buf[24];     // 读取数据暂存
+  uint8_t device_addr;      // 设备iic地址 默认0xa1
+  uint8_t data_start_addr;  // gy901数据寄存器起始地址 默认0x34
 } GYR;
 
 enum gyroscope {
@@ -25,8 +28,11 @@ enum gyroscope {
   gyr_z_yaw = 0x3F,    // The angle of the sensor around the z-axis
 };
 
-void get_gyr_data(GYR *gyr);                        // 放在status_update()中
-float get_gyr_value(GYR *gyr, enum gyroscope key);  // 放在status_driver()中
-void init_gyr(GYR *gyr);                            // 放在init_sensor()中
+// 读取gy901的原始数据 放在status_update()中
+void get_gyr_data(GYR *gyr);
+// 将原始数据转化为实际物理量 key传入参数枚举 gyroscope见上
+float get_gyr_value(GYR *gyr, enum gyroscope key);
+// 初始化gyr 放在init_sensor()中
+void init_gyr(GYR *gyr);
 
 #endif /* !__GYROSCOPE_H__ */

@@ -2,6 +2,7 @@
 #include "ccd.h"
 #include "led.h"
 #include "log.h"
+#include "lq_step.h"
 #include "servo.h"
 #include "status.h"
 #include "tim.h"
@@ -27,12 +28,15 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     else if (status.time == 300)
       status.device.led_on_board.on = 0;
 
+    if (status.time == 100)
+      set_lq_step_abslute_angle(huart4, 100);
+
     if (status.time % 25 == 0) {  // 周期 25ms
       if (update_or_driver == 0) {
-        update_status(&status);
+        update_status(&status);  // 状态更新中断 用于读取传感器原始数据
         update_or_driver = 1;
       } else {
-        driver_status(&status);
+        driver_status(&status);  // 状态驱动中断 用于处理传感器数据与驱动外设
         update_or_driver = 0;
       }
     }

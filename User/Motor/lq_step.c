@@ -1,4 +1,5 @@
 #include "lq_step.h"
+
 #include "math_tool.h"
 
 uint8_t BCC(uint8_t *data, uint16_t length) {
@@ -15,17 +16,17 @@ void set_lq_step_abslute_angle(UART_HandleTypeDef huart, float angle) {
   cmd[0] = 0x7B;
   cmd[1] = 0x01;
   cmd[2] = 0x04;
-  cmd[3] = 0x00;
+  cmd[3] = 0x01;
   cmd[4] = 0x20;
   int16_t turn_angle = (uint16_t)(angle * 10);
   turn_angle = CONFINE(turn_angle, 0, 3600);
   cmd[5] = ((turn_angle >> 8) & 0x00FF);
   cmd[6] = (turn_angle & 0x00FF);
-  cmd[7] = 0xff;
-  cmd[8] = 0x00;
+  cmd[7] = 0x00;
+  cmd[8] = 0x64;
   cmd[9] = BCC(cmd, 9);
   cmd[10] = 0x7D;
-  HAL_UART_Transmit_DMA(&huart, cmd, 11);
+  HAL_UART_Transmit(&huart, cmd, 11, 10);
 
   return;
 }
@@ -40,8 +41,8 @@ void trun_lq_step_angle(UART_HandleTypeDef huart, float angle, uint8_t dir) {
   int16_t turn_angle = (uint16_t)(angle * 10);
   cmd[5] = ((turn_angle >> 8) & 0x00FF);
   cmd[6] = (turn_angle & 0x00FF);
-  cmd[7] = 0xff;
-  cmd[8] = 0x00;
+  cmd[7] = 0x00;
+  cmd[8] = 0x64;
   cmd[9] = BCC(cmd, 9);
   cmd[10] = 0x7D;
   HAL_UART_Transmit_DMA(&huart, cmd, 11);
