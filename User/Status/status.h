@@ -32,10 +32,17 @@ typedef struct MOTOR {
   SERVO servo[2];
 } MOTOR;
 
-typedef struct STATUS {
-  int64_t time;  // 系统时间单位ms
-  int8_t T;      // 系统周期单位ms
+typedef struct STATE {
+  int8_t T;  // 系统周期单位ms
+  uint64_t time;
   MOTION motion;
+  float initial_angle;
+  float cur_angle;
+  float cur_angle;
+} STATE;
+
+typedef struct STATUS {
+  STATE state;
   SENSOR sensor;  // 传感器数据
   MOTOR motor;    // 电机数据
   DEVICE device;
