@@ -38,7 +38,7 @@ typedef struct STATE {
   MOTION motion;
   float initial_angle;
   float cur_angle;
-  float cur_angle;
+  float tar_angle;
 } STATE;
 
 typedef struct STATUS {

@@ -28,9 +28,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     else if (status.state.time == 300)
       status.device.led_on_board.on = 0;
 
-    if (status.state.time == 100)
-      set_lq_step_abslute_angle(huart4, 100);
-
     if (status.state.time % 25 == 0) {  // 周期 25ms
       if (update_or_driver == 0) {
         update_status(&status);  // 状态更新中断 用于读取传感器原始数据

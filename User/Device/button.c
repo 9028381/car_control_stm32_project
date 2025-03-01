@@ -3,18 +3,22 @@
 #include "gpio.h"
 #include "led.h"
 #include "log.h"
+#include "lq_step.h"
 #include "math_tool.h"
 #include "status.h"
+#include "usart.h"
 
 void server_button(BUTTON *button, BUTTON_STATION station) {
   if (button->which == 1) {
     if (station == BUTTON_DOWN) {
-      status.motor.wheel[0].tar_speed = -status.motor.wheel[0].tar_speed;
+      // status.motor.wheel[0].tar_speed = -status.motor.wheel[0].tar_speed;
+      trun_lq_step_abslute_angle(&huart4, 120, 5);
     }
   }
   if (button->which == 2) {
     if (station == BUTTON_DOWN) {
-      status.motor.wheel[1].tar_speed = -status.motor.wheel[1].tar_speed;
+      // status.motor.wheel[1].tar_speed = -status.motor.wheel[1].tar_speed;
+      trun_lq_step_abslute_angle(&huart4, 0, 10);
     }
   }
   return;

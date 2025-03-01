@@ -25,6 +25,7 @@ status状态树的目的是将小车的所有状态(包括传感器、运动状�
 #include "buzzer.h"
 #include "led.h"
 #include "log.h"
+#include "motion.h"
 #include "servo.h"
 #include "wheel.h"
 
@@ -55,9 +56,20 @@ void init_sensor(STATUS *status) {  // 传感器初始化
   init_gyr(&status->sensor.gy901);
 }
 
+void init_state(STATUS *status, uint8_t T)  // 状态初始化
+{
+  status->state.T = T;
+  status->state.time = 0;
+  status->state.motion = STOP;
+  status->state.initial_angle = 0;
+  status->state.cur_angle = 0;
+
+  return;
+}
+
 void init_status(STATUS *status, uint8_t T) {  // 状态树初始化
-  status->time = 0;
-  status->T = T;
+
+  init_state(status, T);
 
   init_sensor(status);
 

@@ -11,7 +11,7 @@ uint8_t BCC(uint8_t *data, uint16_t length) {
   return bcc;
 }
 
-void set_lq_step_abslute_angle(UART_HandleTypeDef huart, float angle) {
+void trun_lq_step_abslute_angle(UART_HandleTypeDef *huart, float angle, float speed) {
   uint8_t cmd[11] = {0};
   cmd[0] = 0x7B;
   cmd[1] = 0x01;
@@ -22,16 +22,17 @@ void set_lq_step_abslute_angle(UART_HandleTypeDef huart, float angle) {
   turn_angle = CONFINE(turn_angle, 0, 3600);
   cmd[5] = ((turn_angle >> 8) & 0x00FF);
   cmd[6] = (turn_angle & 0x00FF);
-  cmd[7] = 0x00;
-  cmd[8] = 0x64;
+  int16_t turn_speed = (uint16_t)(speed * 10);
+  cmd[7] = (turn_speed >> 8) & 0x00FF;
+  cmd[8] = turn_speed & 0x00FF;
   cmd[9] = BCC(cmd, 9);
   cmd[10] = 0x7D;
-  HAL_UART_Transmit(&huart, cmd, 11, 10);
+  HAL_UART_Transmit(huart, cmd, 11, 10);
 
   return;
 }
 
-void trun_lq_step_angle(UART_HandleTypeDef huart, float angle, uint8_t dir) {
+void trun_lq_step_angle(UART_HandleTypeDef *huart, float angle, uint8_t dir, float speed) {
   uint8_t cmd[11] = {0};
   cmd[0] = 0x7B;
   cmd[1] = 0x01;
@@ -41,16 +42,17 @@ void trun_lq_step_angle(UART_HandleTypeDef huart, float angle, uint8_t dir) {
   int16_t turn_angle = (uint16_t)(angle * 10);
   cmd[5] = ((turn_angle >> 8) & 0x00FF);
   cmd[6] = (turn_angle & 0x00FF);
-  cmd[7] = 0x00;
-  cmd[8] = 0x64;
+  int16_t turn_speed = (uint16_t)(speed * 10);
+  cmd[7] = (turn_speed >> 8) & 0x00FF;
+  cmd[8] = turn_speed & 0x00FF;
   cmd[9] = BCC(cmd, 9);
   cmd[10] = 0x7D;
-  HAL_UART_Transmit_DMA(&huart, cmd, 11);
+  HAL_UART_Transmit(huart, cmd, 11, 10);
 
   return;
 }
 
-void trun_lq_step_speed(UART_HandleTypeDef huart, float speed, uint8_t dir)  // speed 单位rad/s
+void trun_lq_step_speed(UART_HandleTypeDef *huart, float speed, uint8_t dir)  // speed 单位rad/s
 {
   uint8_t cmd[11] = {0};
   cmd[0] = 0x7B;
@@ -65,12 +67,12 @@ void trun_lq_step_speed(UART_HandleTypeDef huart, float speed, uint8_t dir)  // 
   cmd[8] = turn_speed & 0x00FF;
   cmd[9] = BCC(cmd, 9);
   cmd[10] = 0x7D;
-  HAL_UART_Transmit_DMA(&huart, cmd, 11);
+  HAL_UART_Transmit(huart, cmd, 11, 10);
 
   return;
 }
 
-void turn_lq_step_current(UART_HandleTypeDef huart, uint16_t current, uint8_t dir)  // current 电流单位mA
+void trun_lq_step_current(UART_HandleTypeDef *huart, uint16_t current, uint8_t dir)  // current 电流单位mA
 {
   uint8_t cmd[11] = {0};
   cmd[0] = 0x7B;
@@ -84,7 +86,7 @@ void turn_lq_step_current(UART_HandleTypeDef huart, uint16_t current, uint8_t di
   cmd[8] = 0xff;
   cmd[9] = BCC(cmd, 9);
   cmd[10] = 0x7D;
-  HAL_UART_Transmit_DMA(&huart, cmd, 11);
+  HAL_UART_Transmit(huart, cmd, 11, 10);
 
   return;
 }
