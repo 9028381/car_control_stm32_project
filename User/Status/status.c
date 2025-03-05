@@ -23,8 +23,10 @@ status状态树的目的是将小车的所有状态(包括传感器、运动状�
 
 #include "button.h"
 #include "buzzer.h"
+#include "i2c.h"
 #include "led.h"
 #include "log.h"
+#include "math_tool.h"
 #include "motion.h"
 #include "servo.h"
 #include "wheel.h"
@@ -54,6 +56,7 @@ void init_device() {  // 设备初始化
 
 void init_sensor(STATUS *status) {  // 传感器初始化
   init_gyr(&status->sensor.gy901);
+  init_gw_8bit(&status->sensor.gw_8bit);
 }
 
 void init_state(STATUS *status, uint8_t T)  // 状态初始化
@@ -63,6 +66,8 @@ void init_state(STATUS *status, uint8_t T)  // 状态初始化
   status->state.motion = STOP;
   status->state.initial_angle = 0;
   status->state.cur_angle = 0;
+
+  status->state.gw_8bit = 0x00;  // 8位灰度传感器数据
 
   return;
 }
@@ -86,12 +91,22 @@ void update_status(STATUS *status) {  // 状态树更新数据
   status->motor.wheel[2].cur_speed = get_wheel_speed(&status->motor.wheel[2]);
   status->motor.wheel[3].cur_speed = get_wheel_speed(&status->motor.wheel[3]);
 
-  get_gyr_data(&status->sensor.gy901);
+  // get_gyr_data(&hi2c1, &status->sensor.gy901);
+  get_gw_8bit_data(&hi2c1, &status->sensor.gw_8bit);
 
   return;
 }
 
 void driver_status(STATUS *status) {  // 状态数驱动
+  int32_t line_diff = get_line_value(&status->sensor.gw_8bit);
+  status->motor.wheel[0].tar_speed = 2000 - line_diff;
+  status->motor.wheel[1].tar_speed = 2000 + line_diff;
+
+  status->motor.wheel[0].tar_speed = CLAMP(status->motor.wheel[0].tar_speed, 4000);
+  status->motor.wheel[1].tar_speed = CLAMP(status->motor.wheel[1].tar_speed, 4000);
+
+  log_uprintf(&huart1, "tar_speed: %d\n", status->motor.wheel[0].tar_speed);
+
   driver_button(&status->device.button_D2);
   driver_button(&status->device.button_B11);
 

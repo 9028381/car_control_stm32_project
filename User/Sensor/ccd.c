@@ -3,8 +3,8 @@
 #include "ccd.h"
 
 #include "array.h"
-#include "road.h"
 #include "math_tool.h"
+#include "road.h"
 
 uint16_t BUFF_DATA_1[128] = {0};
 uint16_t BUFF_DATA_2[128] = {0};
@@ -82,7 +82,7 @@ int16_t ccd_compute() {
   if (sum_count.count < CCD_COUNT_THRUST) {
     /* INFO("CCD not found black."); */
     if (ABS(last) < CCD_BLACK_COUNT_LIMIT)
-      return NONE;
+      return 0;
     return last;
   }
 

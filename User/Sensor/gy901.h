@@ -29,7 +29,7 @@ enum gyroscope {
 };
 
 // 读取gy901的原始数据 放在status_update()中
-void get_gyr_data(GYR *gyr);
+void get_gyr_data(I2C_HandleTypeDef *i2c, GYR *gyr);
 // 将原始数据转化为实际物理量 key传入参数枚举 gyroscope见上
 float get_gyr_value(GYR *gyr, enum gyroscope key);
 // 初始化gyr 放在init_sensor()中

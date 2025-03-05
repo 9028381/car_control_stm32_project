@@ -6,9 +6,18 @@
 #include "main.h"
 #include "road.h"
 
-void gw_gray_get_line_digital_is_black();
-int16_t compute_gw_gray_diff(uint8_t gray);
-void set_gw_gray_mode(uint8_t cmd);
-LINE_TYPE get_line_value();
+typedef struct GW_8BIT {
+  uint8_t data_buf;
+  int16_t gw_bit_weight[8];
+  uint8_t integral;
+  uint8_t maybe;
+  uint8_t cross_cnt;
+  Road cross;
+} GW_8BIT;
+
+void get_gw_8bit_data(I2C_HandleTypeDef *hi2c, GW_8BIT *gw_8bit);
+void get_gw_8bit_update_analog_data(I2C_HandleTypeDef *hi2c, GW_8BIT *gw_8bit);
+void init_gw_8bit(GW_8BIT *gw_8bit);
+short get_line_value(GW_8BIT *gw_8bit);
 
 #endif

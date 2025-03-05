@@ -5,6 +5,7 @@
 
 #include "button.h"
 #include "buzzer.h"
+#include "gw_find_line.h"
 #include "gy901.h"
 #include "led.h"
 #include "main.h"
@@ -15,7 +16,7 @@
 
 typedef struct SENSOR {
   GYR gy901;
-  int16_t Line;
+  GW_8BIT gw_8bit;
 } SENSOR;
 
 typedef struct DEVICE {
@@ -35,10 +36,13 @@ typedef struct MOTOR {
 typedef struct STATE {
   int8_t T;  // 系统周期单位ms
   uint64_t time;
+
   MOTION motion;
   float initial_angle;
   float cur_angle;
   float tar_angle;
+
+  uint8_t gw_8bit;
 } STATE;
 
 typedef struct STATUS {

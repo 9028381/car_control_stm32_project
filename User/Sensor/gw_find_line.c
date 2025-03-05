@@ -5,150 +5,178 @@
 #include "log.h"
 #include "main.h"
 #include "road.h"
+#include "status.h"
 #include "stdbool.h"
 #include "usart.h"
 
-#define GW_GRAY_ADDR 0x4C
+#define GW_GRAY_ADDR 0x4C << 1
 
 #define Ping_CMD 0xAA
 #define Digital_Output_CMD 0xDD
-#define Analogue_Output_CMD 0xB0
+#define Analog_Output_CMD 0xB0
 #define Get_error_CMD 0xDE
 
 #define Ping_SUCCESS 0x66
 
-uint8_t gw_find_line_data_buf = 0;
+#define GW_GRAY_CROSSROAD_MIN_RETURN_TIMES 20
+#define INTEGRAL_TIMES 10
 
-const int16_t gw_bit_weight[8] = {0, -1500, -300, -100, 100, 300, 1500, 0};
-uint32_t line_record = 0x6666;  // 0b0110_0110_0110_0110初始化路为直线
+void init_gw_8bit(GW_8BIT *gw_8bit) {
+  gw_8bit->gw_bit_weight[0] = 0;
+  gw_8bit->gw_bit_weight[1] = -1500;
+  gw_8bit->gw_bit_weight[2] = -500;
+  gw_8bit->gw_bit_weight[3] = -200;
+  gw_8bit->gw_bit_weight[4] = 200;
+  gw_8bit->gw_bit_weight[5] = 500;
+  gw_8bit->gw_bit_weight[6] = 1500;
+  gw_8bit->gw_bit_weight[7] = 0;
 
-void update_line_record() {
-  line_record = (line_record << 8) | gw_find_line_data_buf;
+  gw_8bit->integral = 0;
+  gw_8bit->maybe = 0;
+  gw_8bit->cross_cnt = 0;
+  gw_8bit->cross = Straight;
+
+  gw_8bit->data_buf = 0;
 
   return;
 }
 
-LINE_TYPE get_line_value() {
-  update_line_record();  // 更新路线信息
-
-  uint8_t tar = (line_record >> 16) & 0xFF;  // 将第三行的信息提取出来
-  if (tar & 0x81)                            // 两端有黑线
-  {
-    // 开始判断是什么路口
-    tar = ((line_record >> 24) & 0xFF) | ((line_record >> 16) & 0xFF) | ((line_record >> 8) & 0xFF) | (line_record >> 8);  // 将四行信息压缩为一行
-    if ((tar & 0x81) == 0x81)                                                                                              // 可能是十字路口或者丁字路口
-    {
-      tar = line_record & 0xff;  // 取出最新行信息
-      if (tar & 0x18)            // 最新的前面有黑线
-      {
-        return CROSS;
-      } else {
-        return T;
-      }
-    } else if ((tar & 0x01) == 0x01)  // 可能是R或者RT
-    {
-      tar = line_record & 0xff;  // 取出最新行信息
-      if (tar & 0x01)            // 最新的前面有黑线
-      {
-        return RT;
-      } else {
-        return R;
-      }
-    } else if ((tar & 0x80) == 0x80)  // 可能是L或者LT
-    {
-      tar = line_record & 0xff;  // 取出最新行信息
-      if (tar & 0x80)            // 最新的前面有黑线
-      {
-        return LT;
-      } else {
-        return L;
-      }
-    }
-  }
-  tar = line_record & 0xff;  // 取出最新行信息
-  if (tar & 0x18)            // 最新行最中间的两个有黑线
-  {
-    return STRAIGHT;
-  }
-
-  return NONE;  // 一点不特殊
+void corvet_black_is_1(GW_8BIT *gw_8bit) {
+  gw_8bit->data_buf = ~gw_8bit->data_buf;
 }
 
-int16_t gw_gray_diff(LINE_TYPE line_type) {
-  if (1)  // 这里还没想好?????
-  {
-    if (line_record & 0x01)  // 新的左边有黑线
-    {
-      return compute_gw_gray_diff((uint8_t)((line_record >> 24) & 0xfc));  // 把左边的两个屏蔽掉
-    }
-    if (line_record & 0x80)  // 新的右边有黑线
-    {
-      return compute_gw_gray_diff((uint8_t)((line_record >> 24) & 0x3f));  // 把右边的两个屏蔽掉
-    } else {
-      return compute_gw_gray_diff((uint8_t)((line_record >> 24) & 0xff));  // 正常计算
-    }
-  }
-}
-
-int16_t compute_gw_gray_diff(uint8_t gray) {
-  int16_t diff = 0;
-  uint8_t cnt = 0;
+void gw_gray_show(GW_8BIT *gw_8bit) {
+  uint8_t buf = gw_8bit->data_buf;
+  char str[9];
+  str[8] = '\0';
   for (int i = 0; i < 8; i++) {
-    if (((gray >> i) & 0x01) == 1) {
-      cnt++;
-    }
-    diff += ((gray >> i) & 0x01) * gw_bit_weight[i];
+    str[i] = buf & 0x80 ? '#' : '.';
+    buf <<= 1;
   }
-  if (cnt != 0)
-    return diff / cnt;
-  else
-    return 0;
+  PRINTLN("%s", str);
 }
 
-#ifdef STM32
+enum Road road_new_from_bit(bool L, bool F, bool R) {
+  uint8_t left = L ? 0b100 : 0;
+  uint8_t font = F ? 0b010 : 0;
+  uint8_t right = R ? 0b001 : 0;
 
-void gw_gray_get_line_digital_is_black() {
+  return left | font | right;
+}
+
+void gw_gray_decision(GW_8BIT *gw_8bit, uint8_t integral, uint8_t line) {
+  bool left = (integral >> 6) == 0x03;     // 0b1100_0000
+  bool right = (integral & 0x03) == 0x03;  // 0b0000_0011
+  bool font = line & 0x3C;                 // 0b0011_1100
+  enum Road road = road_new_from_bit(left, font, right);
+  gw_8bit->cross = road;
+}
+
+short gw_gray_diff(GW_8BIT *gw_8bit, uint8_t line) {
+  short diff = 0;
+  unsigned char cnt = 0;
+
+  for (int i = 0; i < 8; i++) {
+    if (((gw_8bit->data_buf >> i) & 0x01)) {
+      cnt++;
+      diff += gw_8bit->gw_bit_weight[i];
+    }
+  }
+  if (cnt != 0) {
+    return diff / cnt;
+  } else {
+    return 0;
+  }
+}
+
+short get_line_value(GW_8BIT *gw_8bit) {
+  corvet_black_is_1(gw_8bit);
+  // gw_gray_show(gw_8bit);
+  if (gw_8bit->maybe) {
+    if (gw_8bit->maybe == 1) {
+      if (gw_8bit->cross == Straight) {
+        gw_gray_decision(gw_8bit, gw_8bit->integral, gw_8bit->data_buf);
+      }
+      switch (gw_8bit->cross) {
+        case UnknowRoad:
+          log_uprintf(&huart1, "Unknow road\n");
+          gw_8bit->cross = Straight;
+          gw_8bit->maybe = 0;
+          return 0;
+        case CrossRoad:
+          log_uprintf(&huart1, "Cross road\n");
+          if (gw_8bit->cross_cnt == 0)
+            gw_8bit->cross_cnt = GW_GRAY_CROSSROAD_MIN_RETURN_TIMES;
+
+          if (gw_8bit->cross_cnt >= 2) {
+            gw_8bit->cross_cnt -= 1;
+            return ROAD_CROSS;
+          }
+
+          if (gw_8bit->data_buf & 0b00111100) {
+            gw_8bit->cross = Straight;
+            gw_8bit->maybe = 0;
+            gw_8bit->cross_cnt = 0;
+            return gw_gray_diff(gw_8bit, gw_8bit->data_buf & 0x7E);
+          }
+
+          return ROAD_CROSS;
+        case TBRoad:
+          log_uprintf(&huart1, "T B road\n");
+          if (gw_8bit->data_buf & 0b00111100) {
+            gw_8bit->cross = Straight;
+            gw_8bit->maybe = 0;
+            return gw_gray_diff(gw_8bit, gw_8bit->data_buf & 0x7E);
+          }
+          return ROAD_TB;
+        case TLRoad:
+          log_uprintf(&huart1, "T L road\n");
+          gw_8bit->cross = Straight;
+          gw_8bit->maybe = 0;
+          return ROAD_TL;
+        case TRRoad:
+          log_uprintf(&huart1, "T R road\n");
+          gw_8bit->cross = Straight;
+          gw_8bit->maybe = 0;
+          return ROAD_TR;
+        case LeftRoad:
+          log_uprintf(&huart1, "Left road\n");
+          if (gw_8bit->data_buf & 0b00111100) {
+            gw_8bit->cross = Straight;
+            gw_8bit->maybe = 0;
+            return gw_gray_diff(gw_8bit, gw_8bit->data_buf & 0x7E);
+          }
+          return ROAD_LEFT;
+        case RightRoad:
+          log_uprintf(&huart1, "Right road\n");
+          if (gw_8bit->data_buf & 0b00111100) {
+            gw_8bit->cross = Straight;
+            gw_8bit->maybe = 0;
+            return gw_gray_diff(gw_8bit, gw_8bit->data_buf & 0x7E);
+          }
+          return ROAD_RIGHT;
+        case Straight:
+          log_uprintf(&huart1, "Straight road\n");
+          gw_8bit->maybe = 0;
+          return gw_gray_diff(gw_8bit, gw_8bit->data_buf & 0x7E);
+      }
+    }
+
+    gw_8bit->integral = gw_8bit->integral | gw_8bit->data_buf;
+    gw_8bit->maybe--;
+  } else if (gw_8bit->data_buf & 0x81) {
+    gw_8bit->maybe = INTEGRAL_TIMES;
+    gw_8bit->integral = 0;
+  }
+
+  return gw_gray_diff(gw_8bit, gw_8bit->data_buf & 0x7E);  // 0b0111_1110
+}
+
+void get_gw_8bit_data(I2C_HandleTypeDef *hi2c, GW_8BIT *gw_8bit) {
   uint8_t cmd = Digital_Output_CMD;
+  uint8_t buf = 0;
 
-  HAL_I2C_Master_Receive_DMA(&hi2c1, GW_GRAY_ADDR, &data_buf, 1);
+  HAL_I2C_Mem_Read_DMA(hi2c, GW_GRAY_ADDR, cmd, I2C_MEMADD_SIZE_8BIT, &gw_8bit->data_buf, 1);
 
   return;
 }
-
-void gw_gray_get_line_analog(uint8_t gray[8]) {
-  uint8_t cmd = Analogue_Output_CMD;
-  uint8_t buf[8] = {0};
-
-  HAL_I2C_Master_Receive_DMA(&hi2c1, GW_GRAY_ADDR, buf, 8);
-
-  // printf("1:%X 2:%X 3:%X 4:%X 5:%X 6:%X 7:%X 8:%X", buf[0], buf[1], buf[2],
-  // buf[3], buf[4], buf[5], buf[6], buf[7]);
-}
-
-uint8_t gw_gray_is_ok() {
-  uint8_t cmd = Ping_CMD;
-  uint8_t buf = 0;
-
-  HAL_I2C_Master_Transmit(&hi2c1, GW_GRAY_ADDR, &cmd, 1, 10);
-  HAL_I2C_Master_Receive(&hi2c1, GW_GRAY_ADDR, &buf, 1, 10);
-
-  if (buf == Ping_SUCCESS)
-    return 1;
-  else
-    return 0;
-}
-
-uint8_t gw_gray_get_error() {
-  uint8_t cmd = Get_error_CMD;
-  uint8_t buf = 0;
-
-  HAL_I2C_Master_Receive_DMA(&hi2c1, GW_GRAY_ADDR, &buf, 1);
-
-  return buf;
-}
-
-void set_gw_gray_mode(uint8_t cmd) {
-  HAL_I2C_Master_Transmit_DMA(&hi2c1, GW_GRAY_ADDR, &cmd, 1);
-}
-
-#endif

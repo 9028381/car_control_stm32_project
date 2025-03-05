@@ -33,4 +33,7 @@ car_control_stm32_project/gw_find_line.o: ..\User\Sensor\gw_find_line.c \
   ..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h \
   ..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h \
   ..\User\Status\road.h ..\Core\Inc\i2c.h ..\User\Tool\log.h \
-  ..\Core\Inc\usart.h
+  ..\Core\Inc\usart.h ..\User\Status\status.h ..\User\Device\button.h \
+  ..\User\Device\buzzer.h ..\User\Sensor\gy901.h ..\User\Device\led.h \
+  ..\User\Status\motion.h ..\User\Tool\pid.h ..\User\Motor\servo.h \
+  ..\User\Motor\wheel.h

@@ -32,5 +32,5 @@ car_control_stm32_project/ccd.o: ..\User\Sensor\ccd.c \
   ..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_tim_ex.h \
   ..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h \
   ..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h \
-  ..\Core\Inc\tim.h ..\User\Tool\array.h ..\User\Status\road.h \
-  ..\User\Tool\math_tool.h
+  ..\Core\Inc\tim.h ..\User\Tool\array.h ..\User\Tool\math_tool.h \
+  ..\User\Status\road.h
