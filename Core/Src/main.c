@@ -57,34 +57,7 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-void I2C_Scan(I2C_HandleTypeDef *hi2c) {
-  uint8_t address;
-  HAL_StatusTypeDef result;
-  uint8_t found_devices = 0;
 
-  log_uprintf(&huart2, "\r\nScanning I2C bus...\r\n");
-
-  /*
-   * 扫描范围：0x00 ~ 0x7F
-   * 在7位地址模式下，有效地址范围为0x08 ~ 0x77
-   * 跳过保留地址
-   */
-  for (address = 0x08; address < 0x78; address++) {
-    // 尝试向每个地址发送一个字节
-    result = HAL_I2C_IsDeviceReady(hi2c, (uint16_t)(address << 1), 3, 5);
-
-    if (result == HAL_OK) {
-      log_uprintf(&huart2, "Found I2C device at address: 0x%02X\r\n", address);
-      found_devices++;
-    }
-  }
-
-  if (found_devices == 0) {
-    log_uprintf(&huart2, "No I2C devices found!\r\n");
-  } else {
-    log_uprintf(&huart2, "\r\nTotal devices found: %d\r\n", found_devices);
-  }
-}
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -137,10 +110,9 @@ int main(void) {
   MX_I2C1_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
-
-  I2C_Scan(&hi2c1);
-
   init_status(&status, 1);
+
+  after_init_state();
 
   HAL_TIM_Base_Start_IT(&htim5);
 
