@@ -35,6 +35,6 @@ car_control_stm32_project/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
   ..\Core\Inc\i2c.h ..\Core\Inc\spi.h ..\Core\Inc\tim.h \
   ..\Core\Inc\usart.h ..\User\Tool\log.h ..\User\Status\status.h \
   ..\User\Device\button.h ..\User\Device\buzzer.h \
-  ..\User\Sensor\gw_find_line.h ..\User\Status\road.h \
-  ..\User\Sensor\gy901.h ..\User\Device\led.h ..\User\Status\motion.h \
-  ..\User\Tool\pid.h ..\User\Motor\servo.h ..\User\Motor\wheel.h
+  ..\User\Sensor\gw_find_line.h ..\User\Tool\pid.h ..\User\Status\road.h \
+  ..\User\Sensor\gy901.h ..\User\Device\led.h ..\User\Motor\servo.h \
+  ..\User\Motor\wheel.h

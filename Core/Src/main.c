@@ -116,9 +116,8 @@ int main(void) {
 
   HAL_TIM_Base_Start_IT(&htim5);
 
-  status.motor.wheel[0].tar_speed = 2500;
-  status.motor.wheel[1].tar_speed = 2500;
   /* USER CODE END 2 */
+
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1) {

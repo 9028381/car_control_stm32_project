@@ -35,6 +35,5 @@ car_control_stm32_project/button.o: ..\User\Device\button.c \
   ..\Core\Inc\gpio.h ..\User\Device\led.h ..\User\Tool\log.h \
   ..\Core\Inc\usart.h ..\User\Motor\lq_step.h ..\User\Tool\math_tool.h \
   ..\User\Status\status.h ..\User\Device\buzzer.h \
-  ..\User\Sensor\gw_find_line.h ..\User\Status\road.h \
-  ..\User\Sensor\gy901.h ..\User\Status\motion.h ..\User\Tool\pid.h \
-  ..\User\Motor\servo.h ..\User\Motor\wheel.h
+  ..\User\Sensor\gw_find_line.h ..\User\Tool\pid.h ..\User\Status\road.h \
+  ..\User\Sensor\gy901.h ..\User\Motor\servo.h ..\User\Motor\wheel.h

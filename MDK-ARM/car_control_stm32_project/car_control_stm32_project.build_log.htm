@@ -22,42 +22,16 @@ Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
 D:\DATA\STM32\CubeMX\car_control_stm32_project\MDK-ARM\car_control_stm32_project.uvprojx
-Project File Date:  02/27/2025
+Project File Date:  03/26/2025
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.22', folder: 'D:\program\keil_5\ARM\ARMCLANG\Bin'
 Build target 'car_control_stm32_project'
-compiling radar.c...
 compiling status.c...
-compiling button.c...
-compiling abslute_angle_sensor.c...
-compiling pid.c...
-compiling lq_step.c...
-../User/Sensor/ccd.c(48): warning: incompatible pointer types passing 'uint16_t *' (aka 'unsigned short *') to parameter of type 'uint32_t *' (aka 'unsigned int *') [-Wincompatible-pointer-types]
-   48 |     HAL_ADC_Start_DMA(&hadc3, &BUFF_DATA_1[(cnt - 10) / 3], 1);
-      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
-../Drivers/STM32G4xx_HAL_Driver/Inc\stm32g4xx_hal_adc.h(1959): note: passing argument to parameter 'pData' here
- 1959 | HAL_StatusTypeDef       HAL_ADC_Start_DMA(ADC_HandleTypeDef *hadc, uint32_t *pData, uint32_t Length);
-      |                                                                              ^
-../User/Sensor/ccd.c(79): warning: passing 'uint16_t *' (aka 'unsigned short *') to parameter of type 'const short *' converts between pointers to integer types with different sign [-Wpointer-sign]
-   79 |       array_mean_index_less_than(CCD_ARRAY_LEN, CCD_ARRAY, CCD_BLACK_THRUST);
-      |                                                 ^~~~~~~~~
-../User/Sensor/ccd.c(15): note: expanded from macro 'CCD_ARRAY'
-   15 | #define CCD_ARRAY &BUFF_DATA_1[MASK]
-      |                   ^~~~~~~~~~~~~~~~~~
-../User/Tool\array.h(22): note: passing argument to parameter 'array' here
-   22 | array_mean_index_less_than(unsigned len, const short array[len], short compare);
-      |                                                      ^
-../User/Sensor/ccd.c(96): warning: non-void function does not return a value in all control paths [-Wreturn-type]
-   96 | }
-      | ^
-3 warnings generated.
-compiling ccd.c...
-compiling wheel.c...
 linking...
-Program Size: Code=58292 RO-data=1348 RW-data=12 ZI-data=5564  
+Program Size: Code=34720 RO-data=1220 RW-data=16 ZI-data=5688  
 FromELF: creating hex file...
-"car_control_stm32_project\car_control_stm32_project.axf" - 0 Error(s), 3 Warning(s).
+"car_control_stm32_project\car_control_stm32_project.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -81,7 +55,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE@6.1.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

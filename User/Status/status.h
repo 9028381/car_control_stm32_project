@@ -9,10 +9,17 @@
 #include "gy901.h"
 #include "led.h"
 #include "main.h"
-#include "motion.h"
 #include "pid.h"
 #include "servo.h"
 #include "wheel.h"
+
+#define MOTION_BASE_SPEED 2000
+
+typedef enum MOTION_STATION {
+  STOP,
+  KEEP_ANGLE,
+  FIND_LINE,
+} MOTION_STATION;
 
 typedef struct SENSOR {
   GYR gy901;
@@ -37,7 +44,7 @@ typedef struct STATE {
   int8_t T;  // 系统周期单位ms
   uint64_t time;
 
-  MOTION motion;
+  MOTION_STATION motion;
   float initial_angle;
   float cur_angle;
   float tar_angle;
@@ -54,6 +61,7 @@ typedef struct STATUS {
 
 extern STATUS status;
 
+void after_init_state();
 void init_status(STATUS *status, uint8_t T);
 void update_status(STATUS *status);
 void driver_status(STATUS *status);

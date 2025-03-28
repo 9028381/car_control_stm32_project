@@ -32,4 +32,4 @@ car_control_stm32_project/gy901.o: ..\User\Sensor\gy901.c \
   ..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_tim_ex.h \
   ..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h \
   ..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h \
-  ..\Core\Inc\i2c.h
+  ..\User\Tool\pid.h ..\Core\Inc\i2c.h

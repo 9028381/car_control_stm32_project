@@ -35,4 +35,4 @@ car_control_stm32_project/pid.o: ..\User\Tool\pid.c ..\User\Tool\pid.h \
   ..\User\Status\status.h ..\User\Device\button.h \
   ..\User\Device\buzzer.h ..\User\Sensor\gw_find_line.h \
   ..\User\Status\road.h ..\User\Sensor\gy901.h ..\User\Device\led.h \
-  ..\User\Status\motion.h ..\User\Motor\servo.h ..\User\Motor\wheel.h
+  ..\User\Motor\servo.h ..\User\Motor\wheel.h

@@ -94,7 +94,7 @@ void init_wheel(WHEEL *wheel, uint8_t which, int8_t dir) {
   wheel->cur_speed = 0;
   wheel->tar_speed = 0;
   wheel->dir = dir;
-  wheel->wheel_pid = init_pid(0.05, 0.01, 0.03, 1, 10);
+  wheel->wheel_pid = init_pid(1.5, 0.5, 1.1, 1, 10);  //(1.5, 0.5, 1.3, 1, 10)
 
   if (wheel->which == 1) {
     HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_1);

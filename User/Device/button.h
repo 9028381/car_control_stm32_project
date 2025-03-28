@@ -3,7 +3,7 @@
 
 #include "main.h"
 
-#define LONG_PRESS_CNT 500  // 长按判断时间 单位 ms
+#define LONG_PRESS_CNT 20  // 长按判断时间 单位 ms
 
 // 按键结构体
 // 挂载于 status device

@@ -5,6 +5,7 @@
 #include "gy901.h"
 
 #include "i2c.h"
+#include "pid.h"
 
 #define GYR_ADDR 0xa1
 
@@ -14,11 +15,12 @@ void init_gyr(GYR *gyr) {
   for (int i = 0; i < 24; i++) {
     gyr->data_buf[i] = 0;
   }
+  gyr->gy901_keep_angle_pid = init_pid(50, 0, 0, 50, 500);
   return;
 }
 
 void get_gyr_data(I2C_HandleTypeDef *i2c, GYR *gyr) {
-  HAL_I2C_Mem_Read_DMA(i2c, GYR_ADDR, gyr->data_start_addr, I2C_MEMADD_SIZE_8BIT, gyr->data_buf, 24);
+  HAL_I2C_Mem_Read(i2c, GYR_ADDR, gyr->data_start_addr, I2C_MEMADD_SIZE_8BIT, gyr->data_buf, 24, 10);
 
   return;
 }
