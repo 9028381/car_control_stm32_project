@@ -5,6 +5,7 @@
 
 #include "button.h"
 #include "buzzer.h"
+#include "gw_anagloge.h"
 #include "gw_find_line.h"
 #include "gy901.h"
 #include "led.h"
@@ -24,6 +25,7 @@ typedef enum MOTION_STATION {
 typedef struct SENSOR {
   GYR gy901;
   GW_8BIT gw_8bit;
+  GW_ANALOGUE gw_analogue;
 } SENSOR;
 
 typedef struct DEVICE {

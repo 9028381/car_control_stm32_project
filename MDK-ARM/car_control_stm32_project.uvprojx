@@ -771,6 +771,16 @@
               <FileType>5</FileType>
               <FilePath>..\User\Sensor\radar.h</FilePath>
             </File>
+            <File>
+              <FileName>gw_anagloge.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\Sensor\gw_anagloge.h</FilePath>
+            </File>
+            <File>
+              <FileName>gw_analogue.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Sensor\gw_analogue.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -1,10 +1,11 @@
 #MicroXplorer Configuration settings - do not modify
 ADC3.Channel-0\#ChannelRegularConversion=ADC_CHANNEL_11
 ADC3.CommonPathInternal=null|null|null|null
-ADC3.IPParameters=Rank-0\#ChannelRegularConversion,master,Channel-0\#ChannelRegularConversion,SamplingTime-0\#ChannelRegularConversion,OffsetNumber-0\#ChannelRegularConversion,NbrOfConversionFlag,CommonPathInternal
+ADC3.IPParameters=Rank-0\#ChannelRegularConversion,master,Channel-0\#ChannelRegularConversion,SamplingTime-0\#ChannelRegularConversion,OffsetNumber-0\#ChannelRegularConversion,NbrOfConversionFlag,Resolution,CommonPathInternal
 ADC3.NbrOfConversionFlag=1
 ADC3.OffsetNumber-0\#ChannelRegularConversion=ADC_OFFSET_NONE
 ADC3.Rank-0\#ChannelRegularConversion=1
+ADC3.Resolution=ADC_RESOLUTION_8B
 ADC3.SamplingTime-0\#ChannelRegularConversion=ADC_SAMPLETIME_2CYCLES_5
 ADC3.master=1
 CAD.formats=

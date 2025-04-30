@@ -59,6 +59,7 @@ void init_device() {  // 璁惧鍒濆鍖�
 void init_sensor(STATUS *status) {  // 浼犳劅鍣ㄥ垵濮嬪寲
   init_gyr(&status->sensor.gy901);
   init_gw_8bit(&status->sensor.gw_8bit);
+  init_gw_analogue(&status->sensor.gw_analogue);
 }
 
 void init_state(STATUS *status, uint8_t T)  // 鐘舵€佸垵濮嬪寲
@@ -94,15 +95,15 @@ void update_status(STATUS *status) {  // 鐘舵€佹爲鏇存柊鏁版嵁
   status->motor.wheel[2].cur_speed = get_wheel_speed(&status->motor.wheel[2]);
   status->motor.wheel[3].cur_speed = get_wheel_speed(&status->motor.wheel[3]);
 
-  get_gyr_data(&hi2c1, &status->sensor.gy901);
   get_gw_8bit_data(&hi2c1, &status->sensor.gw_8bit);
+  get_gw_angalogue_data(&status->sensor.gw_analogue);
+  get_gw_analoge_digital_data(&status->sensor.gw_analogue);
+  get_gw_analogue_analogue_diff(&status->sensor.gw_analogue);
 
   return;
 }
 
 void driver_status(STATUS *status) {  // 鐘舵€佹暟椹卞姩
-
-  status->state.cur_angle = get_gyr_value(&status->sensor.gy901, gyr_z_yaw);
 
   // if (status->state.time == 1000) {
   //   status->state.motion = KEEP_ANGLE;
@@ -136,17 +137,9 @@ void driver_status(STATUS *status) {  // 鐘舵€佹暟椹卞姩
   //   status->motor.wheel[0].tar_speed = diff;
   //   status->motor.wheel[1].tar_speed = -diff;
   //   log_uprintf(&huart1, "diff_angle %5.2f\r\n", diff_angle);
-  float error_angle = get_gyr_value(&status->sensor.gy901, gyr_y_pitch);
 
-  int16_t diff = compute_pid(&balance_pid, error_angle);
+  log_uprintf(&huart1, "%5.2f\n", status->sensor.gw_analogue.diff);
 
-  diff = CONFINE(diff, -150, 150);
-
-  status->motor.wheel[0].tar_speed = diff;
-  status->motor.wheel[1].tar_speed = diff;
-  log_uprintf(&huart1, "kp : %f\r\nkd : %f\r\n\r\n\r\n", balance_pid.kp, balance_pid.kd);
-
-  // }
   driver_button(&status->device.button_D2);
   driver_button(&status->device.button_B11);
 
@@ -162,9 +155,6 @@ void driver_status(STATUS *status) {  // 鐘舵€佹暟椹卞姩
   driver_wheel(&status->motor.wheel[0]);
   driver_wheel(&status->motor.wheel[1]);
 
-  status->device.led1.on = 1;
-  status->device.led2.on = 1;
-
   return;
 }
 
@@ -172,5 +162,4 @@ void after_init_state() {
   get_gyr_data(&hi2c1, &status.sensor.gy901);
   HAL_Delay(50);
   status.state.initial_angle = get_gyr_value(&status.sensor.gy901, gyr_z_yaw);
-  log_uprintf(&huart1, "ok\n");
 }

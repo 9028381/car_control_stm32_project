@@ -35,6 +35,6 @@ car_control_stm32_project/wheel.o: ..\User\Motor\wheel.c \
   ..\User\Tool\pid.h ..\Core\Inc\gpio.h ..\User\Tool\log.h \
   ..\Core\Inc\usart.h ..\User\Tool\math_tool.h ..\User\Status\status.h \
   ..\User\Device\button.h ..\User\Device\buzzer.h \
-  ..\User\Sensor\gw_find_line.h ..\User\Status\road.h \
-  ..\User\Sensor\gy901.h ..\User\Device\led.h ..\User\Motor\servo.h \
-  ..\Core\Inc\tim.h
+  ..\User\Sensor\gw_anagloge.h ..\User\Sensor\gw_find_line.h \
+  ..\User\Status\road.h ..\User\Sensor\gy901.h ..\User\Device\led.h \
+  ..\User\Motor\servo.h ..\Core\Inc\tim.h

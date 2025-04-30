@@ -47,6 +47,7 @@
 "car_control_stm32_project\gy901.o"
 "car_control_stm32_project\ms_find_line.o"
 "car_control_stm32_project\radar.o"
+"car_control_stm32_project\gw_analogue.o"
 "car_control_stm32_project\lq_step.o"
 "car_control_stm32_project\servo.o"
 "car_control_stm32_project\wheel.o"

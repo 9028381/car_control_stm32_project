@@ -1,6 +1,7 @@
 #include "button.h"
 
 #include "gpio.h"
+#include "gw_anagloge.h"
 #include "led.h"
 #include "log.h"
 #include "lq_step.h"
@@ -15,29 +16,14 @@ uint8_t is_p = 1;
 void server_button(BUTTON *button, BUTTON_STATION station) {
   if (button->which == 1) {
     if (station == BUTTON_DOWN) {
-      if (is_p == 1) {
-        balance_pid.kp += 50;
-      } else {
-        balance_pid.kd += 50;
-      }
+      correct_gw_analogue(&status.sensor.gw_analogue);
     }
   }
   if (button->which == 2) {
     if (station == BUTTON_DOWN) {
-      if (is_p == 1) {
-        balance_pid.kp -= 50;
-      } else {
-        balance_pid.kd -= 50;
-      }
     }
   }
   if (station == BUTTON_LONG) {
-    log_uprintf(&huart1, "sxsefwwfjh349qeoyhf7o8rewqyhgqf78io345regyhf7i8o43wegq5rf78oiegwrq78iofg78eiorqwg\r\n");
-    if (is_p == 1) {
-      is_p = 0;
-    } else {
-      is_p = 1;
-    }
   }
   return;
 }
