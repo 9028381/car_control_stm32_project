@@ -7,6 +7,8 @@
 #include "tim.h"
 
 void driver_servo(SERVO *servo) {
+  HAL_TIM_PWM_Start(&htim15, TIM_CHANNEL_1);
+  HAL_TIM_PWM_Start(&htim15, TIM_CHANNEL_2);
   if (servo->which == 1) {
     __HAL_TIM_SET_COMPARE(&htim15, TIM_CHANNEL_2, (int)((((float)servo->angle / (float)servo->max_angle) * 0.1 + 0.025) * 50000));
   } else if (servo->which == 2) {

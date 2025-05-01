@@ -59,7 +59,7 @@ void select_channel(uint8_t channel) {
   }
 }
 
-void get_gw_angalogue_data(GW_ANALOGUE *gw_analogue) {
+void get_gw_raw_data(GW_ANALOGUE *gw_analogue) {
   // Read the ADC value for the selected channel
   for (int i = 0; i < 8; i++) {
     select_channel(i);                                   // Select the channel to read from

@@ -1,5 +1,7 @@
 // @63 @551
 
+// 当前CCD驱动未验证 谨慎使用
+
 #include "ccd.h"
 
 #include "array.h"

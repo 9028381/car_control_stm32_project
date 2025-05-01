@@ -103,7 +103,7 @@ void update_status(STATUS *status) {  // 鐘舵€佹爲鏇存柊鏁版嵁
   status->motor.wheel[3].cur_speed = get_wheel_speed(&status->motor.wheel[3]);
 
   get_gw_8bit_data(&hi2c1, &status->sensor.gw_8bit);
-  get_gw_angalogue_data(&status->sensor.gw_analogue);
+  get_gw_analoge_digital_data(&status->sensor.gw_analogue);
   get_gw_analoge_digital_data(&status->sensor.gw_analogue);
   get_gw_analogue_analogue_diff(&status->sensor.gw_analogue);
 
@@ -144,6 +144,9 @@ void driver_status(STATUS *status) {  // 鐘舵€佹暟椹卞姩
   //   status->motor.wheel[0].tar_speed = diff;
   //   status->motor.wheel[1].tar_speed = -diff;
   //   log_uprintf(&huart1, "diff_angle %5.2f\r\n", diff_angle);
+
+  status->motor.servo[0].angle = 100;
+
   get_road_type(&status->state.road_determine, status->sensor.gw_analogue.digital_8bit);
   log_uprintf(&huart1, "%5.2f\n", status->sensor.gw_analogue.diff);
 

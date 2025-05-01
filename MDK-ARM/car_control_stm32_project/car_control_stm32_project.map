@@ -1752,7 +1752,6 @@ Section Cross References
     status.o(.text.update_status) refers to wheel.o(.text.get_wheel_speed) for get_wheel_speed
     status.o(.text.update_status) refers to i2c.o(.bss.hi2c1) for hi2c1
     status.o(.text.update_status) refers to gw_find_line.o(.text.get_gw_8bit_data) for get_gw_8bit_data
-    status.o(.text.update_status) refers to gw_analogue.o(.text.get_gw_angalogue_data) for get_gw_angalogue_data
     status.o(.text.update_status) refers to gw_analogue.o(.text.get_gw_analoge_digital_data) for get_gw_analoge_digital_data
     status.o(.text.update_status) refers to gw_analogue.o(.text.get_gw_analogue_analogue_diff) for get_gw_analogue_analogue_diff
     status.o(.ARM.exidx.text.update_status) refers to status.o(.text.update_status) for [Anonymous Symbol]
@@ -1886,13 +1885,13 @@ Section Cross References
     gw_analogue.o(.ARM.exidx.text.init_gw_analogue) refers to gw_analogue.o(.text.init_gw_analogue) for [Anonymous Symbol]
     gw_analogue.o(.text.select_channel) refers to stm32g4xx_hal_gpio.o(.text.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
     gw_analogue.o(.ARM.exidx.text.select_channel) refers to gw_analogue.o(.text.select_channel) for [Anonymous Symbol]
-    gw_analogue.o(.text.get_gw_angalogue_data) refers to adc.o(.bss.hadc3) for hadc3
-    gw_analogue.o(.text.get_gw_angalogue_data) refers to gw_analogue.o(.text.select_channel) for select_channel
-    gw_analogue.o(.text.get_gw_angalogue_data) refers to stm32g4xx_hal_adc.o(.text.HAL_ADC_Start) for HAL_ADC_Start
-    gw_analogue.o(.text.get_gw_angalogue_data) refers to stm32g4xx_hal_adc.o(.text.HAL_ADC_PollForConversion) for HAL_ADC_PollForConversion
-    gw_analogue.o(.text.get_gw_angalogue_data) refers to stm32g4xx_hal_adc.o(.text.HAL_ADC_GetValue) for HAL_ADC_GetValue
-    gw_analogue.o(.text.get_gw_angalogue_data) refers to stm32g4xx_hal_adc.o(.text.HAL_ADC_Stop) for HAL_ADC_Stop
-    gw_analogue.o(.ARM.exidx.text.get_gw_angalogue_data) refers to gw_analogue.o(.text.get_gw_angalogue_data) for [Anonymous Symbol]
+    gw_analogue.o(.text.get_gw_raw_data) refers to adc.o(.bss.hadc3) for hadc3
+    gw_analogue.o(.text.get_gw_raw_data) refers to gw_analogue.o(.text.select_channel) for select_channel
+    gw_analogue.o(.text.get_gw_raw_data) refers to stm32g4xx_hal_adc.o(.text.HAL_ADC_Start) for HAL_ADC_Start
+    gw_analogue.o(.text.get_gw_raw_data) refers to stm32g4xx_hal_adc.o(.text.HAL_ADC_PollForConversion) for HAL_ADC_PollForConversion
+    gw_analogue.o(.text.get_gw_raw_data) refers to stm32g4xx_hal_adc.o(.text.HAL_ADC_GetValue) for HAL_ADC_GetValue
+    gw_analogue.o(.text.get_gw_raw_data) refers to stm32g4xx_hal_adc.o(.text.HAL_ADC_Stop) for HAL_ADC_Stop
+    gw_analogue.o(.ARM.exidx.text.get_gw_raw_data) refers to gw_analogue.o(.text.get_gw_raw_data) for [Anonymous Symbol]
     gw_analogue.o(.text.correct_gw_analogue) refers to adc.o(.bss.hadc3) for hadc3
     gw_analogue.o(.text.correct_gw_analogue) refers to gw_analogue.o(.text.select_channel) for select_channel
     gw_analogue.o(.text.correct_gw_analogue) refers to stm32g4xx_hal_adc.o(.text.HAL_ADC_Start) for HAL_ADC_Start
@@ -1921,11 +1920,12 @@ Section Cross References
     lq_step.o(.ARM.exidx.text.trun_lq_step_speed) refers to lq_step.o(.text.trun_lq_step_speed) for [Anonymous Symbol]
     lq_step.o(.text.trun_lq_step_current) refers to stm32g4xx_hal_uart.o(.text.HAL_UART_Transmit) for HAL_UART_Transmit
     lq_step.o(.ARM.exidx.text.trun_lq_step_current) refers to lq_step.o(.text.trun_lq_step_current) for [Anonymous Symbol]
+    servo.o(.text.driver_servo) refers to tim.o(.bss.htim15) for htim15
+    servo.o(.text.driver_servo) refers to stm32g4xx_hal_tim.o(.text.HAL_TIM_PWM_Start) for HAL_TIM_PWM_Start
     servo.o(.text.driver_servo) refers to f2d.o(x$fpl$f2d) for __aeabi_f2d
     servo.o(.text.driver_servo) refers to dmul.o(x$fpl$dmul) for __aeabi_dmul
     servo.o(.text.driver_servo) refers to daddsub_clz.o(x$fpl$dadd) for __aeabi_dadd
     servo.o(.text.driver_servo) refers to dfix.o(x$fpl$dfix) for __aeabi_d2iz
-    servo.o(.text.driver_servo) refers to tim.o(.bss.htim15) for htim15
     servo.o(.ARM.exidx.text.driver_servo) refers to servo.o(.text.driver_servo) for [Anonymous Symbol]
     servo.o(.text.init_servo) refers to f2d.o(x$fpl$f2d) for __aeabi_f2d
     servo.o(.text.init_servo) refers to dmul.o(x$fpl$dmul) for __aeabi_dmul
@@ -3800,7 +3800,8 @@ Removing Unused input sections from the image.
     Removing gw_analogue.o(.ARM.exidx.text.gw_analogue_gray_show), (8 bytes).
     Removing gw_analogue.o(.ARM.exidx.text.init_gw_analogue), (8 bytes).
     Removing gw_analogue.o(.ARM.exidx.text.select_channel), (8 bytes).
-    Removing gw_analogue.o(.ARM.exidx.text.get_gw_angalogue_data), (8 bytes).
+    Removing gw_analogue.o(.text.get_gw_raw_data), (58 bytes).
+    Removing gw_analogue.o(.ARM.exidx.text.get_gw_raw_data), (8 bytes).
     Removing gw_analogue.o(.ARM.exidx.text.correct_gw_analogue), (8 bytes).
     Removing gw_analogue.o(.ARM.exidx.text.get_gw_analoge_digital_data), (8 bytes).
     Removing gw_analogue.o(.text.normalize_gray_data), (40 bytes).
@@ -3864,7 +3865,7 @@ Removing Unused input sections from the image.
     Removing pid.o(.ARM.exidx.text.init_pid), (8 bytes).
     Removing pid.o(.ARM.exidx.text.compute_pid), (8 bytes).
 
-1514 unused section(s) (total 103264 bytes) removed from the image.
+1515 unused section(s) (total 103322 bytes) removed from the image.
 
 ==============================================================================
 
@@ -4365,104 +4366,103 @@ Image Symbol Table
     [Anonymous Symbol]                       0x08007388   Section        0  button.o(.text.driver_button)
     [Anonymous Symbol]                       0x08007430   Section        0  ccd.o(.text.driver_ccd)
     [Anonymous Symbol]                       0x08007550   Section        0  servo.o(.text.driver_servo)
-    [Anonymous Symbol]                       0x080075c8   Section        0  status.o(.text.driver_status)
-    [Anonymous Symbol]                       0x08007650   Section        0  wheel.o(.text.driver_wheel)
-    [Anonymous Symbol]                       0x08007710   Section        0  gw_find_line.o(.text.get_gw_8bit_data)
-    [Anonymous Symbol]                       0x08007730   Section        0  gw_analogue.o(.text.get_gw_analoge_digital_data)
-    [Anonymous Symbol]                       0x0800776c   Section        0  gw_analogue.o(.text.get_gw_analogue_analogue_diff)
-    [Anonymous Symbol]                       0x0800785c   Section        0  gw_analogue.o(.text.get_gw_angalogue_data)
-    [Anonymous Symbol]                       0x08007898   Section        0  gy901.o(.text.get_gyr_data)
-    [Anonymous Symbol]                       0x080078b8   Section        0  gy901.o(.text.get_gyr_value)
-    [Anonymous Symbol]                       0x0800795c   Section        0  road.o(.text.get_road_type)
-    [Anonymous Symbol]                       0x08007b0c   Section        0  wheel.o(.text.get_wheel_speed)
-    [Anonymous Symbol]                       0x08007b50   Section        0  buzzer.o(.text.init_BUZZER)
-    [Anonymous Symbol]                       0x08007b5c   Section        0  led.o(.text.init_LED)
-    [Anonymous Symbol]                       0x08007b68   Section        0  button.o(.text.init_button)
-    [Anonymous Symbol]                       0x08007b7c   Section        0  gw_find_line.o(.text.init_gw_8bit)
-    [Anonymous Symbol]                       0x08007c10   Section        0  gw_analogue.o(.text.init_gw_analogue)
-    [Anonymous Symbol]                       0x08007c70   Section        0  gy901.o(.text.init_gyr)
-    [Anonymous Symbol]                       0x08007cd8   Section        0  pid.o(.text.init_pid)
-    [Anonymous Symbol]                       0x08007cf8   Section        0  servo.o(.text.init_servo)
-    [Anonymous Symbol]                       0x08007d78   Section        0  status.o(.text.init_status)
-    [Anonymous Symbol]                       0x08007e94   Section        0  wheel.o(.text.init_wheel)
-    [Anonymous Symbol]                       0x08007f5c   Section        0  log.o(.text.log_uprintf)
-    [Anonymous Symbol]                       0x08007fb0   Section        0  main.o(.text.main)
-    [Anonymous Symbol]                       0x08008090   Section        0  gw_analogue.o(.text.select_channel)
-    [Anonymous Symbol]                       0x080080c8   Section        0  wheel.o(.text.set_wheel_dir)
-    [Anonymous Symbol]                       0x080081d8   Section        0  status.o(.text.update_status)
-    CL$$btod_d2e                             0x08008232   Section       62  btod.o(CL$$btod_d2e)
-    CL$$btod_d2e_denorm_low                  0x08008270   Section       70  btod.o(CL$$btod_d2e_denorm_low)
-    CL$$btod_d2e_norm_op1                    0x080082b6   Section       96  btod.o(CL$$btod_d2e_norm_op1)
-    CL$$btod_div_common                      0x08008318   Section      824  btod.o(CL$$btod_div_common)
-    CL$$btod_e2e                             0x08008650   Section      220  btod.o(CL$$btod_e2e)
-    CL$$btod_ediv                            0x0800872c   Section       42  btod.o(CL$$btod_ediv)
-    CL$$btod_emul                            0x08008756   Section       42  btod.o(CL$$btod_emul)
-    CL$$btod_mult_common                     0x08008780   Section      580  btod.o(CL$$btod_mult_common)
-    i.__ARM_fpclassify                       0x080089c4   Section        0  fpclassify.o(i.__ARM_fpclassify)
-    i._is_digit                              0x080089f4   Section        0  __printf_wp.o(i._is_digit)
-    locale$$code                             0x08008a04   Section       44  lc_ctype_c.o(locale$$code)
-    locale$$code                             0x08008a30   Section       44  lc_numeric_c.o(locale$$code)
-    $v0                                      0x08008a5c   Number         0  d2f.o(x$fpl$d2f)
-    x$fpl$d2f                                0x08008a5c   Section       98  d2f.o(x$fpl$d2f)
-    $v0                                      0x08008ac0   Number         0  daddsub_clz.o(x$fpl$dadd)
-    x$fpl$dadd                               0x08008ac0   Section      336  daddsub_clz.o(x$fpl$dadd)
-    _dadd1                                   0x08008ad1   Thumb Code     0  daddsub_clz.o(x$fpl$dadd)
-    $v0                                      0x08008c10   Number         0  dfix.o(x$fpl$dfix)
-    x$fpl$dfix                               0x08008c10   Section       94  dfix.o(x$fpl$dfix)
-    $v0                                      0x08008c6e   Number         0  dflt_clz.o(x$fpl$dflt)
-    x$fpl$dflt                               0x08008c6e   Section       46  dflt_clz.o(x$fpl$dflt)
-    $v0                                      0x08008c9c   Number         0  dflt_clz.o(x$fpl$dfltu)
-    x$fpl$dfltu                              0x08008c9c   Section       38  dflt_clz.o(x$fpl$dfltu)
-    $v0                                      0x08008cc4   Number         0  dmul.o(x$fpl$dmul)
-    x$fpl$dmul                               0x08008cc4   Section      340  dmul.o(x$fpl$dmul)
-    $v0                                      0x08008e18   Number         0  dnaninf.o(x$fpl$dnaninf)
-    x$fpl$dnaninf                            0x08008e18   Section      156  dnaninf.o(x$fpl$dnaninf)
-    $v0                                      0x08008eb4   Number         0  dretinf.o(x$fpl$dretinf)
-    x$fpl$dretinf                            0x08008eb4   Section       12  dretinf.o(x$fpl$dretinf)
-    $v0                                      0x08008ec0   Number         0  daddsub_clz.o(x$fpl$dsub)
-    x$fpl$dsub                               0x08008ec0   Section      476  daddsub_clz.o(x$fpl$dsub)
-    _dsub1                                   0x08008ed1   Thumb Code     0  daddsub_clz.o(x$fpl$dsub)
-    $v0                                      0x0800909c   Number         0  f2d.o(x$fpl$f2d)
-    x$fpl$f2d                                0x0800909c   Section       86  f2d.o(x$fpl$f2d)
-    $v0                                      0x080090f2   Number         0  fnaninf.o(x$fpl$fnaninf)
-    x$fpl$fnaninf                            0x080090f2   Section      140  fnaninf.o(x$fpl$fnaninf)
-    $v0                                      0x0800917e   Number         0  fpinit.o(x$fpl$fpinit)
-    x$fpl$fpinit                             0x0800917e   Section       26  fpinit.o(x$fpl$fpinit)
-    $v0                                      0x08009198   Number         0  fretinf.o(x$fpl$fretinf)
-    x$fpl$fretinf                            0x08009198   Section       10  fretinf.o(x$fpl$fretinf)
-    $v0                                      0x080091a2   Number         0  printf1.o(x$fpl$printf1)
-    x$fpl$printf1                            0x080091a2   Section        4  printf1.o(x$fpl$printf1)
-    $v0                                      0x080091a6   Number         0  printf2.o(x$fpl$printf2)
-    x$fpl$printf2                            0x080091a6   Section        4  printf2.o(x$fpl$printf2)
-    x$fpl$usenofp                            0x080091aa   Section        0  usenofp.o(x$fpl$usenofp)
-    initial_mbstate                          0x080091ac   Data           8  _printf_wctomb.o(.constdata)
-    .constdata                               0x080091ac   Section        8  _printf_wctomb.o(.constdata)
-    uc_hextab                                0x080091b4   Data          20  _printf_hex_int_ll_ptr.o(.constdata)
-    .constdata                               0x080091b4   Section       40  _printf_hex_int_ll_ptr.o(.constdata)
-    lc_hextab                                0x080091c8   Data          20  _printf_hex_int_ll_ptr.o(.constdata)
-    maptable                                 0x080091dc   Data          17  __printf_flags_ss_wp.o(.constdata)
-    .constdata                               0x080091dc   Section       17  __printf_flags_ss_wp.o(.constdata)
-    lc_hextab                                0x080091ed   Data          19  _printf_fp_hex.o(.constdata)
-    .constdata                               0x080091ed   Section       38  _printf_fp_hex.o(.constdata)
-    uc_hextab                                0x08009200   Data          19  _printf_fp_hex.o(.constdata)
-    tenpwrs_x                                0x08009214   Data          60  bigflt0.o(.constdata)
-    .constdata                               0x08009214   Section      148  bigflt0.o(.constdata)
-    tenpwrs_i                                0x08009250   Data          64  bigflt0.o(.constdata)
-    .Lswitch.table.UART_SetConfig.5          0x080092d8   Data          16  stm32g4xx_hal_uart.o(.rodata.cst16)
-    UARTEx_SetNbDataToProcess.numerator      0x080092e8   Data           8  stm32g4xx_hal_uart_ex.o(.rodata.cst8)
-    [Anonymous Symbol]                       0x080092e8   Section        0  stm32g4xx_hal_uart_ex.o(.rodata.cst8)
-    UARTEx_SetNbDataToProcess.denominator    0x080092f0   Data           8  stm32g4xx_hal_uart_ex.o(.rodata.cst8)
-    locale$$data                             0x08009318   Section      272  lc_ctype_c.o(locale$$data)
-    __lcctype_c_name                         0x0800931c   Data           2  lc_ctype_c.o(locale$$data)
-    __lcctype_c_start                        0x08009324   Data           0  lc_ctype_c.o(locale$$data)
-    __lcctype_c_end                          0x08009428   Data           0  lc_ctype_c.o(locale$$data)
-    locale$$data                             0x08009428   Section       28  lc_numeric_c.o(locale$$data)
-    __lcnum_c_name                           0x0800942c   Data           2  lc_numeric_c.o(locale$$data)
-    __lcnum_c_start                          0x08009434   Data           0  lc_numeric_c.o(locale$$data)
-    __lcnum_c_point                          0x08009440   Data           0  lc_numeric_c.o(locale$$data)
-    __lcnum_c_thousands                      0x08009442   Data           0  lc_numeric_c.o(locale$$data)
-    __lcnum_c_grouping                       0x08009443   Data           0  lc_numeric_c.o(locale$$data)
-    __lcnum_c_end                            0x08009444   Data           0  lc_numeric_c.o(locale$$data)
+    [Anonymous Symbol]                       0x080075d8   Section        0  status.o(.text.driver_status)
+    [Anonymous Symbol]                       0x08007674   Section        0  wheel.o(.text.driver_wheel)
+    [Anonymous Symbol]                       0x08007734   Section        0  gw_find_line.o(.text.get_gw_8bit_data)
+    [Anonymous Symbol]                       0x08007754   Section        0  gw_analogue.o(.text.get_gw_analoge_digital_data)
+    [Anonymous Symbol]                       0x08007790   Section        0  gw_analogue.o(.text.get_gw_analogue_analogue_diff)
+    [Anonymous Symbol]                       0x08007880   Section        0  gy901.o(.text.get_gyr_data)
+    [Anonymous Symbol]                       0x080078a0   Section        0  gy901.o(.text.get_gyr_value)
+    [Anonymous Symbol]                       0x08007944   Section        0  road.o(.text.get_road_type)
+    [Anonymous Symbol]                       0x08007af4   Section        0  wheel.o(.text.get_wheel_speed)
+    [Anonymous Symbol]                       0x08007b38   Section        0  buzzer.o(.text.init_BUZZER)
+    [Anonymous Symbol]                       0x08007b44   Section        0  led.o(.text.init_LED)
+    [Anonymous Symbol]                       0x08007b50   Section        0  button.o(.text.init_button)
+    [Anonymous Symbol]                       0x08007b64   Section        0  gw_find_line.o(.text.init_gw_8bit)
+    [Anonymous Symbol]                       0x08007bf8   Section        0  gw_analogue.o(.text.init_gw_analogue)
+    [Anonymous Symbol]                       0x08007c58   Section        0  gy901.o(.text.init_gyr)
+    [Anonymous Symbol]                       0x08007cc0   Section        0  pid.o(.text.init_pid)
+    [Anonymous Symbol]                       0x08007ce0   Section        0  servo.o(.text.init_servo)
+    [Anonymous Symbol]                       0x08007d60   Section        0  status.o(.text.init_status)
+    [Anonymous Symbol]                       0x08007e7c   Section        0  wheel.o(.text.init_wheel)
+    [Anonymous Symbol]                       0x08007f44   Section        0  log.o(.text.log_uprintf)
+    [Anonymous Symbol]                       0x08007f98   Section        0  main.o(.text.main)
+    [Anonymous Symbol]                       0x08008078   Section        0  gw_analogue.o(.text.select_channel)
+    [Anonymous Symbol]                       0x080080b0   Section        0  wheel.o(.text.set_wheel_dir)
+    [Anonymous Symbol]                       0x080081c0   Section        0  status.o(.text.update_status)
+    CL$$btod_d2e                             0x0800821a   Section       62  btod.o(CL$$btod_d2e)
+    CL$$btod_d2e_denorm_low                  0x08008258   Section       70  btod.o(CL$$btod_d2e_denorm_low)
+    CL$$btod_d2e_norm_op1                    0x0800829e   Section       96  btod.o(CL$$btod_d2e_norm_op1)
+    CL$$btod_div_common                      0x08008300   Section      824  btod.o(CL$$btod_div_common)
+    CL$$btod_e2e                             0x08008638   Section      220  btod.o(CL$$btod_e2e)
+    CL$$btod_ediv                            0x08008714   Section       42  btod.o(CL$$btod_ediv)
+    CL$$btod_emul                            0x0800873e   Section       42  btod.o(CL$$btod_emul)
+    CL$$btod_mult_common                     0x08008768   Section      580  btod.o(CL$$btod_mult_common)
+    i.__ARM_fpclassify                       0x080089ac   Section        0  fpclassify.o(i.__ARM_fpclassify)
+    i._is_digit                              0x080089dc   Section        0  __printf_wp.o(i._is_digit)
+    locale$$code                             0x080089ec   Section       44  lc_ctype_c.o(locale$$code)
+    locale$$code                             0x08008a18   Section       44  lc_numeric_c.o(locale$$code)
+    $v0                                      0x08008a44   Number         0  d2f.o(x$fpl$d2f)
+    x$fpl$d2f                                0x08008a44   Section       98  d2f.o(x$fpl$d2f)
+    $v0                                      0x08008aa8   Number         0  daddsub_clz.o(x$fpl$dadd)
+    x$fpl$dadd                               0x08008aa8   Section      336  daddsub_clz.o(x$fpl$dadd)
+    _dadd1                                   0x08008ab9   Thumb Code     0  daddsub_clz.o(x$fpl$dadd)
+    $v0                                      0x08008bf8   Number         0  dfix.o(x$fpl$dfix)
+    x$fpl$dfix                               0x08008bf8   Section       94  dfix.o(x$fpl$dfix)
+    $v0                                      0x08008c56   Number         0  dflt_clz.o(x$fpl$dflt)
+    x$fpl$dflt                               0x08008c56   Section       46  dflt_clz.o(x$fpl$dflt)
+    $v0                                      0x08008c84   Number         0  dflt_clz.o(x$fpl$dfltu)
+    x$fpl$dfltu                              0x08008c84   Section       38  dflt_clz.o(x$fpl$dfltu)
+    $v0                                      0x08008cac   Number         0  dmul.o(x$fpl$dmul)
+    x$fpl$dmul                               0x08008cac   Section      340  dmul.o(x$fpl$dmul)
+    $v0                                      0x08008e00   Number         0  dnaninf.o(x$fpl$dnaninf)
+    x$fpl$dnaninf                            0x08008e00   Section      156  dnaninf.o(x$fpl$dnaninf)
+    $v0                                      0x08008e9c   Number         0  dretinf.o(x$fpl$dretinf)
+    x$fpl$dretinf                            0x08008e9c   Section       12  dretinf.o(x$fpl$dretinf)
+    $v0                                      0x08008ea8   Number         0  daddsub_clz.o(x$fpl$dsub)
+    x$fpl$dsub                               0x08008ea8   Section      476  daddsub_clz.o(x$fpl$dsub)
+    _dsub1                                   0x08008eb9   Thumb Code     0  daddsub_clz.o(x$fpl$dsub)
+    $v0                                      0x08009084   Number         0  f2d.o(x$fpl$f2d)
+    x$fpl$f2d                                0x08009084   Section       86  f2d.o(x$fpl$f2d)
+    $v0                                      0x080090da   Number         0  fnaninf.o(x$fpl$fnaninf)
+    x$fpl$fnaninf                            0x080090da   Section      140  fnaninf.o(x$fpl$fnaninf)
+    $v0                                      0x08009166   Number         0  fpinit.o(x$fpl$fpinit)
+    x$fpl$fpinit                             0x08009166   Section       26  fpinit.o(x$fpl$fpinit)
+    $v0                                      0x08009180   Number         0  fretinf.o(x$fpl$fretinf)
+    x$fpl$fretinf                            0x08009180   Section       10  fretinf.o(x$fpl$fretinf)
+    $v0                                      0x0800918a   Number         0  printf1.o(x$fpl$printf1)
+    x$fpl$printf1                            0x0800918a   Section        4  printf1.o(x$fpl$printf1)
+    $v0                                      0x0800918e   Number         0  printf2.o(x$fpl$printf2)
+    x$fpl$printf2                            0x0800918e   Section        4  printf2.o(x$fpl$printf2)
+    x$fpl$usenofp                            0x08009192   Section        0  usenofp.o(x$fpl$usenofp)
+    initial_mbstate                          0x08009194   Data           8  _printf_wctomb.o(.constdata)
+    .constdata                               0x08009194   Section        8  _printf_wctomb.o(.constdata)
+    uc_hextab                                0x0800919c   Data          20  _printf_hex_int_ll_ptr.o(.constdata)
+    .constdata                               0x0800919c   Section       40  _printf_hex_int_ll_ptr.o(.constdata)
+    lc_hextab                                0x080091b0   Data          20  _printf_hex_int_ll_ptr.o(.constdata)
+    maptable                                 0x080091c4   Data          17  __printf_flags_ss_wp.o(.constdata)
+    .constdata                               0x080091c4   Section       17  __printf_flags_ss_wp.o(.constdata)
+    lc_hextab                                0x080091d5   Data          19  _printf_fp_hex.o(.constdata)
+    .constdata                               0x080091d5   Section       38  _printf_fp_hex.o(.constdata)
+    uc_hextab                                0x080091e8   Data          19  _printf_fp_hex.o(.constdata)
+    tenpwrs_x                                0x080091fc   Data          60  bigflt0.o(.constdata)
+    .constdata                               0x080091fc   Section      148  bigflt0.o(.constdata)
+    tenpwrs_i                                0x08009238   Data          64  bigflt0.o(.constdata)
+    .Lswitch.table.UART_SetConfig.5          0x080092c0   Data          16  stm32g4xx_hal_uart.o(.rodata.cst16)
+    UARTEx_SetNbDataToProcess.numerator      0x080092d0   Data           8  stm32g4xx_hal_uart_ex.o(.rodata.cst8)
+    [Anonymous Symbol]                       0x080092d0   Section        0  stm32g4xx_hal_uart_ex.o(.rodata.cst8)
+    UARTEx_SetNbDataToProcess.denominator    0x080092d8   Data           8  stm32g4xx_hal_uart_ex.o(.rodata.cst8)
+    locale$$data                             0x08009300   Section      272  lc_ctype_c.o(locale$$data)
+    __lcctype_c_name                         0x08009304   Data           2  lc_ctype_c.o(locale$$data)
+    __lcctype_c_start                        0x0800930c   Data           0  lc_ctype_c.o(locale$$data)
+    __lcctype_c_end                          0x08009410   Data           0  lc_ctype_c.o(locale$$data)
+    locale$$data                             0x08009410   Section       28  lc_numeric_c.o(locale$$data)
+    __lcnum_c_name                           0x08009414   Data           2  lc_numeric_c.o(locale$$data)
+    __lcnum_c_start                          0x0800941c   Data           0  lc_numeric_c.o(locale$$data)
+    __lcnum_c_point                          0x08009428   Data           0  lc_numeric_c.o(locale$$data)
+    __lcnum_c_thousands                      0x0800942a   Data           0  lc_numeric_c.o(locale$$data)
+    __lcnum_c_grouping                       0x0800942b   Data           0  lc_numeric_c.o(locale$$data)
+    __lcnum_c_end                            0x0800942c   Data           0  lc_numeric_c.o(locale$$data)
     .bss                                     0x20000030   Section       96  libspace.o(.bss)
     driver_ccd.cnt                           0x200001b8   Data           2  ccd.o(.bss.driver_ccd.cnt)
     [Anonymous Symbol]                       0x200001b8   Section        0  ccd.o(.bss.driver_ccd.cnt)
@@ -4883,76 +4883,75 @@ Image Symbol Table
     driver_LED                               0x0800730d   Thumb Code   122  led.o(.text.driver_LED)
     driver_button                            0x08007389   Thumb Code   168  button.o(.text.driver_button)
     driver_ccd                               0x08007431   Thumb Code   286  ccd.o(.text.driver_ccd)
-    driver_servo                             0x08007551   Thumb Code    96  servo.o(.text.driver_servo)
-    driver_status                            0x080075c9   Thumb Code   128  status.o(.text.driver_status)
-    driver_wheel                             0x08007651   Thumb Code   192  wheel.o(.text.driver_wheel)
-    get_gw_8bit_data                         0x08007711   Thumb Code    32  gw_find_line.o(.text.get_gw_8bit_data)
-    get_gw_analoge_digital_data              0x08007731   Thumb Code    60  gw_analogue.o(.text.get_gw_analoge_digital_data)
-    get_gw_analogue_analogue_diff            0x0800776d   Thumb Code   232  gw_analogue.o(.text.get_gw_analogue_analogue_diff)
-    get_gw_angalogue_data                    0x0800785d   Thumb Code    58  gw_analogue.o(.text.get_gw_angalogue_data)
-    get_gyr_data                             0x08007899   Thumb Code    32  gy901.o(.text.get_gyr_data)
-    get_gyr_value                            0x080078b9   Thumb Code   144  gy901.o(.text.get_gyr_value)
-    get_road_type                            0x0800795d   Thumb Code   344  road.o(.text.get_road_type)
-    get_wheel_speed                          0x08007b0d   Thumb Code    66  wheel.o(.text.get_wheel_speed)
-    init_BUZZER                              0x08007b51   Thumb Code    10  buzzer.o(.text.init_BUZZER)
-    init_LED                                 0x08007b5d   Thumb Code    10  led.o(.text.init_LED)
-    init_button                              0x08007b69   Thumb Code    20  button.o(.text.init_button)
-    init_gw_8bit                             0x08007b7d   Thumb Code   144  gw_find_line.o(.text.init_gw_8bit)
-    init_gw_analogue                         0x08007c11   Thumb Code    94  gw_analogue.o(.text.init_gw_analogue)
-    init_gyr                                 0x08007c71   Thumb Code    92  gy901.o(.text.init_gyr)
-    init_pid                                 0x08007cd9   Thumb Code    26  pid.o(.text.init_pid)
-    init_servo                               0x08007cf9   Thumb Code   104  servo.o(.text.init_servo)
-    init_status                              0x08007d79   Thumb Code   268  status.o(.text.init_status)
-    init_wheel                               0x08007e95   Thumb Code   196  wheel.o(.text.init_wheel)
-    log_uprintf                              0x08007f5d   Thumb Code    82  log.o(.text.log_uprintf)
-    main                                     0x08007fb1   Thumb Code   222  main.o(.text.main)
-    select_channel                           0x08008091   Thumb Code    54  gw_analogue.o(.text.select_channel)
-    set_wheel_dir                            0x080080c9   Thumb Code   270  wheel.o(.text.set_wheel_dir)
-    update_status                            0x080081d9   Thumb Code    90  status.o(.text.update_status)
-    _btod_d2e                                0x08008233   Thumb Code    62  btod.o(CL$$btod_d2e)
-    _d2e_denorm_low                          0x08008271   Thumb Code    70  btod.o(CL$$btod_d2e_denorm_low)
-    _d2e_norm_op1                            0x080082b7   Thumb Code    96  btod.o(CL$$btod_d2e_norm_op1)
-    __btod_div_common                        0x08008319   Thumb Code   696  btod.o(CL$$btod_div_common)
-    _e2e                                     0x08008651   Thumb Code   220  btod.o(CL$$btod_e2e)
-    _btod_ediv                               0x0800872d   Thumb Code    42  btod.o(CL$$btod_ediv)
-    _btod_emul                               0x08008757   Thumb Code    42  btod.o(CL$$btod_emul)
-    __btod_mult_common                       0x08008781   Thumb Code   580  btod.o(CL$$btod_mult_common)
-    __ARM_fpclassify                         0x080089c5   Thumb Code    48  fpclassify.o(i.__ARM_fpclassify)
-    _is_digit                                0x080089f5   Thumb Code    14  __printf_wp.o(i._is_digit)
-    _get_lc_ctype                            0x08008a05   Thumb Code    44  lc_ctype_c.o(locale$$code)
-    _get_lc_numeric                          0x08008a31   Thumb Code    44  lc_numeric_c.o(locale$$code)
-    __aeabi_d2f                              0x08008a5d   Thumb Code     0  d2f.o(x$fpl$d2f)
-    _d2f                                     0x08008a5d   Thumb Code    98  d2f.o(x$fpl$d2f)
-    __aeabi_dadd                             0x08008ac1   Thumb Code     0  daddsub_clz.o(x$fpl$dadd)
-    _dadd                                    0x08008ac1   Thumb Code   332  daddsub_clz.o(x$fpl$dadd)
-    __aeabi_d2iz                             0x08008c11   Thumb Code     0  dfix.o(x$fpl$dfix)
-    _dfix                                    0x08008c11   Thumb Code    94  dfix.o(x$fpl$dfix)
-    __aeabi_i2d                              0x08008c6f   Thumb Code     0  dflt_clz.o(x$fpl$dflt)
-    _dflt                                    0x08008c6f   Thumb Code    46  dflt_clz.o(x$fpl$dflt)
-    __aeabi_ui2d                             0x08008c9d   Thumb Code     0  dflt_clz.o(x$fpl$dfltu)
-    _dfltu                                   0x08008c9d   Thumb Code    38  dflt_clz.o(x$fpl$dfltu)
-    __aeabi_dmul                             0x08008cc5   Thumb Code     0  dmul.o(x$fpl$dmul)
-    _dmul                                    0x08008cc5   Thumb Code   332  dmul.o(x$fpl$dmul)
-    __fpl_dnaninf                            0x08008e19   Thumb Code   156  dnaninf.o(x$fpl$dnaninf)
-    __fpl_dretinf                            0x08008eb5   Thumb Code    12  dretinf.o(x$fpl$dretinf)
-    __aeabi_dsub                             0x08008ec1   Thumb Code     0  daddsub_clz.o(x$fpl$dsub)
-    _dsub                                    0x08008ec1   Thumb Code   472  daddsub_clz.o(x$fpl$dsub)
-    __aeabi_f2d                              0x0800909d   Thumb Code     0  f2d.o(x$fpl$f2d)
-    _f2d                                     0x0800909d   Thumb Code    86  f2d.o(x$fpl$f2d)
-    __fpl_fnaninf                            0x080090f3   Thumb Code   140  fnaninf.o(x$fpl$fnaninf)
-    _fp_init                                 0x0800917f   Thumb Code    26  fpinit.o(x$fpl$fpinit)
-    __fplib_config_fpu_vfp                   0x08009197   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    __fplib_config_pureend_doubles           0x08009197   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    __fpl_fretinf                            0x08009199   Thumb Code    10  fretinf.o(x$fpl$fretinf)
-    _printf_fp_dec                           0x080091a3   Thumb Code     4  printf1.o(x$fpl$printf1)
-    _printf_fp_hex                           0x080091a7   Thumb Code     4  printf2.o(x$fpl$printf2)
-    __I$use$fp                               0x080091aa   Number         0  usenofp.o(x$fpl$usenofp)
-    AHBPrescTable                            0x080092a8   Data          16  system_stm32g4xx.o(.rodata.AHBPrescTable)
-    APBPrescTable                            0x080092b8   Data           8  system_stm32g4xx.o(.rodata.APBPrescTable)
-    UARTPrescTable                           0x080092c0   Data          24  stm32g4xx_hal_uart.o(.rodata.UARTPrescTable)
-    Region$$Table$$Base                      0x080092f8   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08009318   Number         0  anon$$obj.o(Region$$Table)
-    __ctype                                  0x08009325   Data           0  lc_ctype_c.o(locale$$data)
+    driver_servo                             0x08007551   Thumb Code   112  servo.o(.text.driver_servo)
+    driver_status                            0x080075d9   Thumb Code   148  status.o(.text.driver_status)
+    driver_wheel                             0x08007675   Thumb Code   192  wheel.o(.text.driver_wheel)
+    get_gw_8bit_data                         0x08007735   Thumb Code    32  gw_find_line.o(.text.get_gw_8bit_data)
+    get_gw_analoge_digital_data              0x08007755   Thumb Code    60  gw_analogue.o(.text.get_gw_analoge_digital_data)
+    get_gw_analogue_analogue_diff            0x08007791   Thumb Code   232  gw_analogue.o(.text.get_gw_analogue_analogue_diff)
+    get_gyr_data                             0x08007881   Thumb Code    32  gy901.o(.text.get_gyr_data)
+    get_gyr_value                            0x080078a1   Thumb Code   144  gy901.o(.text.get_gyr_value)
+    get_road_type                            0x08007945   Thumb Code   344  road.o(.text.get_road_type)
+    get_wheel_speed                          0x08007af5   Thumb Code    66  wheel.o(.text.get_wheel_speed)
+    init_BUZZER                              0x08007b39   Thumb Code    10  buzzer.o(.text.init_BUZZER)
+    init_LED                                 0x08007b45   Thumb Code    10  led.o(.text.init_LED)
+    init_button                              0x08007b51   Thumb Code    20  button.o(.text.init_button)
+    init_gw_8bit                             0x08007b65   Thumb Code   144  gw_find_line.o(.text.init_gw_8bit)
+    init_gw_analogue                         0x08007bf9   Thumb Code    94  gw_analogue.o(.text.init_gw_analogue)
+    init_gyr                                 0x08007c59   Thumb Code    92  gy901.o(.text.init_gyr)
+    init_pid                                 0x08007cc1   Thumb Code    26  pid.o(.text.init_pid)
+    init_servo                               0x08007ce1   Thumb Code   104  servo.o(.text.init_servo)
+    init_status                              0x08007d61   Thumb Code   268  status.o(.text.init_status)
+    init_wheel                               0x08007e7d   Thumb Code   196  wheel.o(.text.init_wheel)
+    log_uprintf                              0x08007f45   Thumb Code    82  log.o(.text.log_uprintf)
+    main                                     0x08007f99   Thumb Code   222  main.o(.text.main)
+    select_channel                           0x08008079   Thumb Code    54  gw_analogue.o(.text.select_channel)
+    set_wheel_dir                            0x080080b1   Thumb Code   270  wheel.o(.text.set_wheel_dir)
+    update_status                            0x080081c1   Thumb Code    90  status.o(.text.update_status)
+    _btod_d2e                                0x0800821b   Thumb Code    62  btod.o(CL$$btod_d2e)
+    _d2e_denorm_low                          0x08008259   Thumb Code    70  btod.o(CL$$btod_d2e_denorm_low)
+    _d2e_norm_op1                            0x0800829f   Thumb Code    96  btod.o(CL$$btod_d2e_norm_op1)
+    __btod_div_common                        0x08008301   Thumb Code   696  btod.o(CL$$btod_div_common)
+    _e2e                                     0x08008639   Thumb Code   220  btod.o(CL$$btod_e2e)
+    _btod_ediv                               0x08008715   Thumb Code    42  btod.o(CL$$btod_ediv)
+    _btod_emul                               0x0800873f   Thumb Code    42  btod.o(CL$$btod_emul)
+    __btod_mult_common                       0x08008769   Thumb Code   580  btod.o(CL$$btod_mult_common)
+    __ARM_fpclassify                         0x080089ad   Thumb Code    48  fpclassify.o(i.__ARM_fpclassify)
+    _is_digit                                0x080089dd   Thumb Code    14  __printf_wp.o(i._is_digit)
+    _get_lc_ctype                            0x080089ed   Thumb Code    44  lc_ctype_c.o(locale$$code)
+    _get_lc_numeric                          0x08008a19   Thumb Code    44  lc_numeric_c.o(locale$$code)
+    __aeabi_d2f                              0x08008a45   Thumb Code     0  d2f.o(x$fpl$d2f)
+    _d2f                                     0x08008a45   Thumb Code    98  d2f.o(x$fpl$d2f)
+    __aeabi_dadd                             0x08008aa9   Thumb Code     0  daddsub_clz.o(x$fpl$dadd)
+    _dadd                                    0x08008aa9   Thumb Code   332  daddsub_clz.o(x$fpl$dadd)
+    __aeabi_d2iz                             0x08008bf9   Thumb Code     0  dfix.o(x$fpl$dfix)
+    _dfix                                    0x08008bf9   Thumb Code    94  dfix.o(x$fpl$dfix)
+    __aeabi_i2d                              0x08008c57   Thumb Code     0  dflt_clz.o(x$fpl$dflt)
+    _dflt                                    0x08008c57   Thumb Code    46  dflt_clz.o(x$fpl$dflt)
+    __aeabi_ui2d                             0x08008c85   Thumb Code     0  dflt_clz.o(x$fpl$dfltu)
+    _dfltu                                   0x08008c85   Thumb Code    38  dflt_clz.o(x$fpl$dfltu)
+    __aeabi_dmul                             0x08008cad   Thumb Code     0  dmul.o(x$fpl$dmul)
+    _dmul                                    0x08008cad   Thumb Code   332  dmul.o(x$fpl$dmul)
+    __fpl_dnaninf                            0x08008e01   Thumb Code   156  dnaninf.o(x$fpl$dnaninf)
+    __fpl_dretinf                            0x08008e9d   Thumb Code    12  dretinf.o(x$fpl$dretinf)
+    __aeabi_dsub                             0x08008ea9   Thumb Code     0  daddsub_clz.o(x$fpl$dsub)
+    _dsub                                    0x08008ea9   Thumb Code   472  daddsub_clz.o(x$fpl$dsub)
+    __aeabi_f2d                              0x08009085   Thumb Code     0  f2d.o(x$fpl$f2d)
+    _f2d                                     0x08009085   Thumb Code    86  f2d.o(x$fpl$f2d)
+    __fpl_fnaninf                            0x080090db   Thumb Code   140  fnaninf.o(x$fpl$fnaninf)
+    _fp_init                                 0x08009167   Thumb Code    26  fpinit.o(x$fpl$fpinit)
+    __fplib_config_fpu_vfp                   0x0800917f   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    __fplib_config_pureend_doubles           0x0800917f   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    __fpl_fretinf                            0x08009181   Thumb Code    10  fretinf.o(x$fpl$fretinf)
+    _printf_fp_dec                           0x0800918b   Thumb Code     4  printf1.o(x$fpl$printf1)
+    _printf_fp_hex                           0x0800918f   Thumb Code     4  printf2.o(x$fpl$printf2)
+    __I$use$fp                               0x08009192   Number         0  usenofp.o(x$fpl$usenofp)
+    AHBPrescTable                            0x08009290   Data          16  system_stm32g4xx.o(.rodata.AHBPrescTable)
+    APBPrescTable                            0x080092a0   Data           8  system_stm32g4xx.o(.rodata.APBPrescTable)
+    UARTPrescTable                           0x080092a8   Data          24  stm32g4xx_hal_uart.o(.rodata.UARTPrescTable)
+    Region$$Table$$Base                      0x080092e0   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08009300   Number         0  anon$$obj.o(Region$$Table)
+    __ctype                                  0x0800930d   Data           0  lc_ctype_c.o(locale$$data)
     SystemCoreClock                          0x20000000   Data           4  system_stm32g4xx.o(.data.SystemCoreClock)
     distance                                 0x20000004   Data          32  gw_analogue.o(.data.distance)
     uwTickFreq                               0x20000024   Data           4  stm32g4xx_hal.o(.data.uwTickFreq)
@@ -5002,9 +5001,9 @@ Memory Map of the image
 
   Image Entry point : 0x080001d9
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00009478, Max: 0x00020000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00009460, Max: 0x00020000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00009444, Max: 0x00020000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x0000942c, Max: 0x00020000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -5363,105 +5362,103 @@ Memory Map of the image
     0x08007388   0x08007388   0x000000a8   Code   RO         1756    .text.driver_button  button.o
     0x08007430   0x08007430   0x0000011e   Code   RO         1884    .text.driver_ccd    ccd.o
     0x0800754e   0x0800754e   0x00000002   PAD
-    0x08007550   0x08007550   0x00000078   Code   RO         2033    .text.driver_servo  servo.o
-    0x080075c8   0x080075c8   0x00000088   Code   RO         1823    .text.driver_status  status.o
-    0x08007650   0x08007650   0x000000c0   Code   RO         2049    .text.driver_wheel  wheel.o
-    0x08007710   0x08007710   0x00000020   Code   RO         1919    .text.get_gw_8bit_data  gw_find_line.o
-    0x08007730   0x08007730   0x0000003c   Code   RO         1998    .text.get_gw_analoge_digital_data  gw_analogue.o
-    0x0800776c   0x0800776c   0x000000f0   Code   RO         2004    .text.get_gw_analogue_analogue_diff  gw_analogue.o
-    0x0800785c   0x0800785c   0x0000003a   Code   RO         1994    .text.get_gw_angalogue_data  gw_analogue.o
-    0x08007896   0x08007896   0x00000002   PAD
-    0x08007898   0x08007898   0x00000020   Code   RO         1931    .text.get_gyr_data  gy901.o
-    0x080078b8   0x080078b8   0x000000a4   Code   RO         1933    .text.get_gyr_value  gy901.o
-    0x0800795c   0x0800795c   0x000001b0   Code   RO         1845    .text.get_road_type  road.o
-    0x08007b0c   0x08007b0c   0x00000042   Code   RO         2045    .text.get_wheel_speed  wheel.o
+    0x08007550   0x08007550   0x00000088   Code   RO         2033    .text.driver_servo  servo.o
+    0x080075d8   0x080075d8   0x0000009c   Code   RO         1823    .text.driver_status  status.o
+    0x08007674   0x08007674   0x000000c0   Code   RO         2049    .text.driver_wheel  wheel.o
+    0x08007734   0x08007734   0x00000020   Code   RO         1919    .text.get_gw_8bit_data  gw_find_line.o
+    0x08007754   0x08007754   0x0000003c   Code   RO         1998    .text.get_gw_analoge_digital_data  gw_analogue.o
+    0x08007790   0x08007790   0x000000f0   Code   RO         2004    .text.get_gw_analogue_analogue_diff  gw_analogue.o
+    0x08007880   0x08007880   0x00000020   Code   RO         1931    .text.get_gyr_data  gy901.o
+    0x080078a0   0x080078a0   0x000000a4   Code   RO         1933    .text.get_gyr_value  gy901.o
+    0x08007944   0x08007944   0x000001b0   Code   RO         1845    .text.get_road_type  road.o
+    0x08007af4   0x08007af4   0x00000042   Code   RO         2045    .text.get_wheel_speed  wheel.o
+    0x08007b36   0x08007b36   0x00000002   PAD
+    0x08007b38   0x08007b38   0x0000000a   Code   RO         1783    .text.init_BUZZER   buzzer.o
+    0x08007b42   0x08007b42   0x00000002   PAD
+    0x08007b44   0x08007b44   0x0000000a   Code   RO         1771    .text.init_LED      led.o
     0x08007b4e   0x08007b4e   0x00000002   PAD
-    0x08007b50   0x08007b50   0x0000000a   Code   RO         1783    .text.init_BUZZER   buzzer.o
-    0x08007b5a   0x08007b5a   0x00000002   PAD
-    0x08007b5c   0x08007b5c   0x0000000a   Code   RO         1771    .text.init_LED      led.o
-    0x08007b66   0x08007b66   0x00000002   PAD
-    0x08007b68   0x08007b68   0x00000014   Code   RO         1758    .text.init_button   button.o
-    0x08007b7c   0x08007b7c   0x00000094   Code   RO         1905    .text.init_gw_8bit  gw_find_line.o
-    0x08007c10   0x08007c10   0x0000005e   Code   RO         1990    .text.init_gw_analogue  gw_analogue.o
-    0x08007c6e   0x08007c6e   0x00000002   PAD
-    0x08007c70   0x08007c70   0x00000068   Code   RO         1929    .text.init_gyr      gy901.o
-    0x08007cd8   0x08007cd8   0x0000001a   Code   RO         2117    .text.init_pid      pid.o
-    0x08007cf2   0x08007cf2   0x00000006   PAD
-    0x08007cf8   0x08007cf8   0x00000080   Code   RO         2035    .text.init_servo    servo.o
-    0x08007d78   0x08007d78   0x0000011c   Code   RO         1819    .text.init_status   status.o
-    0x08007e94   0x08007e94   0x000000c8   Code   RO         2051    .text.init_wheel    wheel.o
-    0x08007f5c   0x08007f5c   0x00000052   Code   RO         2106    .text.log_uprintf   log.o
-    0x08007fae   0x08007fae   0x00000002   PAD
-    0x08007fb0   0x08007fb0   0x000000de   Code   RO           11    .text.main          main.o
-    0x0800808e   0x0800808e   0x00000002   PAD
-    0x08008090   0x08008090   0x00000036   Code   RO         1992    .text.select_channel  gw_analogue.o
-    0x080080c6   0x080080c6   0x00000002   PAD
-    0x080080c8   0x080080c8   0x0000010e   Code   RO         2047    .text.set_wheel_dir  wheel.o
-    0x080081d6   0x080081d6   0x00000002   PAD
-    0x080081d8   0x080081d8   0x0000005a   Code   RO         1821    .text.update_status  status.o
-    0x08008232   0x08008232   0x0000003e   Code   RO         2346    CL$$btod_d2e        c_w.l(btod.o)
-    0x08008270   0x08008270   0x00000046   Code   RO         2348    CL$$btod_d2e_denorm_low  c_w.l(btod.o)
-    0x080082b6   0x080082b6   0x00000060   Code   RO         2347    CL$$btod_d2e_norm_op1  c_w.l(btod.o)
-    0x08008316   0x08008316   0x00000002   PAD
-    0x08008318   0x08008318   0x00000338   Code   RO         2356    CL$$btod_div_common  c_w.l(btod.o)
-    0x08008650   0x08008650   0x000000dc   Code   RO         2353    CL$$btod_e2e        c_w.l(btod.o)
-    0x0800872c   0x0800872c   0x0000002a   Code   RO         2350    CL$$btod_ediv       c_w.l(btod.o)
-    0x08008756   0x08008756   0x0000002a   Code   RO         2349    CL$$btod_emul       c_w.l(btod.o)
-    0x08008780   0x08008780   0x00000244   Code   RO         2355    CL$$btod_mult_common  c_w.l(btod.o)
-    0x080089c4   0x080089c4   0x00000030   Code   RO         2390    i.__ARM_fpclassify  m_wm.l(fpclassify.o)
-    0x080089f4   0x080089f4   0x0000000e   Code   RO         2236    i._is_digit         c_w.l(__printf_wp.o)
-    0x08008a02   0x08008a02   0x00000002   PAD
-    0x08008a04   0x08008a04   0x0000002c   Code   RO         2371    locale$$code        c_w.l(lc_ctype_c.o)
-    0x08008a30   0x08008a30   0x0000002c   Code   RO         2374    locale$$code        c_w.l(lc_numeric_c.o)
-    0x08008a5c   0x08008a5c   0x00000062   Code   RO         2142    x$fpl$d2f           fz_wm.l(d2f.o)
-    0x08008abe   0x08008abe   0x00000002   PAD
-    0x08008ac0   0x08008ac0   0x00000150   Code   RO         2144    x$fpl$dadd          fz_wm.l(daddsub_clz.o)
-    0x08008c10   0x08008c10   0x0000005e   Code   RO         2154    x$fpl$dfix          fz_wm.l(dfix.o)
-    0x08008c6e   0x08008c6e   0x0000002e   Code   RO         2159    x$fpl$dflt          fz_wm.l(dflt_clz.o)
-    0x08008c9c   0x08008c9c   0x00000026   Code   RO         2158    x$fpl$dfltu         fz_wm.l(dflt_clz.o)
-    0x08008cc2   0x08008cc2   0x00000002   PAD
-    0x08008cc4   0x08008cc4   0x00000154   Code   RO         2164    x$fpl$dmul          fz_wm.l(dmul.o)
-    0x08008e18   0x08008e18   0x0000009c   Code   RO         2271    x$fpl$dnaninf       fz_wm.l(dnaninf.o)
-    0x08008eb4   0x08008eb4   0x0000000c   Code   RO         2273    x$fpl$dretinf       fz_wm.l(dretinf.o)
-    0x08008ec0   0x08008ec0   0x000001dc   Code   RO         2146    x$fpl$dsub          fz_wm.l(daddsub_clz.o)
-    0x0800909c   0x0800909c   0x00000056   Code   RO         2166    x$fpl$f2d           fz_wm.l(f2d.o)
-    0x080090f2   0x080090f2   0x0000008c   Code   RO         2275    x$fpl$fnaninf       fz_wm.l(fnaninf.o)
-    0x0800917e   0x0800917e   0x0000001a   Code   RO         2470    x$fpl$fpinit        fz_wm.l(fpinit.o)
-    0x08009198   0x08009198   0x0000000a   Code   RO         2277    x$fpl$fretinf       fz_wm.l(fretinf.o)
-    0x080091a2   0x080091a2   0x00000004   Code   RO         2279    x$fpl$printf1       fz_wm.l(printf1.o)
-    0x080091a6   0x080091a6   0x00000004   Code   RO         2281    x$fpl$printf2       fz_wm.l(printf2.o)
-    0x080091aa   0x080091aa   0x00000000   Code   RO         2287    x$fpl$usenofp       fz_wm.l(usenofp.o)
-    0x080091aa   0x080091aa   0x00000002   PAD
-    0x080091ac   0x080091ac   0x00000008   Data   RO         2195    .constdata          c_w.l(_printf_wctomb.o)
-    0x080091b4   0x080091b4   0x00000028   Data   RO         2224    .constdata          c_w.l(_printf_hex_int_ll_ptr.o)
-    0x080091dc   0x080091dc   0x00000011   Data   RO         2244    .constdata          c_w.l(__printf_flags_ss_wp.o)
-    0x080091ed   0x080091ed   0x00000026   Data   RO         2319    .constdata          c_w.l(_printf_fp_hex.o)
-    0x08009213   0x08009213   0x00000001   PAD
-    0x08009214   0x08009214   0x00000094   Data   RO         2344    .constdata          c_w.l(bigflt0.o)
-    0x080092a8   0x080092a8   0x00000010   Data   RO         1744    .rodata.AHBPrescTable  system_stm32g4xx.o
-    0x080092b8   0x080092b8   0x00000008   Data   RO         1745    .rodata.APBPrescTable  system_stm32g4xx.o
-    0x080092c0   0x080092c0   0x00000018   Data   RO         1690    .rodata.UARTPrescTable  stm32g4xx_hal_uart.o
-    0x080092d8   0x080092d8   0x00000010   Data   RO         1691    .rodata.cst16       stm32g4xx_hal_uart.o
-    0x080092e8   0x080092e8   0x00000010   Data   RO         1730    .rodata.cst8        stm32g4xx_hal_uart_ex.o
-    0x080092f8   0x080092f8   0x00000020   Data   RO         2531    Region$$Table       anon$$obj.o
-    0x08009318   0x08009318   0x00000110   Data   RO         2370    locale$$data        c_w.l(lc_ctype_c.o)
-    0x08009428   0x08009428   0x0000001c   Data   RO         2373    locale$$data        c_w.l(lc_numeric_c.o)
+    0x08007b50   0x08007b50   0x00000014   Code   RO         1758    .text.init_button   button.o
+    0x08007b64   0x08007b64   0x00000094   Code   RO         1905    .text.init_gw_8bit  gw_find_line.o
+    0x08007bf8   0x08007bf8   0x0000005e   Code   RO         1990    .text.init_gw_analogue  gw_analogue.o
+    0x08007c56   0x08007c56   0x00000002   PAD
+    0x08007c58   0x08007c58   0x00000068   Code   RO         1929    .text.init_gyr      gy901.o
+    0x08007cc0   0x08007cc0   0x0000001a   Code   RO         2117    .text.init_pid      pid.o
+    0x08007cda   0x08007cda   0x00000006   PAD
+    0x08007ce0   0x08007ce0   0x00000080   Code   RO         2035    .text.init_servo    servo.o
+    0x08007d60   0x08007d60   0x0000011c   Code   RO         1819    .text.init_status   status.o
+    0x08007e7c   0x08007e7c   0x000000c8   Code   RO         2051    .text.init_wheel    wheel.o
+    0x08007f44   0x08007f44   0x00000052   Code   RO         2106    .text.log_uprintf   log.o
+    0x08007f96   0x08007f96   0x00000002   PAD
+    0x08007f98   0x08007f98   0x000000de   Code   RO           11    .text.main          main.o
+    0x08008076   0x08008076   0x00000002   PAD
+    0x08008078   0x08008078   0x00000036   Code   RO         1992    .text.select_channel  gw_analogue.o
+    0x080080ae   0x080080ae   0x00000002   PAD
+    0x080080b0   0x080080b0   0x0000010e   Code   RO         2047    .text.set_wheel_dir  wheel.o
+    0x080081be   0x080081be   0x00000002   PAD
+    0x080081c0   0x080081c0   0x0000005a   Code   RO         1821    .text.update_status  status.o
+    0x0800821a   0x0800821a   0x0000003e   Code   RO         2346    CL$$btod_d2e        c_w.l(btod.o)
+    0x08008258   0x08008258   0x00000046   Code   RO         2348    CL$$btod_d2e_denorm_low  c_w.l(btod.o)
+    0x0800829e   0x0800829e   0x00000060   Code   RO         2347    CL$$btod_d2e_norm_op1  c_w.l(btod.o)
+    0x080082fe   0x080082fe   0x00000002   PAD
+    0x08008300   0x08008300   0x00000338   Code   RO         2356    CL$$btod_div_common  c_w.l(btod.o)
+    0x08008638   0x08008638   0x000000dc   Code   RO         2353    CL$$btod_e2e        c_w.l(btod.o)
+    0x08008714   0x08008714   0x0000002a   Code   RO         2350    CL$$btod_ediv       c_w.l(btod.o)
+    0x0800873e   0x0800873e   0x0000002a   Code   RO         2349    CL$$btod_emul       c_w.l(btod.o)
+    0x08008768   0x08008768   0x00000244   Code   RO         2355    CL$$btod_mult_common  c_w.l(btod.o)
+    0x080089ac   0x080089ac   0x00000030   Code   RO         2390    i.__ARM_fpclassify  m_wm.l(fpclassify.o)
+    0x080089dc   0x080089dc   0x0000000e   Code   RO         2236    i._is_digit         c_w.l(__printf_wp.o)
+    0x080089ea   0x080089ea   0x00000002   PAD
+    0x080089ec   0x080089ec   0x0000002c   Code   RO         2371    locale$$code        c_w.l(lc_ctype_c.o)
+    0x08008a18   0x08008a18   0x0000002c   Code   RO         2374    locale$$code        c_w.l(lc_numeric_c.o)
+    0x08008a44   0x08008a44   0x00000062   Code   RO         2142    x$fpl$d2f           fz_wm.l(d2f.o)
+    0x08008aa6   0x08008aa6   0x00000002   PAD
+    0x08008aa8   0x08008aa8   0x00000150   Code   RO         2144    x$fpl$dadd          fz_wm.l(daddsub_clz.o)
+    0x08008bf8   0x08008bf8   0x0000005e   Code   RO         2154    x$fpl$dfix          fz_wm.l(dfix.o)
+    0x08008c56   0x08008c56   0x0000002e   Code   RO         2159    x$fpl$dflt          fz_wm.l(dflt_clz.o)
+    0x08008c84   0x08008c84   0x00000026   Code   RO         2158    x$fpl$dfltu         fz_wm.l(dflt_clz.o)
+    0x08008caa   0x08008caa   0x00000002   PAD
+    0x08008cac   0x08008cac   0x00000154   Code   RO         2164    x$fpl$dmul          fz_wm.l(dmul.o)
+    0x08008e00   0x08008e00   0x0000009c   Code   RO         2271    x$fpl$dnaninf       fz_wm.l(dnaninf.o)
+    0x08008e9c   0x08008e9c   0x0000000c   Code   RO         2273    x$fpl$dretinf       fz_wm.l(dretinf.o)
+    0x08008ea8   0x08008ea8   0x000001dc   Code   RO         2146    x$fpl$dsub          fz_wm.l(daddsub_clz.o)
+    0x08009084   0x08009084   0x00000056   Code   RO         2166    x$fpl$f2d           fz_wm.l(f2d.o)
+    0x080090da   0x080090da   0x0000008c   Code   RO         2275    x$fpl$fnaninf       fz_wm.l(fnaninf.o)
+    0x08009166   0x08009166   0x0000001a   Code   RO         2470    x$fpl$fpinit        fz_wm.l(fpinit.o)
+    0x08009180   0x08009180   0x0000000a   Code   RO         2277    x$fpl$fretinf       fz_wm.l(fretinf.o)
+    0x0800918a   0x0800918a   0x00000004   Code   RO         2279    x$fpl$printf1       fz_wm.l(printf1.o)
+    0x0800918e   0x0800918e   0x00000004   Code   RO         2281    x$fpl$printf2       fz_wm.l(printf2.o)
+    0x08009192   0x08009192   0x00000000   Code   RO         2287    x$fpl$usenofp       fz_wm.l(usenofp.o)
+    0x08009192   0x08009192   0x00000002   PAD
+    0x08009194   0x08009194   0x00000008   Data   RO         2195    .constdata          c_w.l(_printf_wctomb.o)
+    0x0800919c   0x0800919c   0x00000028   Data   RO         2224    .constdata          c_w.l(_printf_hex_int_ll_ptr.o)
+    0x080091c4   0x080091c4   0x00000011   Data   RO         2244    .constdata          c_w.l(__printf_flags_ss_wp.o)
+    0x080091d5   0x080091d5   0x00000026   Data   RO         2319    .constdata          c_w.l(_printf_fp_hex.o)
+    0x080091fb   0x080091fb   0x00000001   PAD
+    0x080091fc   0x080091fc   0x00000094   Data   RO         2344    .constdata          c_w.l(bigflt0.o)
+    0x08009290   0x08009290   0x00000010   Data   RO         1744    .rodata.AHBPrescTable  system_stm32g4xx.o
+    0x080092a0   0x080092a0   0x00000008   Data   RO         1745    .rodata.APBPrescTable  system_stm32g4xx.o
+    0x080092a8   0x080092a8   0x00000018   Data   RO         1690    .rodata.UARTPrescTable  stm32g4xx_hal_uart.o
+    0x080092c0   0x080092c0   0x00000010   Data   RO         1691    .rodata.cst16       stm32g4xx_hal_uart.o
+    0x080092d0   0x080092d0   0x00000010   Data   RO         1730    .rodata.cst8        stm32g4xx_hal_uart_ex.o
+    0x080092e0   0x080092e0   0x00000020   Data   RO         2531    Region$$Table       anon$$obj.o
+    0x08009300   0x08009300   0x00000110   Data   RO         2370    locale$$data        c_w.l(lc_ctype_c.o)
+    0x08009410   0x08009410   0x0000001c   Data   RO         2373    locale$$data        c_w.l(lc_numeric_c.o)
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08009448, Size: 0x00001698, Max: 0x00020000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08009430, Size: 0x00001698, Max: 0x00020000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x08009448   0x00000004   Data   RW         1743    .data.SystemCoreClock  system_stm32g4xx.o
-    0x20000004   0x0800944c   0x00000020   Data   RW         2006    .data.distance      gw_analogue.o
-    0x20000024   0x0800946c   0x00000004   Data   RW          452    .data.uwTickFreq    stm32g4xx_hal.o
-    0x20000028   0x08009470   0x00000004   Data   RW          451    .data.uwTickPrio    stm32g4xx_hal.o
-    0x2000002c   0x08009474   0x00000004   PAD
+    0x20000000   0x08009430   0x00000004   Data   RW         1743    .data.SystemCoreClock  system_stm32g4xx.o
+    0x20000004   0x08009434   0x00000020   Data   RW         2006    .data.distance      gw_analogue.o
+    0x20000024   0x08009454   0x00000004   Data   RW          452    .data.uwTickFreq    stm32g4xx_hal.o
+    0x20000028   0x08009458   0x00000004   Data   RW          451    .data.uwTickPrio    stm32g4xx_hal.o
+    0x2000002c   0x0800945c   0x00000004   PAD
     0x20000030        -       0x00000060   Zero   RW         2289    .bss                c_w.l(libspace.o)
     0x20000090        -       0x00000100   Zero   RW         1890    .bss.BUFF_DATA_1    ccd.o
     0x20000190        -       0x00000028   Zero   RW         1828    .bss.balance_pid    status.o
     0x200001b8        -       0x00000002   Zero   RW         1893    .bss.driver_ccd.cnt  ccd.o
-    0x200001ba   0x08009474   0x00000002   PAD
+    0x200001ba   0x0800945c   0x00000002   PAD
     0x200001bc        -       0x0000006c   Zero   RW           41    .bss.hadc3          adc.o
     0x20000228        -       0x00000060   Zero   RW           42    .bss.hdma_adc3      adc.o
     0x20000288        -       0x00000060   Zero   RW           70    .bss.hdma_i2c1_rx   i2c.o
@@ -5493,10 +5490,10 @@ Memory Map of the image
     0x20000c14        -       0x00000090   Zero   RW          155    .bss.huart4         usart.o
     0x20000ca4        -       0x00000001   Zero   RW         2108    .bss.log_uprintf.abbuf  log.o
     0x20000ca5        -       0x00000200   Zero   RW         2109    .bss.log_uprintf.buf  log.o
-    0x20000ea5   0x08009474   0x00000003   PAD
+    0x20000ea5   0x0800945c   0x00000003   PAD
     0x20000ea8        -       0x000001e8   Zero   RW         1827    .bss.status         status.o
     0x20001090        -       0x00000001   Zero   RW         1795    .bss.update_or_driver  timer_it.o
-    0x20001091   0x08009474   0x00000003   PAD
+    0x20001091   0x0800945c   0x00000003   PAD
     0x20001094        -       0x00000004   Zero   RW          453    .bss.uwTick         stm32g4xx_hal.o
     0x20001098        -       0x00000200   Zero   RW            2    HEAP                startup_stm32g474xx.o
     0x20001298        -       0x00000400   Zero   RW            1    STACK               startup_stm32g474xx.o
@@ -5512,10 +5509,10 @@ Image component sizes
        388          0          0          0        204       7428   adc.o
        188          0          0          0          0       2668   button.o
         54          0          0          0          0       1678   buzzer.o
-       286         10          0          0        258       5733   ccd.o
+       286         10          0          0        258       5734   ccd.o
        280          0          0          0          0       4178   dma.o
        418          0          0          0          0       2590   gpio.o
-       818         24          0         32          0       5408   gw_analogue.o
+       760         24          0         32          0       5402   gw_analogue.o
        180          4          0          0          0       9217   gw_find_line.o
        300         32          0          0          0       5287   gy901.o
        764          0          0          0        536       9864   i2c.o
@@ -5524,10 +5521,10 @@ Image component sizes
        232          0          0          0          0       3383   main.o
        174          4          0          0          0       1215   pid.o
        432         96          0          0          0       4171   road.o
-       248         48          0          0          0       1051   servo.o
+       264         48          0          0          0       2032   servo.o
        186          0          0          0        100       5654   spi.o
         64         26        472          0       1536        848   startup_stm32g474xx.o
-       558         24          0          0        528       6301   status.o
+       578         24          0          0        528       6304   status.o
        198          0          0          8          4       9248   stm32g4xx_hal.o
       3040          0          0          0          0      25293   stm32g4xx_hal_adc.o
        308          0          0          0          0      22423   stm32g4xx_hal_adc_ex.o
@@ -5553,9 +5550,9 @@ Image component sizes
        728         16          0          0          0       4563   wheel.o
 
     ----------------------------------------------------------------------
-     27798        350        584         44       5644     471109   Object Totals
+     27774        350        584         44       5644     472088   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-       190          4          0          0         12          0   (incl. Padding)
+       188          4          0          0         12          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -5674,15 +5671,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     36820        662       1136         44       5740     473037   Grand Totals
-     36820        662       1136         44       5740     473037   ELF Image Totals
-     36820        662       1136         44          0          0   ROM Totals
+     36796        662       1136         44       5740     474016   Grand Totals
+     36796        662       1136         44       5740     474016   ELF Image Totals
+     36796        662       1136         44          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                37956 (  37.07kB)
+    Total RO  Size (Code + RO Data)                37932 (  37.04kB)
     Total RW  Size (RW Data + ZI Data)              5784 (   5.65kB)
-    Total ROM Size (Code + RO Data + RW Data)      38000 (  37.11kB)
+    Total ROM Size (Code + RO Data + RW Data)      37976 (  37.09kB)
 
 ==============================================================================
 
