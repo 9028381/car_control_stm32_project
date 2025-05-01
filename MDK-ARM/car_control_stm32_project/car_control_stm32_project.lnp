@@ -41,6 +41,7 @@
 "car_control_stm32_project\timer_it.o"
 "car_control_stm32_project\uart_it.o"
 "car_control_stm32_project\status.o"
+"car_control_stm32_project\road.o"
 "car_control_stm32_project\abslute_angle_sensor.o"
 "car_control_stm32_project\ccd.o"
 "car_control_stm32_project\gw_find_line.o"

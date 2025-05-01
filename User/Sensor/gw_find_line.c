@@ -75,7 +75,7 @@ void gw_gray_show(GW_8BIT *gw_8bit) {
   PRINTLN("%s", str);
 }
 
-enum Road road_new_from_bit(bool L, bool F, bool R) {
+enum Road gw_road_new_from_bit(bool L, bool F, bool R) {
   uint8_t left = L ? 0b100 : 0;
   uint8_t font = F ? 0b010 : 0;
   uint8_t right = R ? 0b001 : 0;
@@ -87,7 +87,7 @@ Road gw_gray_decision(GW_8BIT *gw_8bit) {
   bool left = (gw_8bit->integral >> 6) == 0x03;     // 0b1100_0000
   bool right = (gw_8bit->integral & 0x03) == 0x03;  // 0b0000_0011
   bool font = gw_8bit->data_buf & 0x3C;             // 0b0011_1100
-  Road road = road_new_from_bit(left, font, right);
+  Road road = gw_road_new_from_bit(left, font, right);
   return road;
 }
 

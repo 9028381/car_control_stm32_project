@@ -51,6 +51,8 @@ typedef struct STATE {
   float cur_angle;
   float tar_angle;
 
+  RoadDetermine road_determine;  // 道路判断结构体
+
   uint8_t gw_8bit;
 } STATE;
 

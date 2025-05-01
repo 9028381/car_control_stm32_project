@@ -1,0 +1,97 @@
+#include "road.h"
+
+#include "log.h"
+#include "stdbool.h"
+#include "stdint.h"
+#include "usart.h"
+
+#define INTEGRAL_TIMES 10
+
+void init_road_determine(RoadDetermine *roaddetermine) {
+  roaddetermine->integral = 0;
+  roaddetermine->data_buf = 0;
+  roaddetermine->cross = Straight;
+  roaddetermine->cross_cnt = 0;
+
+  return;
+}
+
+enum Road road_new_from_bit(bool L, bool F, bool R) {
+  uint8_t left = L ? 0b100 : 0;
+  uint8_t font = F ? 0b010 : 0;
+  uint8_t right = R ? 0b001 : 0;
+
+  return left | font | right;
+}
+
+Road road_decision(RoadDetermine *roaddetermine) {
+  bool left = (roaddetermine->integral >> 6) == 0x03;     // 0b1100_0000
+  bool right = (roaddetermine->integral & 0x03) == 0x03;  // 0b0000_0011
+  bool font = roaddetermine->data_buf & 0x3C;             // 0b0011_1100
+  Road road = road_new_from_bit(left, font, right);
+  return road;
+}
+
+void serve_road(RoadDetermine *roaddetermine, Road road) {
+  if (road == UnknowRoad) {
+    return;  // 没认出来的路口直接忽略
+  }
+  if (roaddetermine->cross == Straight) {
+    roaddetermine->cross = road;                 // 更新路口状态
+  } else {                                       // 如果当前是特殊路口就判断是否回到直线
+    if (roaddetermine->data_buf & 0b00111100) {  // 由特殊路口再次回到直线
+      roaddetermine->cross = Straight;
+    }
+  }
+  return;
+}
+
+void get_road_type(RoadDetermine *roaddetermine, uint8_t road_data) {
+  roaddetermine->data_buf = road_data;  // 更新路口数据
+  if (roaddetermine->data_buf & 0x81) {
+    if (roaddetermine->maybe == 0) {
+      roaddetermine->maybe = INTEGRAL_TIMES;
+    }
+  }
+  if (roaddetermine->maybe > 1) {
+    roaddetermine->integral = roaddetermine->integral | roaddetermine->data_buf;
+    roaddetermine->maybe--;
+  } else if (roaddetermine->maybe == 1) {
+    switch (road_decision(roaddetermine)) {
+      case UnknowRoad:
+        log_uprintf(&huart1, "Unknow road\n");
+        serve_road(roaddetermine, UnknowRoad);
+        break;
+      case CrossRoad:  // 十字路口
+        log_uprintf(&huart1, "Cross road\n");
+        serve_road(roaddetermine, CrossRoad);
+        break;
+      case TBRoad:  // T型路口
+        log_uprintf(&huart1, "T B road\n");
+        serve_road(roaddetermine, TBRoad);
+        break;
+      case TLRoad:  // T型左路口
+        log_uprintf(&huart1, "T L road\n");
+        serve_road(roaddetermine, TLRoad);
+        break;
+      case TRRoad:  // T型右路口
+        log_uprintf(&huart1, "T R road\n");
+        serve_road(roaddetermine, TRRoad);
+        break;
+      case LeftRoad:  // 左路口
+        log_uprintf(&huart1, "Left road\n");
+        serve_road(roaddetermine, LeftRoad);
+        break;
+      case RightRoad:  // 右路口
+        log_uprintf(&huart1, "Right road\n");
+        serve_road(roaddetermine, RightRoad);
+        break;
+      case Straight:  // 直路
+        // log_uprintf(&huart1, "Straight road\n");
+        serve_road(roaddetermine, Straight);
+        break;
+    }
+    roaddetermine->maybe = 0;
+    roaddetermine->integral = 0;
+  }
+}

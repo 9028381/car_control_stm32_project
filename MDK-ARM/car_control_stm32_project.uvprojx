@@ -706,6 +706,11 @@
               <FileType>5</FileType>
               <FilePath>..\User\Status\status.h</FilePath>
             </File>
+            <File>
+              <FileName>road.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Status\road.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

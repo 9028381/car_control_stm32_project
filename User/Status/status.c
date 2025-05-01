@@ -28,6 +28,7 @@ status鐘舵€佹爲鐨勭洰鐨勬槸灏嗗皬杞︾殑鎵€鏈夌姸鎬�(�
 #include "led.h"
 #include "log.h"
 #include "math_tool.h"
+#include "road.h"
 #include "servo.h"
 #include "wheel.h"
 
@@ -72,6 +73,12 @@ void init_state(STATUS *status, uint8_t T)  // 鐘舵€佸垵濮嬪寲
 
   status->state.gw_8bit = 0x00;  // 8浣嶇伆搴︿紶鎰熷櫒鏁版嵁
   balance_pid = init_pid(300, 0, 0, 1, 10);
+
+  status->state.road_determine.cross = Straight;  // 鏁版嵁鍒濆鍖栦负涓€涓叏灞€鍙橀
+  status->state.road_determine.cross_cnt = 0;
+  status->state.road_determine.maybe = 0;  // 鏁版嵁鍒濆鍖栦负涓€涓叏灞€鍙橀
+  status->state.road_determine.integral = 0;
+  status->state.road_determine.data_buf = 0;  // 鏁版嵁鍒濆鍖栦负涓€涓叏灞€鍙橀
 
   return;
 }
@@ -137,7 +144,7 @@ void driver_status(STATUS *status) {  // 鐘舵€佹暟椹卞姩
   //   status->motor.wheel[0].tar_speed = diff;
   //   status->motor.wheel[1].tar_speed = -diff;
   //   log_uprintf(&huart1, "diff_angle %5.2f\r\n", diff_angle);
-
+  get_road_type(&status->state.road_determine, status->sensor.gw_analogue.digital_8bit);
   log_uprintf(&huart1, "%5.2f\n", status->sensor.gw_analogue.diff);
 
   driver_button(&status->device.button_D2);
