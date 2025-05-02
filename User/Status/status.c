@@ -1,24 +1,3 @@
-// @63 @551
-
-/*
-椤圭洰鐘舵€佹爲浠嬬粛
-status鐘舵€佹爲鐨勭洰鐨勬槸灏嗗皬杞︾殑鎵€鏈夌姸鎬�(鍖呮嫭浼犳劅鍣ㄣ€佽繍鍔ㄧ姸鎬併€佷互鍙妉ed銆佽渹楦ｅ櫒绛夎澶�)灏佽鍦ㄤ竴涓粨鏋勪綋涓�
-灏唖tatus浣滀负涓€涓叏灞€鍙橀噺锛屽叧浜庡皬杞︾殑鎵€鏈夊弬鏁扮殑鑾峰彇浜庤缃潎閫氳繃璇ョ粨鏋勪綋杩涜
-渚嬪
-  璁剧疆灏忚溅涓€涓洿娴佺數鏈虹殑閫熷害锛� status.motor.wheel[0].tar_speed;
-  寮€鍚竴涓狶ED鐏細 status.device.led_1.on = 1;
-瀵规瘡涓澶囩殑鏇存柊鏁版嵁浜庨┍鍔ㄥ潎浠ュ崟涓璁捐繘琛岋紝濡傚崟涓數鏈恒€佸崟涓埖鏈恒€佸崟涓猯ed
-渚嬪
-  鑾峰彇闄€铻轰华鐨勫師濮嬫暟鎹� get_gyr_data(&status->sensor.gy901);
-  椹卞姩status.motor.servo[0] driver_servo(&status->motor.servo[0]);
-瀵逛簬姣忎釜璁惧鐨勫垵濮嬪寲銆佽幏鍙栧師濮嬫暟鎹€侀┍鍔�(杩欎笁涓牴鎹璁句笉鍚屽彲鑳戒笉鍏ㄩ兘闇€瑕�)鎻愪緵缁熶竴鐨勬帴鍙�
-渚嬪
-  init_xxx(XXX *xxx) 鍒濆鍖杧xx璁惧
-  update_xxx(XXX *xxx) 鑾峰彇xxx鐨勫師濮嬫暟鎹�
-  driver_xxx(XXX *xxx) 椹卞姩xxx璁惧
-杩欎笁涓嚱鏁板叿浣撴斁鍦ㄥ摢閲岃鐪嬫瘡涓璁剧殑.h鏂囦欢
-*/
-
 #include "status.h"
 
 #include "button.h"
@@ -33,8 +12,6 @@ status鐘舵€佹爲鐨勭洰鐨勬槸灏嗗皬杞︾殑鎵€鏈夌姸鎬�(�
 #include "wheel.h"
 
 STATUS status;
-
-PID balance_pid;
 
 void init_motor() {  // 鐢垫満鍒濆鍖�
   init_servo(&status.motor.servo[0], 1, 180);
@@ -71,21 +48,27 @@ void init_state(STATUS *status, uint8_t T)  // 鐘舵€佸垵濮嬪寲
   status->state.cur_angle = 0;
   status->state.tar_angle = 90;
 
-  status->state.gw_8bit = 0x00;  // 8浣嶇伆搴︿紶鎰熷櫒鏁版嵁
-  balance_pid = init_pid(300, 0, 0, 1, 10);
+  status->state.gw_8bit = 0x00;
 
-  status->state.road_determine.cross = Straight;  // 鏁版嵁鍒濆鍖栦负涓€涓叏灞€鍙橀
+  status->state.road_determine.cross = Straight;
   status->state.road_determine.cross_cnt = 0;
-  status->state.road_determine.maybe = 0;  // 鏁版嵁鍒濆鍖栦负涓€涓叏灞€鍙橀
+  status->state.road_determine.maybe = 0;
   status->state.road_determine.integral = 0;
-  status->state.road_determine.data_buf = 0;  // 鏁版嵁鍒濆鍖栦负涓€涓叏灞€鍙橀
+  status->state.road_determine.data_buf = 0;
+
+  status->state.base_speed = 70;
 
   return;
 }
 
-void init_status(STATUS *status, uint8_t T) {  // 鐘舵€佹爲鍒濆鍖�
+void init_status_pid(STATUS *status) {
+  status->state.status_pid.follow_line_pid = init_pid(1.5, 0.1, 500, 20, 20);  // 1.5, 0.1, 7 //1.5,0.1,10//
+}
 
+void init_status(STATUS *status, uint8_t T) {
   init_state(status, T);
+
+  init_status_pid(status);
 
   init_sensor(status);
 
@@ -96,59 +79,67 @@ void init_status(STATUS *status, uint8_t T) {  // 鐘舵€佹爲鍒濆鍖�
   return;
 }
 
+int16_t wheel_0_speed = 0;
+int16_t wheel_1_speed = 0;
+
+Road road_buf = Straight;
+
+int16_t shit(int8_t acc) {
+  if (ABS(status.motor.wheel[0].tar_speed - wheel_0_speed) > acc) {
+    status.motor.wheel[0].tar_speed += acc * SIGN(wheel_0_speed - status.motor.wheel[0].tar_speed);
+  }
+  if (ABS(status.motor.wheel[1].tar_speed - wheel_1_speed) > acc) {
+    status.motor.wheel[1].tar_speed += acc * SIGN(wheel_1_speed - status.motor.wheel[1].tar_speed);
+  }
+}
+
+Road Turn_or_Straight() {
+  if (road_buf != status.state.road_determine.cross) {
+    status.motor.wheel[0].tar_speed = 0;
+    status.motor.wheel[1].tar_speed = 0;
+    if ((ABS(status.motor.wheel[0].cur_speed) < 5) && (ABS(status.motor.wheel[1].cur_speed) < 5)) {
+      road_buf = status.state.road_determine.cross;
+    }
+  }
+  return road_buf;
+}
+
+void follow_line(STATUS *status) {
+  get_gw_analoge_digital_data(&status->sensor.gw_analogue);
+  get_gw_analogue_analogue_diff(&status->sensor.gw_analogue);
+
+  get_road_type(&status->state.road_determine, status->sensor.gw_analogue.digital_8bit);
+
+  if (Turn_or_Straight() == Straight) {
+    log_uprintf(&huart1, "%d %d\r\n", wheel_0_speed, wheel_1_speed);
+    float diff = compute_pid(&status->state.status_pid.follow_line_pid, status->sensor.gw_analogue.diff);
+    status->motor.wheel[0].tar_speed = status->state.base_speed - (int16_t)diff;
+    status->motor.wheel[1].tar_speed = status->state.base_speed + (int16_t)diff;
+  }
+  if (Turn_or_Straight() == LeftRoad) {
+    status->motor.wheel[0].tar_speed = 20;
+    status->motor.wheel[1].tar_speed = -20;
+  }
+  if (Turn_or_Straight() == RightRoad) {
+    status->motor.wheel[0].tar_speed = -20;
+    status->motor.wheel[1].tar_speed = 20;
+  }
+  if (road_buf != status->state.road_determine.cross) {
+    status->motor.wheel[0].tar_speed = 0;
+    status->motor.wheel[1].tar_speed = 0;
+  }
+  // shit(5);
+}
+
 void update_status(STATUS *status) {  // 鐘舵€佹爲鏇存柊鏁版嵁
+  get_gw_raw_data(&status->sensor.gw_analogue);
+
   status->motor.wheel[0].cur_speed = get_wheel_speed(&status->motor.wheel[0]);
   status->motor.wheel[1].cur_speed = get_wheel_speed(&status->motor.wheel[1]);
   status->motor.wheel[2].cur_speed = get_wheel_speed(&status->motor.wheel[2]);
   status->motor.wheel[3].cur_speed = get_wheel_speed(&status->motor.wheel[3]);
 
-  get_gw_8bit_data(&hi2c1, &status->sensor.gw_8bit);
-  get_gw_analoge_digital_data(&status->sensor.gw_analogue);
-  get_gw_analoge_digital_data(&status->sensor.gw_analogue);
-  get_gw_analogue_analogue_diff(&status->sensor.gw_analogue);
-
-  return;
-}
-
-void driver_status(STATUS *status) {  // 鐘舵€佹暟椹卞姩
-
-  // if (status->state.time == 1000) {
-  //   status->state.motion = KEEP_ANGLE;
-  // }
-
-  // if (status->state.motion == STOP) {
-  //   status->motor.wheel[0].tar_speed = 0;
-  //   status->motor.wheel[1].tar_speed = 0;
-  //   if (status->motor.wheel[0].cur_speed == 0)
-  //     status->motor.wheel[0].trust = 0;
-  //   if (status->motor.wheel[1].cur_speed == 0)
-  //     status->motor.wheel[1].trust = 0;
-  // } else if (status->state.motion == KEEP_ANGLE) {
-  //   float target_angle = (status->state.tar_angle + status->state.initial_angle);
-  //   float diff_angle = target_angle - status->state.cur_angle;
-  //   // 灏嗚搴﹀樊鍊艰皟鏁村埌 [-180掳, 180掳] 鑼冨洿鍐�
-  //   if (diff_angle > 180.0) {
-  //     diff_angle -= 360.0;
-  //   } else if (diff_angle < -180.0) {
-  //     diff_angle += 360.0;
-  //   } else if (status->state.motion == FIND_LINE) {
-  //     int32_t line_diff = gw_get_line_diff(&status->sensor.gw_8bit);
-  //     status->motor.wheel[0].tar_speed = 2000 - line_diff;
-  //     status->motor.wheel[1].tar_speed = 2000 + line_diff;
-  //     if (ABS(line_diff) > 5000) {
-  //       status->motor.wheel[0].tar_speed = CLAMP(status->motor.wheel[0].tar_speed, 1000);
-  //       status->motor.wheel[1].tar_speed = CLAMP(status->motor.wheel[1].tar_speed, 1000);
-  //     }
-  //   }
-  //   int16_t diff = compute_pid(&status->sensor.gy901.gy901_keep_angle_pid, diff_angle);
-  //   status->motor.wheel[0].tar_speed = diff;
-  //   status->motor.wheel[1].tar_speed = -diff;
-  //   log_uprintf(&huart1, "diff_angle %5.2f\r\n", diff_angle);
-
-  status->motor.servo[0].angle = 100;
-
-  get_road_type(&status->state.road_determine, status->sensor.gw_analogue.digital_8bit);
-  log_uprintf(&huart1, "%5.2f\n", status->sensor.gw_analogue.diff);
+  follow_line(status);
 
   driver_button(&status->device.button_D2);
   driver_button(&status->device.button_B11);
@@ -168,8 +159,11 @@ void driver_status(STATUS *status) {  // 鐘舵€佹暟椹卞姩
   return;
 }
 
+void driver_status(STATUS *status) {  // 鐘舵€佹暟椹卞姩
+}
+
 void after_init_state() {
-  get_gyr_data(&hi2c1, &status.sensor.gy901);
+  get_gyr_raw_data(&hi2c1, &status.sensor.gy901);
   HAL_Delay(50);
   status.state.initial_angle = get_gyr_value(&status.sensor.gy901, gyr_z_yaw);
 }

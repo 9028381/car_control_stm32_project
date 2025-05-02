@@ -9,6 +9,7 @@
 #define LIMIT(x, min, max) LIMIT_MIN(LIMIT_MAX(x, max), min)
 #define CLAMP(x, range) LIMIT(x, -(range), range)
 #define CONFINE(x, a, b) ((x) < (a) ? (a) : ((x) > (b) ? (b) : (x)))
+#define SIGN(x) ((x) > 0 ? 1 : ((x) < 0 ? -1 : 0))  // 宏定义符号函数
 
 #define POW(base, exp) ({              \
   int _result = 1;                     \

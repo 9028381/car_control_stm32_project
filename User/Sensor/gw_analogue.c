@@ -5,7 +5,7 @@
 #include "main.h"
 #include "status.h"
 
-float distance[8] = {-42, -30, -18, -6, 6, 18, 30, 42};
+float distance[8] = {-30, -20, -15, -10, 10, 15, 20, 30};  //{-80, -50, -10, -3, 3, 10, 50, 80}
 
 void gw_analogue_gray_show(GW_ANALOGUE *gw_analogue) {
   uint8_t buf = gw_analogue->digital_8bit;
@@ -27,9 +27,27 @@ void init_gw_analogue(GW_ANALOGUE *gw_analogue) {
     gw_analogue->correction_data_w[i] = 0;  // Initialize correction data to 0
     gw_analogue->correction_data_b[i] = 0;  // Initialize correction data to 0
   }
+  gw_analogue->digital_high_threshold[0] = 81;   // Initialize high threshold to 0
+  gw_analogue->digital_high_threshold[1] = 137;  // Initialize high threshold to 0
+  gw_analogue->digital_high_threshold[2] = 77;   // Initialize high threshold to 0
+  gw_analogue->digital_high_threshold[3] = 82;   // Initialize high threshold to 0
+  gw_analogue->digital_high_threshold[4] = 61;   // Initialize high threshold to 0
+  gw_analogue->digital_high_threshold[5] = 115;  // Initialize high threshold to 0
+  gw_analogue->digital_high_threshold[6] = 129;  // Initialize high threshold to 0
+  gw_analogue->digital_high_threshold[7] = 75;   // Initialize high threshold to 0
+
+  gw_analogue->digital_low_threshold[0] = 49;  // Initialize low threshold to 0
+  gw_analogue->digital_low_threshold[1] = 95;  // Initialize low threshold to 0
+  gw_analogue->digital_low_threshold[2] = 49;  // Initialize low threshold to 0
+  gw_analogue->digital_low_threshold[3] = 55;  // Initialize low threshold to 0
+  gw_analogue->digital_low_threshold[4] = 37;  // Initialize low threshold to 0
+  gw_analogue->digital_low_threshold[5] = 77;  // Initialize low threshold to 0
+  gw_analogue->digital_low_threshold[6] = 89;  // Initialize low threshold to 0
+  gw_analogue->digital_low_threshold[7] = 47;  // Initialize low threshold to 0
+
   for (int i = 0; i < 8; i++) {
-    gw_analogue->digital_high_threshold[i] = 255;  // Initialize high threshold to 0
-    gw_analogue->digital_low_threshold[i] = 0;     // Initialize low threshold to 0
+    gw_analogue->correction_data_w[i] = 2 * gw_analogue->digital_high_threshold[i] - gw_analogue->digital_low_threshold[i];  // Initialize high threshold to 0
+    gw_analogue->correction_data_b[i] = 2 * gw_analogue->digital_low_threshold[i] - gw_analogue->digital_high_threshold[i];  // Initialize low threshold to 0
   }
 
   gw_analogue->sta = 0;           // Set the state to 0 (normal mode)
@@ -100,6 +118,13 @@ void correct_gw_analogue(GW_ANALOGUE *gw_analogue) {
                                                (gw_analogue->correction_data_w[i] - gw_analogue->correction_data_b[i]) * 0.66;
       // Calculate the high threshold
     }
+    for (int i = 0; i < 8; i++) {
+      log_uprintf(&huart1, "%d ", gw_analogue->digital_low_threshold[i]);
+    }
+    log_uprintf(&huart1, "\n\n");
+    for (int i = 0; i < 8; i++) {
+      log_uprintf(&huart1, "%d ", gw_analogue->digital_high_threshold[i]);
+    }
     return;
   }
 }
@@ -120,13 +145,13 @@ float normalize_gray_data(uint8_t max, uint8_t min, uint8_t now) {
 
 void normalize_gray_weight(float *raw_data) {
   float total = 0;
-  for (int i = 0; i < 8; i++) {
+  for (int i = 2; i < 6; i++) {
     total += raw_data[i];
   }
   if (total == 0) {
     return;
   }
-  for (int i = 0; i < 8; i++) {
+  for (int i = 2; i < 6; i++) {
     raw_data[i] = (raw_data[i] / total);
   }
 
@@ -136,12 +161,12 @@ void normalize_gray_weight(float *raw_data) {
 void get_gw_analogue_analogue_diff(GW_ANALOGUE *gw_analogue) {
   float buff[8] = {0};
   float diff = 0;
-  for (int i = 0; i < 8; i++) {
+  for (int i = 2; i < 6; i++) {
     if (gw_analogue->channel[i] < gw_analogue->digital_high_threshold[i])
       buff[i] = 100 - normalize_gray_data(gw_analogue->correction_data_w[i], gw_analogue->correction_data_b[i], gw_analogue->channel[i]);
   }
   normalize_gray_weight(buff);
-  for (int i = 0; i < 8; i++) {
+  for (int i = 2; i < 6; i++) {
     diff += buff[i] * distance[i];
   }
 

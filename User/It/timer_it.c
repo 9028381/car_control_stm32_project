@@ -15,20 +15,33 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 
   if (htim == &htim5)  // 周期 1ms
   {
-    if (status.state.time == 50)
-      status.device.led_on_board.on = 1;
-    else if (status.state.time == 100)
-      status.device.led_on_board.on = 0;
-    else if (status.state.time == 150)
-      status.device.led_on_board.on = 1;
-    else if (status.state.time == 200)
-      status.device.led_on_board.on = 0;
-    else if (status.state.time == 250)
-      status.device.led_on_board.on = 1;
-    else if (status.state.time == 300)
-      status.device.led_on_board.on = 0;
+    // if (status.state.time == 50)
+    //   status.device.led_on_board.on = 1;
+    // else if (status.state.time == 100)
+    //   status.device.led_on_board.on = 0;
+    // else if (status.state.time == 150)
+    //   status.device.led_on_board.on = 1;
+    // else if (status.state.time == 200)
+    //   status.device.led_on_board.on = 0;
+    // else if (status.state.time == 250)
+    //   status.device.led_on_board.on = 1;
+    // else if (status.state.time == 300)
+    //   status.device.led_on_board.on = 0;
 
-    if (status.state.time % 25 == 0) {  // 周期 25ms
+    if (status.state.time == 50)
+      status.device.buzzer.on = 1;
+    else if (status.state.time == 100)
+      status.device.buzzer.on = 0;
+    else if (status.state.time == 150)
+      status.device.buzzer.on = 1;
+    else if (status.state.time == 200)
+      status.device.buzzer.on = 0;
+    else if (status.state.time == 250)
+      status.device.buzzer.on = 1;
+    else if (status.state.time == 300)
+      status.device.buzzer.on = 0;
+
+    if (status.state.time % 10 == 0) {  // 周期 25ms
       if (update_or_driver == 0) {
         update_status(&status);  // 状态更新中断 用于读取传感器原始数据
         update_or_driver = 1;

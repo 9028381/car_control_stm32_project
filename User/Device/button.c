@@ -21,6 +21,7 @@ void server_button(BUTTON *button, BUTTON_STATION station) {
   }
   if (button->which == 2) {
     if (station == BUTTON_DOWN) {
+      status.state.base_speed = 70;
     }
   }
   if (station == BUTTON_LONG) {

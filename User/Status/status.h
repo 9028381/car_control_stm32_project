@@ -16,6 +16,10 @@
 
 #define MOTION_BASE_SPEED 2000
 
+typedef struct STATUS_PID {
+  PID follow_line_pid;
+} STATUS_PID;
+
 typedef enum MOTION_STATION {
   STOP,
   KEEP_ANGLE,
@@ -51,9 +55,13 @@ typedef struct STATE {
   float cur_angle;
   float tar_angle;
 
+  int16_t base_speed;  // 基础速度
+
   RoadDetermine road_determine;  // 道路判断结构体
 
   uint8_t gw_8bit;
+
+  STATUS_PID status_pid;  // PID结构体
 } STATE;
 
 typedef struct STATUS {

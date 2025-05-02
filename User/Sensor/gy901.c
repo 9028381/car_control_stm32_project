@@ -19,7 +19,7 @@ void init_gyr(GYR *gyr) {
   return;
 }
 
-void get_gyr_data(I2C_HandleTypeDef *i2c, GYR *gyr) {
+void get_gyr_raw_data(I2C_HandleTypeDef *i2c, GYR *gyr) {
   HAL_I2C_Mem_Read(i2c, GYR_ADDR, gyr->data_start_addr, I2C_MEMADD_SIZE_8BIT, gyr->data_buf, 24, 10);
 
   return;

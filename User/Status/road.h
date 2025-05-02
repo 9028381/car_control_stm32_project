@@ -30,6 +30,9 @@ typedef struct RoadDetermine {
 
 } RoadDetermine;
 
+// 对uint8_t数据进行路口判断
+// 传入参数: 巡线传感器的0-7通道数字量
+// 判断到有路口时进入
 void get_road_type(RoadDetermine *roaddetermine, uint8_t road_data);
 
 #endif

@@ -43,14 +43,14 @@ I (..\Core\Inc\spi.h)(0x67B4841D)
 I (..\Core\Inc\tim.h)(0x67A2155D)
 I (..\Core\Inc\usart.h)(0x679CF7F6)
 I (..\User\Tool\log.h)(0x67B49862)
-I (..\User\Status\status.h)(0x68121FED)
+I (..\User\Status\status.h)(0x68133BB8)
 I (..\User\Device\button.h)(0x67E410EA)
 I (..\User\Device\buzzer.h)(0x67C1224B)
-I (..\User\Sensor\gw_anagloge.h)(0x68130668)
+I (..\User\Sensor\gw_anagloge.h)(0x68131D9A)
 I (..\User\Sensor\gw_find_line.h)(0x67C977DD)
 I (..\User\Tool\pid.h)(0x67C122AB)
-I (..\User\Status\road.h)(0x6812237D)
-I (..\User\Sensor\gy901.h)(0x67CC0CF5)
+I (..\User\Status\road.h)(0x68131778)
+I (..\User\Sensor\gy901.h)(0x68132BCB)
 I (..\User\Device\led.h)(0x67C1224B)
 I (..\User\Motor\servo.h)(0x67C1224B)
 I (..\User\Motor\wheel.h)(0x67C1224B)
@@ -1161,7 +1161,7 @@ I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_tim.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_tim_ex.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x67A7779F)
-F (..\User\Device\button.c)(0x68121720)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Device -I ../User/It -I ../User/Motor -I ../User/Sensor -I ../User/Status -I ../User/Tool-I./RTE/_car_control_stm32_project-ID:/program/keil_5/pack/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/program/keil_5/pack/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G474xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G474xx-o car_control_stm32_project/button.o -MMD)
+F (..\User\Device\button.c)(0x68148A9F)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Device -I ../User/It -I ../User/Motor -I ../User/Sensor -I ../User/Status -I ../User/Tool-I./RTE/_car_control_stm32_project-ID:/program/keil_5/pack/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/program/keil_5/pack/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G474xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G474xx-o car_control_stm32_project/button.o -MMD)
 I (..\User\Device\button.h)(0x67E410EA)
 I (..\Core\Inc\main.h)(0x67C5BB0A)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x67A7779F)
@@ -1197,18 +1197,18 @@ I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_tim_ex.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x67A7779F)
 I (..\Core\Inc\gpio.h)(0x679CF7F4)
-I (..\User\Sensor\gw_anagloge.h)(0x68130668)
+I (..\User\Sensor\gw_anagloge.h)(0x68131D9A)
 I (..\User\Device\led.h)(0x67C1224B)
 I (..\User\Tool\log.h)(0x67B49862)
 I (..\Core\Inc\usart.h)(0x679CF7F6)
 I (..\User\Motor\lq_step.h)(0x67C301F1)
-I (..\User\Tool\math_tool.h)(0x67C8003D)
-I (..\User\Status\status.h)(0x68121FED)
+I (..\User\Tool\math_tool.h)(0x68147A59)
+I (..\User\Status\status.h)(0x68133BB8)
 I (..\User\Device\buzzer.h)(0x67C1224B)
 I (..\User\Sensor\gw_find_line.h)(0x67C977DD)
 I (..\User\Tool\pid.h)(0x67C122AB)
-I (..\User\Status\road.h)(0x6812237D)
-I (..\User\Sensor\gy901.h)(0x67CC0CF5)
+I (..\User\Status\road.h)(0x68131778)
+I (..\User\Sensor\gy901.h)(0x68132BCB)
 I (..\User\Motor\servo.h)(0x67C1224B)
 I (..\User\Motor\wheel.h)(0x67C1224B)
 F (..\User\Device\button.h)(0x67E410EA)()
@@ -1250,14 +1250,14 @@ I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x67A7779F)
 I (..\Core\Inc\gpio.h)(0x679CF7F4)
 I (..\User\Tool\log.h)(0x67B49862)
 I (..\Core\Inc\usart.h)(0x679CF7F6)
-I (..\User\Status\status.h)(0x68121FED)
+I (..\User\Status\status.h)(0x68133BB8)
 I (..\User\Device\button.h)(0x67E410EA)
 I (..\User\Device\buzzer.h)(0x67C1224B)
-I (..\User\Sensor\gw_anagloge.h)(0x68130668)
+I (..\User\Sensor\gw_anagloge.h)(0x68131D9A)
 I (..\User\Sensor\gw_find_line.h)(0x67C977DD)
 I (..\User\Tool\pid.h)(0x67C122AB)
-I (..\User\Status\road.h)(0x6812237D)
-I (..\User\Sensor\gy901.h)(0x67CC0CF5)
+I (..\User\Status\road.h)(0x68131778)
+I (..\User\Sensor\gy901.h)(0x68132BCB)
 I (..\User\Motor\servo.h)(0x67C1224B)
 I (..\User\Motor\wheel.h)(0x67C1224B)
 F (..\User\Device\led.h)(0x67C1224B)()
@@ -1298,7 +1298,7 @@ I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x67A7779F)
 I (..\Core\Inc\gpio.h)(0x679CF7F4)
 F (..\User\Device\buzzer.h)(0x67C1224B)()
-F (..\User\It\timer_it.c)(0x67C29E33)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Device -I ../User/It -I ../User/Motor -I ../User/Sensor -I ../User/Status -I ../User/Tool-I./RTE/_car_control_stm32_project-ID:/program/keil_5/pack/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/program/keil_5/pack/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G474xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G474xx-o car_control_stm32_project/timer_it.o -MMD)
+F (..\User\It\timer_it.c)(0x68148BDF)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Device -I ../User/It -I ../User/Motor -I ../User/Sensor -I ../User/Status -I ../User/Tool-I./RTE/_car_control_stm32_project-ID:/program/keil_5/pack/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/program/keil_5/pack/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G474xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G474xx-o car_control_stm32_project/timer_it.o -MMD)
 I (..\User\Device\buzzer.h)(0x67C1224B)
 I (..\Core\Inc\main.h)(0x67C5BB0A)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x67A7779F)
@@ -1341,13 +1341,13 @@ I (..\User\Tool\log.h)(0x67B49862)
 I (..\Core\Inc\usart.h)(0x679CF7F6)
 I (..\User\Motor\lq_step.h)(0x67C301F1)
 I (..\User\Motor\servo.h)(0x67C1224B)
-I (..\User\Status\status.h)(0x68121FED)
+I (..\User\Status\status.h)(0x68133BB8)
 I (..\User\Device\button.h)(0x67E410EA)
-I (..\User\Sensor\gw_anagloge.h)(0x68130668)
+I (..\User\Sensor\gw_anagloge.h)(0x68131D9A)
 I (..\User\Sensor\gw_find_line.h)(0x67C977DD)
 I (..\User\Tool\pid.h)(0x67C122AB)
-I (..\User\Status\road.h)(0x6812237D)
-I (..\User\Sensor\gy901.h)(0x67CC0CF5)
+I (..\User\Status\road.h)(0x68131778)
+I (..\User\Sensor\gy901.h)(0x68132BCB)
 I (..\User\Motor\wheel.h)(0x67C1224B)
 F (..\User\It\uart_it.c)(0x67B48491)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Device -I ../User/It -I ../User/Motor -I ../User/Sensor -I ../User/Status -I ../User/Tool-I./RTE/_car_control_stm32_project-ID:/program/keil_5/pack/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/program/keil_5/pack/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G474xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G474xx-o car_control_stm32_project/uart_it.o -MMD)
 I (..\Core\Inc\usart.h)(0x679CF7F6)
@@ -1385,9 +1385,9 @@ I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_tim_ex.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x67A7779F)
 F (..\User\Status\motion.h)(0x00000000)()
-F (..\User\Status\road.h)(0x6812237D)()
-F (..\User\Status\status.c)(0x68130702)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Device -I ../User/It -I ../User/Motor -I ../User/Sensor -I ../User/Status -I ../User/Tool-I./RTE/_car_control_stm32_project-ID:/program/keil_5/pack/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/program/keil_5/pack/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G474xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G474xx-o car_control_stm32_project/status.o -MMD)
-I (..\User\Status\status.h)(0x68121FED)
+F (..\User\Status\road.h)(0x68131778)()
+F (..\User\Status\status.c)(0x68148A9B)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Device -I ../User/It -I ../User/Motor -I ../User/Sensor -I ../User/Status -I ../User/Tool-I./RTE/_car_control_stm32_project-ID:/program/keil_5/pack/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/program/keil_5/pack/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G474xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G474xx-o car_control_stm32_project/status.o -MMD)
+I (..\User\Status\status.h)(0x68133BB8)
 I (..\User\Device\button.h)(0x67E410EA)
 I (..\Core\Inc\main.h)(0x67C5BB0A)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x67A7779F)
@@ -1423,21 +1423,21 @@ I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_tim_ex.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x67A7779F)
 I (..\User\Device\buzzer.h)(0x67C1224B)
-I (..\User\Sensor\gw_anagloge.h)(0x68130668)
+I (..\User\Sensor\gw_anagloge.h)(0x68131D9A)
 I (..\User\Sensor\gw_find_line.h)(0x67C977DD)
 I (..\User\Tool\pid.h)(0x67C122AB)
-I (..\User\Status\road.h)(0x6812237D)
-I (..\User\Sensor\gy901.h)(0x67CC0CF5)
+I (..\User\Status\road.h)(0x68131778)
+I (..\User\Sensor\gy901.h)(0x68132BCB)
 I (..\User\Device\led.h)(0x67C1224B)
 I (..\User\Motor\servo.h)(0x67C1224B)
 I (..\User\Motor\wheel.h)(0x67C1224B)
 I (..\Core\Inc\i2c.h)(0x67A38F6A)
 I (..\User\Tool\log.h)(0x67B49862)
 I (..\Core\Inc\usart.h)(0x679CF7F6)
-I (..\User\Tool\math_tool.h)(0x67C8003D)
-F (..\User\Status\status.h)(0x68121FED)()
-F (..\User\Status\road.c)(0x68122467)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Device -I ../User/It -I ../User/Motor -I ../User/Sensor -I ../User/Status -I ../User/Tool-I./RTE/_car_control_stm32_project-ID:/program/keil_5/pack/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/program/keil_5/pack/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G474xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G474xx-o car_control_stm32_project/road.o -MMD)
-I (..\User\Status\road.h)(0x6812237D)
+I (..\User\Tool\math_tool.h)(0x68147A59)
+F (..\User\Status\status.h)(0x68133BB8)()
+F (..\User\Status\road.c)(0x68148B09)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Device -I ../User/It -I ../User/Motor -I ../User/Sensor -I ../User/Status -I ../User/Tool-I./RTE/_car_control_stm32_project-ID:/program/keil_5/pack/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/program/keil_5/pack/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G474xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G474xx-o car_control_stm32_project/road.o -MMD)
+I (..\User\Status\road.h)(0x68131778)
 I (..\User\Tool\log.h)(0x67B49862)
 I (..\Core\Inc\usart.h)(0x679CF7F6)
 I (..\Core\Inc\main.h)(0x67C5BB0A)
@@ -1473,6 +1473,16 @@ I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_tim.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_tim_ex.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x67A7779F)
+I (..\User\Status\status.h)(0x68133BB8)
+I (..\User\Device\button.h)(0x67E410EA)
+I (..\User\Device\buzzer.h)(0x67C1224B)
+I (..\User\Sensor\gw_anagloge.h)(0x68131D9A)
+I (..\User\Sensor\gw_find_line.h)(0x67C977DD)
+I (..\User\Tool\pid.h)(0x67C122AB)
+I (..\User\Sensor\gy901.h)(0x68132BCB)
+I (..\User\Device\led.h)(0x67C1224B)
+I (..\User\Motor\servo.h)(0x67C1224B)
+I (..\User\Motor\wheel.h)(0x67C1224B)
 F (..\User\Sensor\abslute_angle_sensor.c)(0x67B49595)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Device -I ../User/It -I ../User/Motor -I ../User/Sensor -I ../User/Status -I ../User/Tool-I./RTE/_car_control_stm32_project-ID:/program/keil_5/pack/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/program/keil_5/pack/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G474xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G474xx-o car_control_stm32_project/abslute_angle_sensor.o -MMD)
 I (..\User\Sensor\abslute_angle_sensor.h)(0x67B4814F)
 I (..\Core\Inc\main.h)(0x67C5BB0A)
@@ -1508,7 +1518,7 @@ I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_tim.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_tim_ex.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x67A7779F)
-I (..\User\Tool\math_tool.h)(0x67C8003D)
+I (..\User\Tool\math_tool.h)(0x68147A59)
 I (..\Core\Inc\usart.h)(0x679CF7F6)
 F (..\User\Sensor\abslute_angle_sensor.h)(0x67B4814F)()
 F (..\User\Sensor\ccd.c)(0x6812EA51)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Device -I ../User/It -I ../User/Motor -I ../User/Sensor -I ../User/Status -I ../User/Tool-I./RTE/_car_control_stm32_project-ID:/program/keil_5/pack/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/program/keil_5/pack/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G474xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G474xx-o car_control_stm32_project/ccd.o -MMD)
@@ -1549,8 +1559,8 @@ I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x67A7779F)
 I (..\Core\Inc\tim.h)(0x67A2155D)
 I (..\User\Tool\array.h)(0x67A1E299)
-I (..\User\Tool\math_tool.h)(0x67C8003D)
-I (..\User\Status\road.h)(0x6812237D)
+I (..\User\Tool\math_tool.h)(0x68147A59)
+I (..\User\Status\road.h)(0x68131778)
 F (..\User\Sensor\ccd.h)(0x67B49425)()
 F (..\User\Sensor\gw_find_line.c)(0x681224A7)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Device -I ../User/It -I ../User/Motor -I ../User/Sensor -I ../User/Status -I ../User/Tool-I./RTE/_car_control_stm32_project-ID:/program/keil_5/pack/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/program/keil_5/pack/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G474xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G474xx-o car_control_stm32_project/gw_find_line.o -MMD)
 I (..\User\Sensor\gw_find_line.h)(0x67C977DD)
@@ -1588,21 +1598,21 @@ I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_tim_ex.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x67A7779F)
 I (..\User\Tool\pid.h)(0x67C122AB)
-I (..\User\Status\road.h)(0x6812237D)
+I (..\User\Status\road.h)(0x68131778)
 I (..\Core\Inc\i2c.h)(0x67A38F6A)
 I (..\User\Tool\log.h)(0x67B49862)
 I (..\Core\Inc\usart.h)(0x679CF7F6)
-I (..\User\Status\status.h)(0x68121FED)
+I (..\User\Status\status.h)(0x68133BB8)
 I (..\User\Device\button.h)(0x67E410EA)
 I (..\User\Device\buzzer.h)(0x67C1224B)
-I (..\User\Sensor\gw_anagloge.h)(0x68130668)
-I (..\User\Sensor\gy901.h)(0x67CC0CF5)
+I (..\User\Sensor\gw_anagloge.h)(0x68131D9A)
+I (..\User\Sensor\gy901.h)(0x68132BCB)
 I (..\User\Device\led.h)(0x67C1224B)
 I (..\User\Motor\servo.h)(0x67C1224B)
 I (..\User\Motor\wheel.h)(0x67C1224B)
 F (..\User\Sensor\gw_find_line.h)(0x67C977DD)()
-F (..\User\Sensor\gy901.c)(0x67CD08D8)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Device -I ../User/It -I ../User/Motor -I ../User/Sensor -I ../User/Status -I ../User/Tool-I./RTE/_car_control_stm32_project-ID:/program/keil_5/pack/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/program/keil_5/pack/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G474xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G474xx-o car_control_stm32_project/gy901.o -MMD)
-I (..\User\Sensor\gy901.h)(0x67CC0CF5)
+F (..\User\Sensor\gy901.c)(0x68132CF3)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Device -I ../User/It -I ../User/Motor -I ../User/Sensor -I ../User/Status -I ../User/Tool-I./RTE/_car_control_stm32_project-ID:/program/keil_5/pack/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/program/keil_5/pack/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G474xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G474xx-o car_control_stm32_project/gy901.o -MMD)
+I (..\User\Sensor\gy901.h)(0x68132BCB)
 I (..\Core\Inc\main.h)(0x67C5BB0A)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x67A7779F)
 I (..\Core\Inc\stm32g4xx_hal_conf.h)(0x679CE2AB)
@@ -1638,7 +1648,7 @@ I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x67A7779F)
 I (..\User\Tool\pid.h)(0x67C122AB)
 I (..\Core\Inc\i2c.h)(0x67A38F6A)
-F (..\User\Sensor\gy901.h)(0x67CC0CF5)()
+F (..\User\Sensor\gy901.h)(0x68132BCB)()
 F (..\User\Sensor\ms_find_line.c)(0x67B491B7)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Device -I ../User/It -I ../User/Motor -I ../User/Sensor -I ../User/Status -I ../User/Tool-I./RTE/_car_control_stm32_project-ID:/program/keil_5/pack/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/program/keil_5/pack/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G474xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G474xx-o car_control_stm32_project/ms_find_line.o -MMD)
 I (..\User\Sensor\ms_find_line.h)(0x67A20F6B)
 I (..\Core\Inc\main.h)(0x67C5BB0A)
@@ -1710,10 +1720,10 @@ I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_tim.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_tim_ex.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x67A7779F)
-I (..\User\Tool\math_tool.h)(0x67C8003D)
+I (..\User\Tool\math_tool.h)(0x68147A59)
 F (..\User\Sensor\radar.h)(0x67A244D5)()
-F (..\User\Sensor\gw_anagloge.h)(0x68130668)()
-F (..\User\Sensor\gw_analogue.c)(0x6812ECB4)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Device -I ../User/It -I ../User/Motor -I ../User/Sensor -I ../User/Status -I ../User/Tool-I./RTE/_car_control_stm32_project-ID:/program/keil_5/pack/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/program/keil_5/pack/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G474xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G474xx-o car_control_stm32_project/gw_analogue.o -MMD)
+F (..\User\Sensor\gw_anagloge.h)(0x68131D9A)()
+F (..\User\Sensor\gw_analogue.c)(0x681485EE)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Device -I ../User/It -I ../User/Motor -I ../User/Sensor -I ../User/Status -I ../User/Tool-I./RTE/_car_control_stm32_project-ID:/program/keil_5/pack/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/program/keil_5/pack/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G474xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G474xx-o car_control_stm32_project/gw_analogue.o -MMD)
 I (..\Core\Inc\adc.h)(0x679CF7F5)
 I (..\Core\Inc\main.h)(0x67C5BB0A)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x67A7779F)
@@ -1749,16 +1759,16 @@ I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_tim_ex.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x67A7779F)
 I (..\Core\Inc\gpio.h)(0x679CF7F4)
-I (..\User\Sensor\gw_anagloge.h)(0x68130668)
+I (..\User\Sensor\gw_anagloge.h)(0x68131D9A)
 I (..\User\Tool\log.h)(0x67B49862)
 I (..\Core\Inc\usart.h)(0x679CF7F6)
-I (..\User\Status\status.h)(0x68121FED)
+I (..\User\Status\status.h)(0x68133BB8)
 I (..\User\Device\button.h)(0x67E410EA)
 I (..\User\Device\buzzer.h)(0x67C1224B)
 I (..\User\Sensor\gw_find_line.h)(0x67C977DD)
 I (..\User\Tool\pid.h)(0x67C122AB)
-I (..\User\Status\road.h)(0x6812237D)
-I (..\User\Sensor\gy901.h)(0x67CC0CF5)
+I (..\User\Status\road.h)(0x68131778)
+I (..\User\Sensor\gy901.h)(0x68132BCB)
 I (..\User\Device\led.h)(0x67C1224B)
 I (..\User\Motor\servo.h)(0x67C1224B)
 I (..\User\Motor\wheel.h)(0x67C1224B)
@@ -1798,9 +1808,9 @@ I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_tim_ex.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x67A7779F)
 I (..\Core\Inc\usart.h)(0x679CF7F6)
-I (..\User\Tool\math_tool.h)(0x67C8003D)
+I (..\User\Tool\math_tool.h)(0x68147A59)
 F (..\User\Motor\lq_step.h)(0x67C301F1)()
-F (..\User\Motor\servo.c)(0x6813053E)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Device -I ../User/It -I ../User/Motor -I ../User/Sensor -I ../User/Status -I ../User/Tool-I./RTE/_car_control_stm32_project-ID:/program/keil_5/pack/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/program/keil_5/pack/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G474xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G474xx-o car_control_stm32_project/servo.o -MMD)
+F (..\User\Motor\servo.c)(0x681313D8)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Device -I ../User/It -I ../User/Motor -I ../User/Sensor -I ../User/Status -I ../User/Tool-I./RTE/_car_control_stm32_project-ID:/program/keil_5/pack/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/program/keil_5/pack/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G474xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G474xx-o car_control_stm32_project/servo.o -MMD)
 I (..\User\Motor\servo.h)(0x67C1224B)
 I (..\Core\Inc\main.h)(0x67C5BB0A)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal.h)(0x67A7779F)
@@ -1837,14 +1847,14 @@ I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x67A7779F)
 I (..\User\Tool\log.h)(0x67B49862)
 I (..\Core\Inc\usart.h)(0x679CF7F6)
-I (..\User\Status\status.h)(0x68121FED)
+I (..\User\Status\status.h)(0x68133BB8)
 I (..\User\Device\button.h)(0x67E410EA)
 I (..\User\Device\buzzer.h)(0x67C1224B)
-I (..\User\Sensor\gw_anagloge.h)(0x68130668)
+I (..\User\Sensor\gw_anagloge.h)(0x68131D9A)
 I (..\User\Sensor\gw_find_line.h)(0x67C977DD)
 I (..\User\Tool\pid.h)(0x67C122AB)
-I (..\User\Status\road.h)(0x6812237D)
-I (..\User\Sensor\gy901.h)(0x67CC0CF5)
+I (..\User\Status\road.h)(0x68131778)
+I (..\User\Sensor\gy901.h)(0x68132BCB)
 I (..\User\Device\led.h)(0x67C1224B)
 I (..\User\Motor\wheel.h)(0x67C1224B)
 I (..\Core\Inc\tim.h)(0x67A2155D)
@@ -1889,14 +1899,14 @@ I (..\User\Tool\pid.h)(0x67C122AB)
 I (..\Core\Inc\gpio.h)(0x679CF7F4)
 I (..\User\Tool\log.h)(0x67B49862)
 I (..\Core\Inc\usart.h)(0x679CF7F6)
-I (..\User\Tool\math_tool.h)(0x67C8003D)
-I (..\User\Status\status.h)(0x68121FED)
+I (..\User\Tool\math_tool.h)(0x68147A59)
+I (..\User\Status\status.h)(0x68133BB8)
 I (..\User\Device\button.h)(0x67E410EA)
 I (..\User\Device\buzzer.h)(0x67C1224B)
-I (..\User\Sensor\gw_anagloge.h)(0x68130668)
+I (..\User\Sensor\gw_anagloge.h)(0x68131D9A)
 I (..\User\Sensor\gw_find_line.h)(0x67C977DD)
-I (..\User\Status\road.h)(0x6812237D)
-I (..\User\Sensor\gy901.h)(0x67CC0CF5)
+I (..\User\Status\road.h)(0x68131778)
+I (..\User\Sensor\gy901.h)(0x68132BCB)
 I (..\User\Device\led.h)(0x67C1224B)
 I (..\User\Motor\servo.h)(0x67C1224B)
 I (..\Core\Inc\tim.h)(0x67A2155D)
@@ -2014,7 +2024,7 @@ I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_tim_ex.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x67A7779F)
 F (..\User\Tool\log.h)(0x67B49862)()
-F (..\User\Tool\math_tool.h)(0x67C8003D)()
+F (..\User\Tool\math_tool.h)(0x68147A59)()
 F (..\User\Tool\pid.c)(0x67C12099)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Device -I ../User/It -I ../User/Motor -I ../User/Sensor -I ../User/Status -I ../User/Tool-I./RTE/_car_control_stm32_project-ID:/program/keil_5/pack/ARM/CMSIS/6.1.0/CMSIS/Core/Include-ID:/program/keil_5/pack/Keil/STM32G4xx_DFP/1.6.0/Drivers/CMSIS/Device/ST/STM32G4xx/Include-D__UVISION_VERSION="540" -DSTM32G474xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G474xx-o car_control_stm32_project/pid.o -MMD)
 I (..\User\Tool\pid.h)(0x67C122AB)
 I (..\Core\Inc\main.h)(0x67C5BB0A)
@@ -2052,14 +2062,14 @@ I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart.h)(0x67A7779F)
 I (..\Drivers\STM32G4xx_HAL_Driver\Inc\stm32g4xx_hal_uart_ex.h)(0x67A7779F)
 I (..\User\Tool\log.h)(0x67B49862)
 I (..\Core\Inc\usart.h)(0x679CF7F6)
-I (..\User\Tool\math_tool.h)(0x67C8003D)
-I (..\User\Status\status.h)(0x68121FED)
+I (..\User\Tool\math_tool.h)(0x68147A59)
+I (..\User\Status\status.h)(0x68133BB8)
 I (..\User\Device\button.h)(0x67E410EA)
 I (..\User\Device\buzzer.h)(0x67C1224B)
-I (..\User\Sensor\gw_anagloge.h)(0x68130668)
+I (..\User\Sensor\gw_anagloge.h)(0x68131D9A)
 I (..\User\Sensor\gw_find_line.h)(0x67C977DD)
-I (..\User\Status\road.h)(0x6812237D)
-I (..\User\Sensor\gy901.h)(0x67CC0CF5)
+I (..\User\Status\road.h)(0x68131778)
+I (..\User\Sensor\gy901.h)(0x68132BCB)
 I (..\User\Device\led.h)(0x67C1224B)
 I (..\User\Motor\servo.h)(0x67C1224B)
 I (..\User\Motor\wheel.h)(0x67C1224B)

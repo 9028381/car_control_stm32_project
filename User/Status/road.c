@@ -1,11 +1,12 @@
 #include "road.h"
 
 #include "log.h"
+#include "status.h"
 #include "stdbool.h"
 #include "stdint.h"
 #include "usart.h"
 
-#define INTEGRAL_TIMES 10
+#define INTEGRAL_TIMES 3
 
 void init_road_determine(RoadDetermine *roaddetermine) {
   roaddetermine->integral = 0;
@@ -33,25 +34,34 @@ Road road_decision(RoadDetermine *roaddetermine) {
 }
 
 void serve_road(RoadDetermine *roaddetermine, Road road) {
-  if (road == UnknowRoad) {
-    return;  // 没认出来的路口直接忽略
+  if (road == CrossRoad) {
+    status.state.base_speed = 0;
   }
-  if (roaddetermine->cross == Straight) {
-    roaddetermine->cross = road;                 // 更新路口状态
-  } else {                                       // 如果当前是特殊路口就判断是否回到直线
-    if (roaddetermine->data_buf & 0b00111100) {  // 由特殊路口再次回到直线
-      roaddetermine->cross = Straight;
-    }
+  if (road == LeftRoad) {
+    status.state.road_determine.cross = LeftRoad;
   }
-  return;
+  if (road == RightRoad) {
+    status.state.road_determine.cross = RightRoad;
+  }
+  if (road == Straight) {
+    status.state.road_determine.cross = Straight;
+    status.state.status_pid.follow_line_pid = init_pid(1.5, 0.1, 500, 20, 20);
+    log_uprintf(&huart1, "PID\n");
+  }
 }
 
 void get_road_type(RoadDetermine *roaddetermine, uint8_t road_data) {
   roaddetermine->data_buf = road_data;  // 更新路口数据
-  if (roaddetermine->data_buf & 0x81) {
-    if (roaddetermine->maybe == 0) {
-      roaddetermine->maybe = INTEGRAL_TIMES;
+  if (roaddetermine->cross == Straight) {
+    if (roaddetermine->data_buf & 0x81) {
+      if (roaddetermine->maybe == 0) {
+        roaddetermine->maybe = INTEGRAL_TIMES;
+        roaddetermine->integral = roaddetermine->integral | roaddetermine->data_buf;
+      }
     }
+  } else if (status.sensor.gw_analogue.digital_8bit & 0x7E) {
+    log_uprintf(&huart1, "Straight road\n");
+    serve_road(roaddetermine, Straight);
   }
   if (roaddetermine->maybe > 1) {
     roaddetermine->integral = roaddetermine->integral | roaddetermine->data_buf;
