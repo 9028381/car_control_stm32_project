@@ -41,9 +41,14 @@ void serve_road(RoadDetermine *roaddetermine, Road road) {
     if (road == CrossRoad) {
       if (cross_cnt < 2) {
         rw_time_cur = status.state.time;
-        cross_cnt++;
+      }
+      if (cross_cnt == 2) {
+        rw_time_cur = status.state.time;
+        status.state.initial_angle = status.state.cur_angle;
+        status.state.tar_angle = -62;
       }
       status.state.base_speed = 0;
+      cross_cnt++;
     }
     if (road == LeftRoad) {
       left_cnt++;

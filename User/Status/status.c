@@ -69,7 +69,7 @@ void init_state(STATUS *status, uint8_t T) {
 
 void init_status_pid(STATUS *status) {
   status->state.status_pid.follow_line_pid = init_pid(1.5, 0.1, 500, 20, 20);
-  status->state.status_pid.keep_angle_pid = init_pid(1, 0, 0, 20, 20);
+  status->state.status_pid.keep_angle_pid = init_pid(1, 0, 1, 20, 20);
 }
 
 void init_status(STATUS *status, uint8_t T) {
@@ -128,28 +128,33 @@ void follow_line(STATUS *status) {
   }
 }
 
-float turn_head_diff() {
-  float current = status.state.cur_angle + 180;                                    // 当前角度
-  float target = status.state.tar_angle + status.state.initial_angle + 180 + 180;  // 目标角度
-  target = target > 360 ? target - 360 : target;
-  target = target < 0 ? target + 360 : target;
-  float tc = target - current;
-  if (ABS(tc) <= 180)
-    return tc;
-  else {
-    if (tc > 180)
-      return tc - 360;
-    else
-      return tc + 360;
-  };
-}
+uint8_t cnt = 20;
+uint8_t flag = 1;
 
 void keep_angle(STATUS *status) {
-  float diff_angle = turn_head_diff();  // 计算当前角度与目标角度的差值
-  log_uprintf(LOG_UART, "%f %f %f\r\n", status->state.cur_angle, diff_angle, status->state.initial_angle);
+  float target = status->state.tar_angle + status->state.initial_angle;  // 目标角度
+  float diff_angle = target - status->state.cur_angle;
+  if (diff_angle > 180.0) {
+    diff_angle -= 360.0;
+  } else if (diff_angle < -180.0) {
+    diff_angle += 360.0;
+  }
   float diff = compute_pid(&status->state.status_pid.keep_angle_pid, diff_angle);  // PID计算
+  diff = CONFINE(diff, -25, 25);                                                   // 限制速度范围
   status->motor.wheel[0].tar_speed = status->state.base_speed + (int16_t)diff;
   status->motor.wheel[1].tar_speed = status->state.base_speed - (int16_t)diff;  // 设置电机速度
+
+  if (ABS(diff_angle) < 1.0) {
+    if (cnt > 0) {
+      cnt--;
+    } else {
+      if (flag == 1) {
+        rw_time_tar = status->state.time;
+        status->state.base_speed = 40;
+        flag = 0;
+      }
+    }
+  }
 }
 
 void update_status(STATUS *status) {
@@ -167,7 +172,11 @@ void update_status(STATUS *status) {
   if (status->state.motion == FIND_LINE) {
     follow_line(status);
   }
-  keep_angle(status);
+  if (status->state.motion == KEEP_ANGLE) {
+    keep_angle(status);
+  }
+
+  log_uprintf(&huart1, "ok");
 
   driver_button(&status->device.button_D2);
   driver_button(&status->device.button_B11);

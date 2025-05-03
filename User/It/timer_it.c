@@ -10,6 +10,7 @@
 
 uint8_t update_or_driver = 0;  // 0 : upadte  1 : driver
 extern int32_t rw_time_cur;    // 临时使用的时间变量
+extern int32_t rw_time_tar;    // 临时使用的时间变量
 extern uint8_t cross_cnt;      // 路口计数器
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
@@ -55,7 +56,24 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
         }
       }
     }
-
+    if (rw_time_tar != -1) {
+      if (status.state.motion == KEEP_ANGLE) {
+        if (status.state.time == rw_time_tar + 4500)
+          status.state.base_speed = 0;
+        if (status.state.time == rw_time_tar + 50 + 4500)
+          status.device.buzzer.on = 1;
+        else if (status.state.time == rw_time_tar + 100 + 4500)
+          status.device.buzzer.on = 0;
+        else if (status.state.time == rw_time_tar + 150 + 4500)
+          status.device.buzzer.on = 1;
+        else if (status.state.time == rw_time_tar + 200 + 4500)
+          status.device.buzzer.on = 0;
+        else if (status.state.time == rw_time_tar + 250 + 4500)
+          status.device.buzzer.on = 1;
+        else if (status.state.time == rw_time_tar + 300 + 4500)
+          status.device.buzzer.on = 0;
+      }
+    }
     if (status.state.time % 10 == 0) {  // 周期 25ms
       if (update_or_driver == 0) {
         update_status(&status);  // 状态更新中断 用于读取传感器原始数据

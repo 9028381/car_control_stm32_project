@@ -681,6 +681,11 @@
               <FileType>1</FileType>
               <FilePath>..\User\It\uart_it.c</FilePath>
             </File>
+            <File>
+              <FileName>uart_it.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\It\uart_it.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
