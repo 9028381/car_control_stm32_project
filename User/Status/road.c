@@ -6,7 +6,10 @@
 #include "stdint.h"
 #include "usart.h"
 
-#define INTEGRAL_TIMES 3
+uint8_t cross_cnt = 0;  // 路口计数器
+uint8_t left_cnt = 0;
+extern int32_t rw_time_cur;  // 临时使用的时间变量
+extern int32_t rw_time_tar;  // 临时使用的时间变量
 
 void init_road_determine(RoadDetermine *roaddetermine) {
   roaddetermine->integral = 0;
@@ -34,19 +37,25 @@ Road road_decision(RoadDetermine *roaddetermine) {
 }
 
 void serve_road(RoadDetermine *roaddetermine, Road road) {
-  if (road == CrossRoad) {
-    status.state.base_speed = 0;
-  }
-  if (road == LeftRoad) {
-    status.state.road_determine.cross = LeftRoad;
-  }
-  if (road == RightRoad) {
-    status.state.road_determine.cross = RightRoad;
-  }
-  if (road == Straight) {
-    status.state.road_determine.cross = Straight;
-    status.state.status_pid.follow_line_pid = init_pid(1.5, 0.1, 500, 20, 20);
-    log_uprintf(&huart1, "PID\n");
+  if (status.state.motion == FIND_LINE) {
+    if (road == CrossRoad) {
+      if (cross_cnt < 2) {
+        rw_time_cur = status.state.time;
+        cross_cnt++;
+      }
+      status.state.base_speed = 0;
+    }
+    if (road == LeftRoad) {
+      left_cnt++;
+      status.state.road_determine.cross = LeftRoad;
+    }
+    if (road == RightRoad) {
+      status.state.road_determine.cross = RightRoad;
+    }
+    if (road == Straight) {
+      status.state.road_determine.cross = Straight;
+      status.state.status_pid.follow_line_pid = init_pid(1.5, 0.1, 500, 20, 20);
+    }
   }
 }
 
@@ -55,7 +64,7 @@ void get_road_type(RoadDetermine *roaddetermine, uint8_t road_data) {
   if (roaddetermine->cross == Straight) {
     if (roaddetermine->data_buf & 0x81) {
       if (roaddetermine->maybe == 0) {
-        roaddetermine->maybe = INTEGRAL_TIMES;
+        roaddetermine->maybe = roaddetermine->integral_times;
         roaddetermine->integral = roaddetermine->integral | roaddetermine->data_buf;
       }
     }

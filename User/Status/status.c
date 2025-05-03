@@ -13,7 +13,11 @@
 
 STATUS status;
 
-void init_motor() {  // 鐢垫満鍒濆鍖�
+int32_t rw_time_cur = -1;
+int32_t rw_time_tar = -1;
+extern uint8_t left_cnt;
+
+void init_motor() {
   init_servo(&status.motor.servo[0], 1, 180);
   init_servo(&status.motor.servo[1], 2, 270);
 
@@ -23,7 +27,7 @@ void init_motor() {  // 鐢垫満鍒濆鍖�
   return;
 }
 
-void init_device() {  // 璁惧鍒濆鍖�
+void init_device() {
   init_button(&status.device.button_D2, 1, 0);
   init_button(&status.device.button_B11, 2, 0);
   init_LED(&status.device.led_on_board, 1, 1);
@@ -34,14 +38,13 @@ void init_device() {  // 璁惧鍒濆鍖�
   return;
 }
 
-void init_sensor(STATUS *status) {  // 浼犳劅鍣ㄥ垵濮嬪寲
+void init_sensor(STATUS *status) {
   init_gyr(&status->sensor.gy901);
   init_gw_8bit(&status->sensor.gw_8bit);
   init_gw_analogue(&status->sensor.gw_analogue);
 }
 
-void init_state(STATUS *status, uint8_t T)  // 鐘舵€佸垵濮嬪寲
-{
+void init_state(STATUS *status, uint8_t T) {
   status->state.T = T;
   status->state.time = 0;
   status->state.motion = STOP;
@@ -55,14 +58,18 @@ void init_state(STATUS *status, uint8_t T)  // 鐘舵€佸垵濮嬪寲
   status->state.road_determine.maybe = 0;
   status->state.road_determine.integral = 0;
   status->state.road_determine.data_buf = 0;
+  status->state.road_determine.integral_times = 6;
 
-  status->state.base_speed = 70;
+  status->state.base_speed = 0;
+
+  status->state.motion = STOP;
 
   return;
 }
 
 void init_status_pid(STATUS *status) {
-  status->state.status_pid.follow_line_pid = init_pid(1.5, 0.1, 500, 20, 20);  // 1.5, 0.1, 7 //1.5,0.1,10//
+  status->state.status_pid.follow_line_pid = init_pid(1.5, 0.1, 500, 20, 20);
+  status->state.status_pid.keep_angle_pid = init_pid(1, 0, 0, 20, 20);
 }
 
 void init_status(STATUS *status, uint8_t T) {
@@ -79,19 +86,7 @@ void init_status(STATUS *status, uint8_t T) {
   return;
 }
 
-int16_t wheel_0_speed = 0;
-int16_t wheel_1_speed = 0;
-
 Road road_buf = Straight;
-
-int16_t shit(int8_t acc) {
-  if (ABS(status.motor.wheel[0].tar_speed - wheel_0_speed) > acc) {
-    status.motor.wheel[0].tar_speed += acc * SIGN(wheel_0_speed - status.motor.wheel[0].tar_speed);
-  }
-  if (ABS(status.motor.wheel[1].tar_speed - wheel_1_speed) > acc) {
-    status.motor.wheel[1].tar_speed += acc * SIGN(wheel_1_speed - status.motor.wheel[1].tar_speed);
-  }
-}
 
 Road Turn_or_Straight() {
   if (road_buf != status.state.road_determine.cross) {
@@ -100,6 +95,10 @@ Road Turn_or_Straight() {
     if ((ABS(status.motor.wheel[0].cur_speed) < 5) && (ABS(status.motor.wheel[1].cur_speed) < 5)) {
       road_buf = status.state.road_determine.cross;
     }
+  }
+  if (status.state.road_determine.cross == LeftRoad && left_cnt == 1) {
+    status.state.base_speed = 60;
+    status.state.road_determine.integral = 4;
   }
   return road_buf;
 }
@@ -111,7 +110,6 @@ void follow_line(STATUS *status) {
   get_road_type(&status->state.road_determine, status->sensor.gw_analogue.digital_8bit);
 
   if (Turn_or_Straight() == Straight) {
-    log_uprintf(&huart1, "%d %d\r\n", wheel_0_speed, wheel_1_speed);
     float diff = compute_pid(&status->state.status_pid.follow_line_pid, status->sensor.gw_analogue.diff);
     status->motor.wheel[0].tar_speed = status->state.base_speed - (int16_t)diff;
     status->motor.wheel[1].tar_speed = status->state.base_speed + (int16_t)diff;
@@ -128,10 +126,33 @@ void follow_line(STATUS *status) {
     status->motor.wheel[0].tar_speed = 0;
     status->motor.wheel[1].tar_speed = 0;
   }
-  // shit(5);
 }
 
-void update_status(STATUS *status) {  // 鐘舵€佹爲鏇存柊鏁版嵁
+float turn_head_diff() {
+  float current = status.state.cur_angle + 180;                                    // 当前角度
+  float target = status.state.tar_angle + status.state.initial_angle + 180 + 180;  // 目标角度
+  target = target > 360 ? target - 360 : target;
+  target = target < 0 ? target + 360 : target;
+  float tc = target - current;
+  if (ABS(tc) <= 180)
+    return tc;
+  else {
+    if (tc > 180)
+      return tc - 360;
+    else
+      return tc + 360;
+  };
+}
+
+void keep_angle(STATUS *status) {
+  float diff_angle = turn_head_diff();  // 计算当前角度与目标角度的差值
+  log_uprintf(LOG_UART, "%f %f %f\r\n", status->state.cur_angle, diff_angle, status->state.initial_angle);
+  float diff = compute_pid(&status->state.status_pid.keep_angle_pid, diff_angle);  // PID计算
+  status->motor.wheel[0].tar_speed = status->state.base_speed + (int16_t)diff;
+  status->motor.wheel[1].tar_speed = status->state.base_speed - (int16_t)diff;  // 设置电机速度
+}
+
+void update_status(STATUS *status) {
   get_gw_raw_data(&status->sensor.gw_analogue);
 
   status->motor.wheel[0].cur_speed = get_wheel_speed(&status->motor.wheel[0]);
@@ -139,7 +160,14 @@ void update_status(STATUS *status) {  // 鐘舵€佹爲鏇存柊鏁版嵁
   status->motor.wheel[2].cur_speed = get_wheel_speed(&status->motor.wheel[2]);
   status->motor.wheel[3].cur_speed = get_wheel_speed(&status->motor.wheel[3]);
 
-  follow_line(status);
+  get_gyr_raw_data(&hi2c1, &status->sensor.gy901);
+
+  status->state.cur_angle = get_gyr_value(&status->sensor.gy901, gyr_z_yaw);
+
+  if (status->state.motion == FIND_LINE) {
+    follow_line(status);
+  }
+  keep_angle(status);
 
   driver_button(&status->device.button_D2);
   driver_button(&status->device.button_B11);

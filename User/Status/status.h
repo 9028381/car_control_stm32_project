@@ -18,6 +18,7 @@
 
 typedef struct STATUS_PID {
   PID follow_line_pid;
+  PID keep_angle_pid;  // PID结构体
 } STATUS_PID;
 
 typedef enum MOTION_STATION {

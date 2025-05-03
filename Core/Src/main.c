@@ -31,6 +31,7 @@
 /* USER CODE BEGIN Includes */
 #include "log.h"
 #include "status.h"
+#include "uart_it.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -114,6 +115,7 @@ int main(void) {
 
   after_init_state();
 
+  init_uart_idle_it();
   HAL_TIM_Base_Start_IT(&htim5);
 
   /* USER CODE END 2 */

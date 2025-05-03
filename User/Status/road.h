@@ -27,6 +27,7 @@ typedef struct RoadDetermine {
   uint8_t maybe;
   uint8_t cross_cnt;
   Road cross;
+  uint8_t integral_times;
 
 } RoadDetermine;
 

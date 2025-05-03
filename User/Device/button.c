@@ -10,7 +10,7 @@
 #include "usart.h"
 
 extern PID balance_pid;
-
+extern int32_t rw_time_cur;
 uint8_t is_p = 1;
 
 void server_button(BUTTON *button, BUTTON_STATION station) {
@@ -19,12 +19,14 @@ void server_button(BUTTON *button, BUTTON_STATION station) {
       correct_gw_analogue(&status.sensor.gw_analogue);
     }
   }
-  if (button->which == 2) {
-    if (station == BUTTON_DOWN) {
-      status.state.base_speed = 70;
+  if (status.state.motion == STOP) {
+    if (button->which == 2) {
+      if (station == BUTTON_DOWN) {
+        rw_time_cur = status.state.time;
+        status.state.base_speed = 40;
+        status.state.motion = FIND_LINE;
+      }
     }
-  }
-  if (station == BUTTON_LONG) {
   }
   return;
 }

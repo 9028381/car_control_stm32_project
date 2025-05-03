@@ -5,7 +5,7 @@
 #include "main.h"
 #include "status.h"
 
-float distance[8] = {-30, -20, -15, -10, 10, 15, 20, 30};  //{-80, -50, -10, -3, 3, 10, 50, 80}
+float distance[8] = {-30, -20, -15, -10, 10, 15, 20, 30};
 
 void gw_analogue_gray_show(GW_ANALOGUE *gw_analogue) {
   uint8_t buf = gw_analogue->digital_8bit;
