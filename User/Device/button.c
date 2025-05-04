@@ -25,6 +25,7 @@ void server_button(BUTTON *button, BUTTON_STATION station) {
         rw_time_cur = status.state.time;
         status.state.base_speed = 40;
         status.state.motion = FIND_LINE;
+        rw_time_cur = status.state.time;
       }
     }
   }

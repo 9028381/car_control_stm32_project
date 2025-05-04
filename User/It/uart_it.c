@@ -16,7 +16,7 @@ extern DMA_HandleTypeDef hdma_uart4_rx;
 
 void start_uart_idle_it(UART_HandleTypeDef *huart, uint8_t *buf) {
   __HAL_UART_ENABLE_IT(huart, UART_IT_IDLE);
-  HAL_UART_Receive_DMA(&huart, buf, 255);
+  HAL_UART_Receive_DMA(huart, buf, 255);
 }
 
 void init_uart_idle_it() {

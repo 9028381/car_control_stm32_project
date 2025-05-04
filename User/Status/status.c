@@ -16,6 +16,10 @@ STATUS status;
 int32_t rw_time_cur = -1;
 int32_t rw_time_tar = -1;
 extern uint8_t left_cnt;
+extern uint8_t cross_cnt;      // 路口计数器
+uint8_t cross_delay = 0;       // 路口延时计数器
+int32_t keep_angle_time = -1;  // 保持角度时间
+uint8_t speed_show_flag = 0;   // 显示速度标志位
 
 void init_motor() {
   init_servo(&status.motor.servo[0], 1, 180);
@@ -104,6 +108,9 @@ Road Turn_or_Straight() {
 }
 
 void follow_line(STATUS *status) {
+  if (cross_delay > 0) {
+    cross_delay--;
+  }
   get_gw_analoge_digital_data(&status->sensor.gw_analogue);
   get_gw_analogue_analogue_diff(&status->sensor.gw_analogue);
 
@@ -119,6 +126,10 @@ void follow_line(STATUS *status) {
     status->motor.wheel[1].tar_speed = -20;
   }
   if (Turn_or_Straight() == RightRoad) {
+    status->motor.wheel[0].tar_speed = -20;
+    status->motor.wheel[1].tar_speed = 20;
+  }
+  if (Turn_or_Straight() == CrossRoad && cross_cnt == 4) {
     status->motor.wheel[0].tar_speed = -20;
     status->motor.wheel[1].tar_speed = 20;
   }
@@ -149,7 +160,7 @@ void keep_angle(STATUS *status) {
       cnt--;
     } else {
       if (flag == 1) {
-        rw_time_tar = status->state.time;
+        keep_angle_time = status->state.time;  // 记录保持角度的时间
         status->state.base_speed = 40;
         flag = 0;
       }
@@ -175,8 +186,12 @@ void update_status(STATUS *status) {
   if (status->state.motion == KEEP_ANGLE) {
     keep_angle(status);
   }
+  if (status->state.motion == STOP) {
+    status->motor.wheel[0].tar_speed = 0;
+    status->motor.wheel[1].tar_speed = 0;
+  }
 
-  log_uprintf(&huart1, "ok");
+  log_uprintf(&huart1, "%d %d %d %d\r\n", cross_cnt, cross_delay, Turn_or_Straight(), status->state.road_determine.cross);
 
   driver_button(&status->device.button_D2);
   driver_button(&status->device.button_B11);
