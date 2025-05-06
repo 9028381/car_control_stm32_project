@@ -12,6 +12,8 @@
 extern PID balance_pid;
 extern int32_t rw_time_cur;
 uint8_t is_p = 1;
+extern uint8_t wait_finish_flag;
+uint8_t button_2_cnt = 0;  // 按键2计数器
 
 void server_button(BUTTON *button, BUTTON_STATION station) {
   if (button->which == 1) {
@@ -21,12 +23,18 @@ void server_button(BUTTON *button, BUTTON_STATION station) {
   }
   if (status.state.motion == STOP) {
     if (button->which == 2) {
-      if (station == BUTTON_DOWN) {
-        rw_time_cur = status.state.time;
-        status.state.base_speed = 40;
-        status.state.motion = FIND_LINE;
-        rw_time_cur = status.state.time;
+      if (button_2_cnt == 0) {
+        if (station == BUTTON_DOWN) {
+          rw_time_cur = status.state.time;
+          status.state.base_speed = 40;
+          status.state.motion = FIND_LINE;
+          rw_time_cur = status.state.time;
+        }
+      } else if (button_2_cnt == 1) {
+        wait_finish_flag = 1;
+        status.device.led1.on = 0;
       }
+      button_2_cnt++;
     }
   }
   return;

@@ -3,7 +3,7 @@
 <title>Static Call Graph - [car_control_stm32_project\car_control_stm32_project.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image car_control_stm32_project\car_control_stm32_project.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6220000: Last Updated: Sun May  4 15:31:03 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6220000: Last Updated: Mon May  5 00:55:21 2025
 <BR><P>
 <H3>Maximum Stack Usage =        336 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1738,7 +1738,7 @@ Global Symbols
 <LI><a href="#[156]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_servo
 </UL>
 
-<P><STRONG><a name="[f6]"></a>HAL_TIM_PeriodElapsedCallback</STRONG> (Thumb, 1120 bytes, Stack size 16 bytes, timer_it.o(.text.HAL_TIM_PeriodElapsedCallback))
+<P><STRONG><a name="[f6]"></a>HAL_TIM_PeriodElapsedCallback</STRONG> (Thumb, 1160 bytes, Stack size 16 bytes, timer_it.o(.text.HAL_TIM_PeriodElapsedCallback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 312 + Unknown Stack Size
 <LI>Call Chain = HAL_TIM_PeriodElapsedCallback &rArr; update_status &rArr; follow_line &rArr; get_road_type &rArr; log_uprintf &rArr; vsnprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -2261,7 +2261,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_status
 </UL>
 
-<P><STRONG><a name="[145]"></a>driver_button</STRONG> (Thumb, 242 bytes, Stack size 16 bytes, button.o(.text.driver_button))
+<P><STRONG><a name="[145]"></a>driver_button</STRONG> (Thumb, 478 bytes, Stack size 16 bytes, button.o(.text.driver_button))
 <BR><BR>[Stack]<UL><LI>Max Depth = 224 + Unknown Stack Size
 <LI>Call Chain = driver_button &rArr; correct_gw_analogue &rArr; log_uprintf &rArr; vsnprintf &rArr; _printf_char_common &rArr; __printf
 </UL>

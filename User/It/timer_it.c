@@ -15,8 +15,10 @@ extern uint8_t cross_cnt;        // 路口计数器
 uint8_t wait_finish_flag = 0;    // 等待完成标志位
 extern int32_t keep_angle_time;  // 保持角度时间
 extern uint8_t speed_show_flag;  // 显示速度标志位
+uint8_t is_init = 0;
 
 uint8_t maixcam[3] = {0xAA, 0x02, 0xBB};
+uint8_t find_voice[3] = {0xAA, 0x01, 0xBB};
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
   status.state.time += status.state.T;  // 更新系统时间
@@ -37,6 +39,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
       status.device.led_on_board.on = 0;
 
     if (rw_time_cur != -1) {
+      if (is_init == 0) {
+        if (status.state.time == rw_time_cur + 300) {
+          status.state.initial_angle = status.state.cur_angle;
+        }
+        is_init = 1;
+      }
       if (cross_cnt == 0) {
         if (status.state.time == rw_time_cur + 50)
           status.device.buzzer.on = 1;
@@ -73,7 +81,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
         }
       } else if (cross_cnt == 3) {
         if (status.state.time == rw_time_cur + 500) {
-          status.state.initial_angle = status.state.cur_angle;
           status.state.base_speed = 40;
         }
       }
@@ -115,8 +122,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
       } else if (status.state.time == rw_time_tar + 1800) {
         status.device.buzzer.on = 0;
         status.state.motion = STOP;
-      } else if (status.state.time == rw_time_tar + 5000) {
-        wait_finish_flag = 1;
+      } else if (status.state.time == rw_time_tar + 1850) {
+        status.device.led1.on = 1;
+        HAL_UART_Transmit(&huart2, find_voice, 3, 100);
       }
       if (wait_finish_flag == 1) {
         wait_finish_flag = 0;
